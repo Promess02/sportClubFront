@@ -2,7 +2,6 @@ package mikolajm.project.sportclubui;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
 import lombok.Getter;
 import org.springframework.context.ConfigurableApplicationContext;
 
@@ -18,11 +17,11 @@ import java.util.logging.Logger;
 public class LoginManager {
     @Getter
     private Scene scene;
-    private final ConfigurableApplicationContext context;
+    private ConfigurableApplicationContext context;
 
-    public LoginManager(ConfigurableApplicationContext context) {
-        this.context = context;
-        scene = new Scene(new StackPane());
+    public LoginManager(Scene scene, ConfigurableApplicationContext applicationContext) {
+        this.context = applicationContext;
+        this.scene = scene;
     }
 
     /**

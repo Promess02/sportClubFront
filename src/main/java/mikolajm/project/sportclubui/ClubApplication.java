@@ -5,7 +5,9 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,6 +18,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 @Slf4j
 public class ClubApplication extends Application {
+    @Getter
     private static ConfigurableApplicationContext applicationContext;
 
     @Override
@@ -28,13 +31,14 @@ public class ClubApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
-        loader.setControllerFactory(applicationContext::getBean);
-        Parent root = loader.load();
-
-        Scene scene = new Scene(root);
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
+//        loader.setControllerFactory(applicationContext::getBean);
+//        Parent root = loader.load();
+        Scene scene = new Scene(new StackPane());
+        LoginManager loginManager = new LoginManager(scene, applicationContext);
+        loginManager.showLoginScreen();
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Login Screen");
+        primaryStage.setTitle("Application");
         primaryStage.show();
         log.info("APP STARTED");
     }
