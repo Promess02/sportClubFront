@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id = "mainView" prefHeight="180.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mikolajm.project.sportclubui.screenController.ActivityViewController">
+   <children>
+      <HBox prefHeight="180.0" prefWidth="300.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="180.0" prefWidth="137.0">
+               <children>
+                  <Label fx:id = "activityName" alignment="CENTER" text="Activity Name">
+                     <font>
+                        <Font name="Comfortaa Regular" size="14.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id = "activityBtn" mnemonicParsing="false" text="=&gt;">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font></Button>
+               </children>
+            </VBox>
+            <FlowPane alignment="CENTER" prefHeight="180.0" prefWidth="161.0">
+               <children>
+                  <ImageView fx:id = "imageView" fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </FlowPane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

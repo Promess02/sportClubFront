@@ -31,9 +31,6 @@ public class ClubApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
-//        loader.setControllerFactory(applicationContext::getBean);
-//        Parent root = loader.load();
         Scene scene = new Scene(new StackPane());
         LoginManager loginManager = new LoginManager(scene, applicationContext);
         loginManager.showLoginScreen();
