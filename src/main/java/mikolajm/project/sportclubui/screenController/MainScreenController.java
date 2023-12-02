@@ -5,10 +5,12 @@ import com.google.gson.reflect.TypeToken;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
 import mikolaj.project.backendapp.controller.ActivityController;
@@ -42,6 +44,7 @@ public class MainScreenController {
     @FXML private ImageView logoView;
     private final ActivityController activityController;
     private final NewsPostController newsPostController;
+    ConfigurableApplicationContext context = ClubApplication.getApplicationContext();
 
     @Autowired
     public MainScreenController(ActivityController activityController, NewsPostController newsPostController) {
@@ -66,6 +69,29 @@ public class MainScreenController {
         loadActivityPostRow(activityList);
         Image image = new Image("src/main/resources/images/clubLogo.png");
         logoView = new ImageView(image);
+    }
+
+    private void initAccountBtn(){
+            accountBtn.setOnAction( event ->
+            {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/accountView.fxml"));
+                    loader.setControllerFactory(context::getBean);
+                    // Load the root node from the FXML file
+                    Parent root = loader.load();
+                    // Create a new Scene with the root node
+                    AccountViewController accountViewController = loader.getController();
+                    accountViewController.initialize();
+                    Scene scene = new Scene(root);
+                    // Set the Scene to the primaryStage or a new Stage
+                    Stage primaryStage = new Stage(); // You might use your existing primaryStage here
+                    primaryStage.setScene(scene);
+                    primaryStage.show();
+                }catch (IOException ex){
+                    Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+
 
     }
 
@@ -73,18 +99,13 @@ public class MainScreenController {
         for (NewsPost newsPost : list) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/NewsPost.fxml"));
-                ConfigurableApplicationContext context = ClubApplication.getApplicationContext();
                 loader.setControllerFactory(context::getBean);
-
                 // Load the root node from the FXML file
                 Parent root = loader.load();
-
                 // Get the MembershipTypeController from the loader
                 NewsPostViewController newsPostViewController = loader.getController();
                 newsPostViewController.initialize(newsPost); // You can initialize if needed
-
                 newsRow.getChildren().add(newsPostViewController.getMainView());
-
             } catch (IOException ex) {
                 Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -95,18 +116,13 @@ public class MainScreenController {
         for (Activity activity : list) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/ActivityView.fxml"));
-                ConfigurableApplicationContext context = ClubApplication.getApplicationContext();
                 loader.setControllerFactory(context::getBean);
-
                 // Load the root node from the FXML file
                 Parent root = loader.load();
-
                 // Get the MembershipTypeController from the loader
                 ActivityViewController activityViewController = loader.getController();
                 activityViewController.initialize(activity); // You can initialize if needed
-
                 activityRow.getChildren().add(activityViewController.getMainView());
-
             } catch (IOException ex) {
                 Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
             }

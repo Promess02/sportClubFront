@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import mikolaj.project.backendapp.controller.UserController;
 import mikolaj.project.backendapp.model.User;
 import mikolajm.project.sportclubui.ClubApplication;
+import mikolajm.project.sportclubui.CurrentSessionUser;
 import mikolajm.project.sportclubui.LoginManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -18,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,6 +37,7 @@ public class LoginController {
     @FXML
     private Button loginButton;
     private final UserController userController;
+    private final CurrentSessionUser currentSessionUser;
 
     public void initialize() {
         loginButton.setOnAction(event -> {
@@ -72,10 +75,10 @@ public class LoginController {
     }
 
     @Autowired
-    public LoginController(final UserController userController) {
+    public LoginController(final UserController userController, final CurrentSessionUser currentSessionUser) {
         this.userController = userController;
+        this.currentSessionUser = currentSessionUser;
     }
-
     /**
      * Check authorization credentials.
      * <p>
@@ -83,15 +86,20 @@ public class LoginController {
      * otherwise, return null.
      */
     private String authorize() {
-        return userController.loginUser(new User(user.getText(), password.getText())).getStatusCode().isSameCodeAs(HttpStatus.OK)
-                ? generateSessionID()
+        User createdUser = new User(user.getText(), password.getText());
+        Optional<User> userDb = userController.loginUser(createdUser).getStatusCode().isSameCodeAs(HttpStatus.OK)
+                ? Optional.of(createdUser)
+                : Optional.empty();
+        return userDb.isPresent()
+                ? generateSessionID(createdUser)
                 : null;
     }
 
     private static int sessionID = 0;
 
-    private String generateSessionID() {
+    private String generateSessionID(User user) {
         sessionID++;
+        currentSessionUser.setUser(user);
         return "xyzzy - session " + sessionID;
     }
 }
