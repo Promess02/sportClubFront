@@ -24,7 +24,7 @@ public class NewsPostViewController {
     public void initialize(NewsPost newsPost){
         dateLabel.setText(newsPost.getDateOfPosting().toString());
         articleName.setText(newsPost.getName());
-        Image sampleimage = new Image("src/main/resources/images/newsPostSample.jpg");
+        Image sampleimage = new Image("/images/newsPostSample.jpg");
         imageView.setImage(sampleimage);
     }
 }

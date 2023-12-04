@@ -24,7 +24,7 @@ public class ActivityViewController {
     @FXML
     public void initialize(Activity activity){
         activityName.setText(activity.getName());
-        Image image = new Image("src/main/resources/images/newsPostSample.jpg");
+        Image image = new Image("/images/newsPostSample.jpg");
         imageView.setImage(image);
     }
 }

@@ -51,7 +51,7 @@ public class AccountViewController {
         if(user.getCreditCard()==null) creditCardBtn.setVisible(true);
         membershipStatusCb.setSelected(currentSessionUser.isMembershipStatus());
         membershipStatusBtn.setVisible(!currentSessionUser.isMembershipStatus());
-        Image image = new Image("src/main/resources/images/profileImage.png");
+        Image image = new Image("/images/profileImage.png");
         userImage.setImage(image);
     }
 }

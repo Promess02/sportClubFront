@@ -17,6 +17,8 @@ import mikolaj.project.backendapp.controller.ActivityController;
 import mikolaj.project.backendapp.controller.NewsPostController;
 import mikolaj.project.backendapp.model.Activity;
 import mikolaj.project.backendapp.model.NewsPost;
+import mikolaj.project.backendapp.service.ActivityService;
+import mikolaj.project.backendapp.service.NewsPostService;
 import mikolajm.project.sportclubui.ClubApplication;
 import mikolajm.project.sportclubui.LoginManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,39 +45,35 @@ public class MainScreenController {
     @FXML private Button calendarBtn;
     @FXML private Button activityBtn;
     @FXML private ImageView logoView;
-    private final ActivityController activityController;
-    private final NewsPostController newsPostController;
+    private final ActivityService activityService;
+    private final NewsPostService newsPostService;
     ConfigurableApplicationContext context = ClubApplication.getApplicationContext();
 
-    @Autowired
-    public MainScreenController(ActivityController activityController, NewsPostController newsPostController) {
-        this.activityController = activityController;
-        this.newsPostController = newsPostController;
+    public MainScreenController(ActivityService activityService, NewsPostService newsPostService) {
+        this.activityService = activityService;
+        this.newsPostService = newsPostService;
     }
 
     @FXML
     public void initialize(){
-        List<Activity> activityList;
-        Gson gson = new Gson();
-        if(activityController.getActivities().getBody()==null) activityList = new ArrayList<>();
-        String activityJson =  activityController.getActivities().getBody().toString();
-        TypeToken<List<Activity>> token = new TypeToken<>() {};
-        activityList = gson.fromJson(activityJson, token.getType());
-        List<NewsPost> newsPostList;
-        if(newsPostController.getAllPosts().getBody()==null) newsPostList = new ArrayList<>();
-        String newsPostListJson = newsPostController.getAllPosts().getBody().toString();
-        TypeToken<List<NewsPost>> tokenNews = new TypeToken<>(){};
-        newsPostList = gson.fromJson(newsPostListJson, tokenNews.getType());
-        loadNewsPostRow(newsPostList);
-        loadActivityPostRow(activityList);
-        Image image = new Image("src/main/resources/images/clubLogo.png");
+        Image image = new Image("/images/clubLogo.png");
         logoView = new ImageView(image);
+        Optional<List<Activity>> activityList;
+        activityList = activityService.getAllActivities().getData();
+        Optional<List<NewsPost>> newsPostList;
+        newsPostList = newsPostService.viewAllNewsPost().getData();
+        if(activityList.isEmpty()) return;
+        if(newsPostList.isEmpty()) return;
+        loadNewsPostRow(newsPostList.get());
+        loadActivityPostRow(activityList.get());
+        initAccountBtn();
     }
 
     private void initAccountBtn(){
             accountBtn.setOnAction( event ->
             {
                 try {
+                    context = ClubApplication.getApplicationContext();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/accountView.fxml"));
                     loader.setControllerFactory(context::getBean);
                     // Load the root node from the FXML file
@@ -98,6 +97,7 @@ public class MainScreenController {
     private void loadNewsPostRow(List<NewsPost> list){
         for (NewsPost newsPost : list) {
             try {
+                context = ClubApplication.getApplicationContext();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/NewsPost.fxml"));
                 loader.setControllerFactory(context::getBean);
                 // Load the root node from the FXML file
@@ -115,6 +115,7 @@ public class MainScreenController {
     private void loadActivityPostRow(List<Activity> list){
         for (Activity activity : list) {
             try {
+                context = ClubApplication.getApplicationContext();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/ActivityView.fxml"));
                 loader.setControllerFactory(context::getBean);
                 // Load the root node from the FXML file
