@@ -6,8 +6,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import mikolaj.project.backendapp.controller.MembershipController;
 import mikolaj.project.backendapp.model.Member;
 import mikolaj.project.backendapp.model.User;
 import mikolajm.project.sportclubui.CurrentSessionUser;

@@ -1,7 +1,5 @@
 package mikolajm.project.sportclubui.screenController;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,20 +11,20 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
-import mikolaj.project.backendapp.controller.ActivityController;
-import mikolaj.project.backendapp.controller.NewsPostController;
 import mikolaj.project.backendapp.model.Activity;
 import mikolaj.project.backendapp.model.NewsPost;
 import mikolaj.project.backendapp.service.ActivityService;
 import mikolaj.project.backendapp.service.NewsPostService;
 import mikolajm.project.sportclubui.ClubApplication;
+import mikolajm.project.sportclubui.CurrentSessionUser;
 import mikolajm.project.sportclubui.LoginManager;
-import org.springframework.beans.factory.annotation.Autowired;
+import mikolajm.project.sportclubui.screenController.calendar.CalendarViewController;
+import mikolajm.project.sportclubui.screenController.calendar.FullCalendarView;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.time.YearMonth;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -47,11 +45,14 @@ public class MainScreenController {
     @FXML private ImageView logoView;
     private final ActivityService activityService;
     private final NewsPostService newsPostService;
+    private final CurrentSessionUser currentSessionUser;
     ConfigurableApplicationContext context = ClubApplication.getApplicationContext();
 
-    public MainScreenController(ActivityService activityService, NewsPostService newsPostService) {
+    public MainScreenController(ActivityService activityService, NewsPostService newsPostService,
+                                CurrentSessionUser currentSessionUser) {
         this.activityService = activityService;
         this.newsPostService = newsPostService;
+        this.currentSessionUser = currentSessionUser;
     }
 
     @FXML
@@ -67,6 +68,7 @@ public class MainScreenController {
         loadNewsPostRow(newsPostList.get());
         loadActivityPostRow(activityList.get());
         initAccountBtn();
+        initCalendarBtn();
     }
 
     private void initAccountBtn(){
@@ -90,8 +92,26 @@ public class MainScreenController {
                     Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
                 }
             });
+    }
 
-
+    private void initCalendarBtn(){
+        calendarBtn.setOnAction( event -> {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/fullCalendar.fxml"));
+                        Parent root = loader.load();
+                        // Get the controller and add the calendar view to it
+                        CalendarViewController controller = loader.getController();
+                        Scene scene = new Scene(root);
+                        Stage stage = new Stage();
+                        controller.getCalendarPane().getChildren().add(new FullCalendarView(YearMonth.now(),
+                                currentSessionUser.getCalendarList()).getView());
+                        stage.setScene(scene);
+                        stage.show();
+                    } catch (IOException ex) {
+                        throw new RuntimeException("failed loading calendar view");
+                    }
+                }
+        );
     }
 
     private void loadNewsPostRow(List<NewsPost> list){
