@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -14,6 +15,7 @@ import lombok.Setter;
 import mikolaj.project.backendapp.model.Activity;
 import mikolaj.project.backendapp.model.NewsPost;
 import mikolaj.project.backendapp.service.ActivityService;
+import mikolaj.project.backendapp.service.CalendarService;
 import mikolaj.project.backendapp.service.NewsPostService;
 import mikolajm.project.sportclubui.ClubApplication;
 import mikolajm.project.sportclubui.CurrentSessionUser;
@@ -40,22 +42,27 @@ public class MainScreenController {
 
     @FXML private HBox activityRow;
     @FXML private HBox newsRow;
-    @FXML private Button TeamsBtn;
-    @FXML private Button accountBtn;
-    @FXML private Button trainersBtn;
-    @FXML private Button calendarBtn;
-    @FXML private Button activityBtn;
+    @FXML private MenuItem TeamsBtn;
+    @FXML private MenuItem accountBtn;
+    @FXML private MenuItem trainersBtn;
+    @FXML private MenuItem logoutBtn;
+    @FXML private MenuItem calendarBtn;
+    @FXML private MenuItem teamsBtn;
+    @FXML private MenuItem activityBtn;
+    @FXML private Button membershipTypeBtn;
     @FXML private ImageView logoView;
     private final ActivityService activityService;
     private final NewsPostService newsPostService;
+    private final CalendarService calendarService;
     private final CurrentSessionUser currentSessionUser;
     ConfigurableApplicationContext context = ClubApplication.getApplicationContext();
 
     public MainScreenController(ActivityService activityService, NewsPostService newsPostService,
-                                CurrentSessionUser currentSessionUser) {
+                                CurrentSessionUser currentSessionUser, CalendarService calendarService) {
         this.activityService = activityService;
         this.newsPostService = newsPostService;
         this.currentSessionUser = currentSessionUser;
+        this.calendarService = calendarService;
     }
 
     @FXML
@@ -106,8 +113,9 @@ public class MainScreenController {
                         // Get the controller and add the calendar view to it
                         ActivityCalendarController controller = loader.getController();
                         List<Activity> listOfActivities = activityService.getAllActivities().getData().orElse(new ArrayList<>());
+                        currentSessionUser.getAlreadySignedList();
                         controller.getActivityPane().getChildren().add(
-                                new CalendarView(YearMonth.now(), listOfActivities).getView());
+                                new CalendarView(YearMonth.now(), listOfActivities, currentSessionUser.getListOfActivities()).getView());
                         Scene scene = new Scene(root);
                         Stage stage = new Stage();
                         stage.setScene(scene);

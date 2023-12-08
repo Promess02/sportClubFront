@@ -1,5 +1,6 @@
 package mikolajm.project.sportclubui.screenController.activityCalendar;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
@@ -8,6 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import lombok.Getter;
 import mikolaj.project.backendapp.model.Activity;
+import mikolaj.project.backendapp.service.CalendarService;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -29,13 +31,10 @@ public class CalendarView {
     private HBox titleBar;
     private Button nextMonth;
     private Button previousMonth;
+    private Map<Activity, Boolean> activityMap;
 
-
-    /**
-     * Create a calendar view
-     * @param yearMonth year month to create the calendar of
-     */
-    public CalendarView(YearMonth yearMonth, List<Activity> activityList) {
+    public CalendarView(YearMonth yearMonth, List<Activity> activityList, Map<Activity, Boolean> activityMap) {
+        this.activityMap = activityMap;
         currentYearMonth = yearMonth;
         mapOfCalendar = activityList.stream()
                 .collect(Collectors.toMap(Activity::getDate, activity -> activity));
@@ -66,8 +65,15 @@ public class CalendarView {
         previousMonth.setOnAction(e -> previousMonth());
         nextMonth = new Button(">>");
         nextMonth.setOnAction(e -> nextMonth());
-        titleBar = new HBox(previousMonth, calendarTitle, nextMonth);
-        titleBar.setAlignment(Pos.BASELINE_CENTER);
+        Button refreshBtn = new Button("Refresh");
+        refreshBtn.setAlignment(Pos.CENTER);
+        refreshBtn.setPadding(new Insets(0,0,0,15));
+        refreshBtn.setOnAction( e -> {
+            refreshView();
+            populateCalendar(currentYearMonth);
+        });
+        titleBar = new HBox(previousMonth, calendarTitle, nextMonth, refreshBtn);
+        titleBar.setAlignment(Pos.CENTER);
         // Populate calendar with the appropriate day numbers
         populateCalendar(currentYearMonth);
         // Create the calendar view
@@ -109,10 +115,13 @@ public class CalendarView {
             ap.setTopAnchor(txt, 5.0);
             ap.setLeftAnchor(txt, 5.0);
             ap.getChildren().add(txt);
-            if(mapOfCalendar.containsKey(calendarDate)
-                    && calendarDate.getMonthValue()==yearMonth.getMonthValue()
-                    && calendarDate.getYear()==yearMonth.getYear())
-                ap.setActivity(mapOfCalendar.get(calendarDate));
+            if(mapOfCalendar.containsKey(calendarDate)){
+                boolean isSigned = false;
+                Activity activity = mapOfCalendar.get(calendarDate);
+                isSigned = activityMap.keySet().stream().filter(act -> act.equals(activity)).toList().isEmpty();
+                ap.setActivity(activity, isSigned);
+            }
+
             calendarDate = calendarDate.plusDays(1);
         }
         // Change the title of the calendar

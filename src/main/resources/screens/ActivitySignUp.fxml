@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mikolajm.project.sportclubui.screenController.activityCalendar.ActivitySignupController">
+   <children>
+      <VBox prefHeight="600.0" prefWidth="350.0">
+         <children>
+            <Label fx:id = "nameLabel" alignment="CENTER" contentDisplay="BOTTOM" prefHeight="38.0" prefWidth="401.0" text="ActivityName">
+               <font>
+                  <Font size="22.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="8.0" />
+               </VBox.margin>
+            </Label>
+            <ImageView fx:id="imageView" fitHeight="125.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+               <VBox.margin>
+                  <Insets left="100.0" top="8.0" />
+               </VBox.margin>
+            </ImageView>
+            <Label fx:id = "timeLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="350.0" text="Date/time/minutes label" textAlignment="CENTER">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </Label>
+             <Label fx:id = "membersLimit" alignment="CENTER" prefHeight="40.0" prefWidth="350.0" text="MembersCur/MemebersLimit">
+                 <VBox.margin>
+                     <Insets top="5.0" />
+                 </VBox.margin>
+             </Label>
+             <HBox>
+                 <Label fx:id = "trainerLabel" alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="210.0" text="trainerLabel: ">
+                     <VBox.margin>
+                         <Insets top="5.0" />
+                     </VBox.margin>
+                 </Label>
+                 <Button fx:id = "trainerBtn" alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="34.0" text="=&gt;" textAlignment="CENTER">
+                  <HBox.margin>
+                     <Insets left="10.0" />
+                  </HBox.margin></Button>
+             </HBox>
+             <HBox>
+                 <Label fx:id = "teamLabel" alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="210.0" text="teamLabel: ">
+                     <VBox.margin>
+                         <Insets top="5.0" />
+                     </VBox.margin>
+                 </Label>
+                 <Button fx:id = "teamBtn" alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="34.0" text="=&gt;" textAlignment="CENTER">
+                     <HBox.margin>
+                         <Insets left="10.0" />
+                     </HBox.margin></Button>
+             </HBox>
+             <HBox>
+                 <Label fx:id = "locationLabel" alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="210.0" text="Location: ">
+                     <VBox.margin>
+                         <Insets top="5.0" />
+                     </VBox.margin>
+                 </Label>
+                 <Button fx:id = "locationBtn" alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="34.0" text="=&gt;" textAlignment="CENTER">
+                     <HBox.margin>
+                         <Insets left="10.0" />
+                     </HBox.margin></Button>
+             </HBox>
+            <ScrollPane hbarPolicy="NEVER" prefHeight="149.0" prefWidth="350.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="125.0" prefWidth="335.0">
+                     <children>
+                         <TextArea fx:id = "descriptionArea" layoutX="8.0" layoutY="8.0" prefHeight="135.0" prefWidth="332.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+            <StackPane prefHeight="63.0" prefWidth="350.0">
+               <children>
+                  <Button fx:id = "signUpBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="122.0" text="Sign Up" />
+               </children></StackPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

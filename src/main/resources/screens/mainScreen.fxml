@@ -1,23 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mikolajm.project.sportclubui.screenController.MainScreenController">
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="850.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mikolajm.project.sportclubui.screenController.MainScreenController">
    <children>
-      <HBox alignment="CENTER" prefHeight="150.0" prefWidth="1200.0" spacing="30.0">
+      <HBox alignment="CENTER" prefHeight="150.0" prefWidth="1200.0" spacing="60.0">
          <children>
-            <ImageView fx:id = "logoView" fitHeight="140.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id = "activityBtn" mnemonicParsing="false" prefHeight="120.0" prefWidth="160.0" text="Activities" />
-            <Button fx:id = "calendarBtn" mnemonicParsing="false" prefHeight="120.0" prefWidth="160.0" text="Calendar" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
-            <Button fx:id = "trainersBtn" mnemonicParsing="false" prefHeight="120.0" prefWidth="160.0" text="Trainers" />
-            <Button fx:id = "accountBtn" mnemonicParsing="false" prefHeight="120.0" prefWidth="160.0" text="Account" />
-            <Button fx:id = "TeamsBtn" mnemonicParsing="false" prefHeight="120.0" prefWidth="160.0" text="Logout" />
+            <ImageView fx:id="logoView" fitHeight="140.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
+            <MenuButton mnemonicParsing="false" prefHeight="60.0" prefWidth="110.0" text="Activities">
+              <items>
+                <MenuItem fx:id = "calendarBtn" mnemonicParsing="false" text="My calendar" />
+                <MenuItem fx:id = "activityBtn" mnemonicParsing="false" text="CLub calendar" />
+              </items>
+            </MenuButton>
+            <MenuButton mnemonicParsing="false" prefHeight="60.0" prefWidth="110.0" text="About Club">
+               <items>
+                  <MenuItem fx:id = "teamsBtn" mnemonicParsing="false" text="Teams" />
+                  <MenuItem fx:id = "trainersBtn" mnemonicParsing="false" text="Trainers" />
+               </items>
+            </MenuButton>
+            <MenuButton mnemonicParsing="false" prefHeight="60.0" prefWidth="110.0" text="MyAccount">
+               <items>
+                  <MenuItem fx:id="accountBtn" mnemonicParsing="false" text="My Account" />
+                  <MenuItem fx:id = "logoutBtn" mnemonicParsing="false" text="Logout" />
+               </items>
+            </MenuButton>
+           <Button fx:id="membershipTypeBtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="110.0" text="Membership Offer" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
          </children>
       </HBox>
-      <VBox layoutY="150.0" prefHeight="650.0" prefWidth="1200.0">
+      <VBox layoutY="150.0" prefHeight="700.0" prefWidth="1200.0">
          <children>
             <Label prefHeight="50.0" prefWidth="230.0" text="News">
                <font>
@@ -29,7 +44,7 @@
             </Label>
             <ScrollPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="300.0" prefWidth="1200.0" vbarPolicy="NEVER">
                <content>
-                  <HBox fx:id = "newsRow" alignment="CENTER" prefHeight="300.0" prefWidth="1200.0" />
+                  <HBox fx:id="newsRow" alignment="CENTER" prefHeight="252.0" prefWidth="1200.0" />
                </content>
             </ScrollPane>
             <Label prefHeight="50.0" prefWidth="230.0" text="Activities">
@@ -42,7 +57,7 @@
             </Label>
             <ScrollPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="300.0" prefWidth="1200.0" vbarPolicy="NEVER">
                <content>
-                  <HBox fx:id = "activityRow" alignment="CENTER" prefHeight="300.0" prefWidth="1200.0" />
+                  <HBox fx:id="activityRow" alignment="CENTER" prefHeight="300.0" prefWidth="1200.0" />
                </content>
             </ScrollPane>
          </children>
