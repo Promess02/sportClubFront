@@ -1,5 +1,6 @@
-package mikolajm.project.sportclubui.screenController.calendar;
+package mikolajm.project.sportclubui.screenController.activityCalendar;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -8,33 +9,27 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import lombok.Getter;
+import mikolaj.project.backendapp.model.Activity;
 import mikolaj.project.backendapp.model.Calendar;
 
 import java.time.LocalDate;
 
-/**
- * Create an anchor pane that can store additional data.
- */
-
 @Getter
-public class AnchorPaneNode extends AnchorPane {
-
-    // Date associated with this pane
+public class ActivityNode extends AnchorPane {
     private LocalDate date;
-    private Calendar calendar;
+    private Activity activity;
 
     /**
      * Create a anchor pane node. Date is not assigned in the constructor.
      * @param children children of the anchor pane
      */
 
-    public AnchorPaneNode(Node... children) {
+    public ActivityNode(Node... children) {
         super(children);
-        this.setBorder(new Border(new BorderStroke(Color.BLACK, null, new CornerRadii(0.1), new BorderWidths(5d))));
         // Add action handler for mouse clicked
         this.setOnMouseClicked(e -> {
             System.out.println("This pane's date is: " + date);
-            if(calendar!=null) System.out.println("This pane's calendar entity name:  " + calendar.getName());
+            if(activity!=null) System.out.println("This pane's calendar entity name:  " + activity.getName());
         });
     }
 
@@ -42,24 +37,33 @@ public class AnchorPaneNode extends AnchorPane {
         this.date = date;
     }
 
-    public void setCalendar(Calendar calendar) {
-        this.calendar = calendar;
+    public void setActivity(Activity activity) {
+        this.activity = activity;
         setBackground(new javafx.scene.layout.Background(
                 new javafx.scene.layout.BackgroundFill(Color.GREEN, null, null)));
         Button getActivityBtn = new Button();
-        getActivityBtn.setText("=>");
-        getActivityBtn.setMaxWidth(35.0);
-        getActivityBtn.setMaxHeight(25.0);
+        getActivityBtn.setText("Sign up");
+        getActivityBtn.setFont(new Font(8.0));
+        getActivityBtn.setMaxWidth(65.0);
+        getActivityBtn.setMaxHeight(17.0);
         getActivityBtn.setAlignment(Pos.CENTER);
         Label textView = new Label();
-        textView.setText(calendar.getName());
-        textView.setFont(new Font(22.0));
+        textView.setText(activity.getName());
+        textView.setFont(new Font(16.0));
+        Label memberLimit  = new Label();
+        String limit = activity.getCurrentMembers() + "/" + activity.getMemberLimit();
+        memberLimit.setText(limit);
+        memberLimit.setFont(new Font(14.0));
+        memberLimit.setAlignment(Pos.BOTTOM_CENTER);
+        memberLimit.setPadding(new Insets(0,0,5,0));
         textView.setAlignment(Pos.TOP_CENTER);
         VBox vbox = new VBox();
-        vbox.setSpacing(15.0);
+        vbox.setSpacing(10.0);
         vbox.getChildren().add(textView);
         vbox.getChildren().add(getActivityBtn);
+        vbox.getChildren().add(memberLimit);
         vbox.setLayoutX(20.0);
+        if(activity.getCurrentMembers().equals(activity.getMemberLimit())) getActivityBtn.setVisible(false);
         vbox.setLayoutY(20.0);
         this.getChildren().add(vbox);
     }

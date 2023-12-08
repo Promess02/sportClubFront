@@ -18,6 +18,8 @@ import mikolaj.project.backendapp.service.NewsPostService;
 import mikolajm.project.sportclubui.ClubApplication;
 import mikolajm.project.sportclubui.CurrentSessionUser;
 import mikolajm.project.sportclubui.LoginManager;
+import mikolajm.project.sportclubui.screenController.activityCalendar.ActivityCalendarController;
+import mikolajm.project.sportclubui.screenController.activityCalendar.CalendarView;
 import mikolajm.project.sportclubui.screenController.calendar.CalendarViewController;
 import mikolajm.project.sportclubui.screenController.calendar.FullCalendarView;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -25,6 +27,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.time.YearMonth;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -57,7 +60,7 @@ public class MainScreenController {
 
     @FXML
     public void initialize(){
-        Image image = new Image("/images/clubLogo.png");
+        Image image = new Image("/images/clubLogo.jpg");
         logoView = new ImageView(image);
         Optional<List<Activity>> activityList;
         activityList = activityService.getAllActivities().getData();
@@ -69,6 +72,7 @@ public class MainScreenController {
         loadActivityPostRow(activityList.get());
         initAccountBtn();
         initCalendarBtn();
+        initActivityBtn();
     }
 
     private void initAccountBtn(){
@@ -92,6 +96,27 @@ public class MainScreenController {
                     Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
                 }
             });
+    }
+
+    private void initActivityBtn(){
+        activityBtn.setOnAction( event -> {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/activityCalendar.fxml"));
+                        Parent root = loader.load();
+                        // Get the controller and add the calendar view to it
+                        ActivityCalendarController controller = loader.getController();
+                        List<Activity> listOfActivities = activityService.getAllActivities().getData().orElse(new ArrayList<>());
+                        controller.getActivityPane().getChildren().add(
+                                new CalendarView(YearMonth.now(), listOfActivities).getView());
+                        Scene scene = new Scene(root);
+                        Stage stage = new Stage();
+                        stage.setScene(scene);
+                        stage.show();
+                    } catch (IOException ex) {
+                        throw new RuntimeException("failed loading calendar activity view");
+                    }
+                }
+        );
     }
 
     private void initCalendarBtn(){
