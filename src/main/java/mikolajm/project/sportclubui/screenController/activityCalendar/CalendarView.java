@@ -116,7 +116,7 @@ public class CalendarView {
             ap.setLeftAnchor(txt, 5.0);
             ap.getChildren().add(txt);
             if(mapOfCalendar.containsKey(calendarDate)){
-                boolean isSigned = false;
+                boolean isSigned;
                 Activity activity = mapOfCalendar.get(calendarDate);
                 isSigned = activityMap.keySet().stream().filter(act -> act.equals(activity)).toList().isEmpty();
                 ap.setActivity(activity, isSigned);

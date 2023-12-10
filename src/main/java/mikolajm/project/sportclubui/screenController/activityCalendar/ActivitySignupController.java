@@ -1,6 +1,7 @@
 package mikolajm.project.sportclubui.screenController.activityCalendar;
 
 import jakarta.persistence.Cache;
+import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -8,6 +9,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import lombok.Getter;
 import lombok.Setter;
 import mikolaj.project.backendapp.model.Activity;
 import mikolaj.project.backendapp.model.Calendar;
@@ -18,19 +20,20 @@ import mikolajm.project.sportclubui.CurrentSessionUser;
 import org.springframework.stereotype.Component;
 
 @Component
+@Getter
 public class ActivitySignupController {
-    public Button signUpBtn;
-    public TextArea descriptionArea;
-    public Button locationBtn;
-    public Label locationLabel;
-    public Button teamBtn;
-    public Label teamLabel;
-    public Button trainerBtn;
-    public Label trainerLabel;
-    public Label membersLimit;
-    public Label timeLabel;
-    public ImageView imageView;
-    public Label nameLabel;
+    @FXML private Button signUpBtn;
+    @FXML private TextArea descriptionArea;
+    @FXML private Button locationBtn;
+    @FXML private Label locationLabel;
+    @FXML private Button teamBtn;
+    @FXML private Label teamLabel;
+    @FXML private Button trainerBtn;
+    @FXML private Label trainerLabel;
+    @FXML private Label membersLimit;
+    @FXML private Label timeLabel;
+    @FXML private ImageView imageView;
+    @FXML private Label nameLabel;
     private Activity activity;
     private final CurrentSessionUser currentSessionUser;
     private final CalendarService calendarService;
@@ -57,6 +60,7 @@ public class ActivitySignupController {
         String locationTxt = "Location: " + activity.getLocation().getName();
         locationLabel.setText(locationTxt);
         descriptionArea.setText(activity.getDescription());
+        descriptionArea.setEditable(false);
         initSignUpBtn();
     }
 
@@ -66,6 +70,11 @@ public class ActivitySignupController {
             Stage stage = (Stage) signUpBtn.getScene().getWindow();
             stage.close();
         });
+    }
+
+    public void disableSpecificActivity(){
+        timeLabel.setVisible(false);
+        membersLimit.setVisible(false);
     }
     private void initSignUpBtn(){
         signUpBtn.setOnAction(e->

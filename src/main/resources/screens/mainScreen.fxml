@@ -10,7 +10,7 @@
    <children>
       <HBox alignment="CENTER" prefHeight="150.0" prefWidth="1200.0" spacing="60.0">
          <children>
-            <ImageView fx:id="logoView" fitHeight="140.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="logoView" fitHeight="140.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true"/>
             <MenuButton mnemonicParsing="false" prefHeight="60.0" prefWidth="110.0" text="Activities">
               <items>
                 <MenuItem fx:id = "calendarBtn" mnemonicParsing="false" text="My calendar" />

@@ -29,11 +29,10 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.time.YearMonth;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @Component
 @Getter
@@ -67,7 +66,7 @@ public class MainScreenController {
 
     @FXML
     public void initialize(){
-        Image image = new Image("/images/clubLogo.jpg");
+        Image image = new Image("/images/newsPostSample.jpg");
         logoView = new ImageView(image);
         Optional<List<Activity>> activityList;
         activityList = activityService.getAllActivities().getData();
@@ -75,8 +74,12 @@ public class MainScreenController {
         newsPostList = newsPostService.viewAllNewsPost().getData();
         if(activityList.isEmpty()) return;
         if(newsPostList.isEmpty()) return;
+        Set<Activity> set = new HashSet<>(activityList.get().stream()
+                .collect(Collectors.toMap(Activity::getName, activity -> activity, (a, b) -> a))
+                .values());
+        List<Activity> distinctActivities = set.stream().toList();
         loadNewsPostRow(newsPostList.get());
-        loadActivityPostRow(activityList.get());
+        loadActivityPostRow(distinctActivities);
         initAccountBtn();
         initCalendarBtn();
         initActivityBtn();
@@ -108,6 +111,9 @@ public class MainScreenController {
     private void initActivityBtn(){
         activityBtn.setOnAction( event -> {
                     try {
+                        if(currentSessionUser.getMember()==null){
+                           showErrorMessage("unable to show calendar without an active membership");
+                        }
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/activityCalendar.fxml"));
                         Parent root = loader.load();
                         // Get the controller and add the calendar view to it
@@ -130,6 +136,9 @@ public class MainScreenController {
     private void initCalendarBtn(){
         calendarBtn.setOnAction( event -> {
                     try {
+                        if(currentSessionUser.getMember()==null){
+                            showErrorMessage("unable to show calendar without an active membership");
+                        }
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/fullCalendar.fxml"));
                         Parent root = loader.load();
                         // Get the controller and add the calendar view to it
@@ -180,6 +189,22 @@ public class MainScreenController {
             } catch (IOException ex) {
                 Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+    }
+    private void showErrorMessage(String error){
+        try {
+            context = ClubApplication.getApplicationContext();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/errorMsg.fxml"));
+            loader.setControllerFactory(context::getBean);
+            Parent root = loader.load();
+            ErrorMessageController errorMessageController = loader.getController();
+            errorMessageController.setError(error);
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        }catch (IOException exception){
+            throw new RuntimeException("failed loading error view");
         }
     }
 

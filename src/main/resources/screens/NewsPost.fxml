@@ -24,7 +24,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                   <Button alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="50.0" text=" =&gt;">
+                   <Button fx:id="button" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="50.0" text=" =&gt;">
                      <VBox.margin>
                         <Insets left="30.0" top="30.0" />
                      </VBox.margin></Button>
