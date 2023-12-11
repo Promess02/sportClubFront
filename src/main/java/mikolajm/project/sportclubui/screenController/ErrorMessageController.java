@@ -13,11 +13,11 @@ public class ErrorMessageController {
     private String error;
 
     public ErrorMessageController() {
+
+    }
+    public void setError(String error) {
         Image image = new Image("/images/exclamationMark.png");
         exclamationImg.setImage(image);
-    }
-
-    public void setError(String error) {
         this.error = error;
         errorMsg.setText(error);
     }

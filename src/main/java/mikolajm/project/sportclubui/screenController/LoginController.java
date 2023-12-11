@@ -13,6 +13,7 @@ import mikolaj.project.backendapp.model.User;
 import mikolajm.project.sportclubui.ClubApplication;
 import mikolajm.project.sportclubui.CurrentSessionUser;
 import mikolajm.project.sportclubui.LoginManager;
+import mikolajm.project.sportclubui.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.http.HttpStatus;
@@ -50,7 +51,11 @@ public class LoginController {
                     Stage stage = (Stage) loginButton.getScene().getWindow();
                     stage.close();
                 }
-                else log.info("authentication failed");
+            }else{
+                Utils util = new Utils();
+                util.showErrorMessage("user not found");
+                user.setText("");
+                password.setText("");
             }
         });
     }

@@ -83,6 +83,7 @@ public class MainScreenController {
         initAccountBtn();
         initCalendarBtn();
         initActivityBtn();
+        initMembershipTypeBtn();
     }
 
     private void initAccountBtn(){
@@ -108,11 +109,31 @@ public class MainScreenController {
             });
     }
 
+    private void initMembershipTypeBtn(){
+        membershipTypeBtn.setOnAction( e ->{
+            try{
+                context = ClubApplication.getApplicationContext();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/membership.fxml"));
+                loader.setControllerFactory(context::getBean);
+                Parent root = loader.load();
+                MembershipUiController membershipUiController = loader.getController();
+                Scene scene = new Scene(root);
+                // Set the Scene to the primaryStage or a new Stage
+                Stage primaryStage = new Stage(); // You might use your existing primaryStage here
+                primaryStage.setScene(scene);
+                primaryStage.show();
+            }catch(IOException exception){
+                throw new RuntimeException("unable to load membership type view");
+            }
+        });
+    }
+
     private void initActivityBtn(){
         activityBtn.setOnAction( event -> {
                     try {
                         if(currentSessionUser.getMember()==null){
                            showErrorMessage("unable to show calendar without an active membership");
+                           return;
                         }
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/activityCalendar.fxml"));
                         Parent root = loader.load();
@@ -138,6 +159,7 @@ public class MainScreenController {
                     try {
                         if(currentSessionUser.getMember()==null){
                             showErrorMessage("unable to show calendar without an active membership");
+                            return;
                         }
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/fullCalendar.fxml"));
                         Parent root = loader.load();
@@ -193,9 +215,7 @@ public class MainScreenController {
     }
     private void showErrorMessage(String error){
         try {
-            context = ClubApplication.getApplicationContext();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/errorMsg.fxml"));
-            loader.setControllerFactory(context::getBean);
             Parent root = loader.load();
             ErrorMessageController errorMessageController = loader.getController();
             errorMessageController.setError(error);
