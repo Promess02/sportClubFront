@@ -1,8 +1,8 @@
 package mikolajm.project.sportclubui;
 
 import lombok.Getter;
-import mikolaj.project.backendapp.model.*;
 import mikolaj.project.backendapp.model.Calendar;
+import mikolaj.project.backendapp.model.*;
 import mikolaj.project.backendapp.repo.CalendarRepo;
 import mikolaj.project.backendapp.repo.MemberRepo;
 import mikolaj.project.backendapp.repo.TrainerRepo;
@@ -80,6 +80,23 @@ public class CurrentSessionUser {
 
     public void loadCalendarList(){
             calendarService.getEntriesForMember(member).getData().ifPresent(calendars -> calendarList=calendars);
+    }
+
+    public void loadCreditCard(){
+        creditCard = userRepo.findById(user.getId()).get().getCreditCard();
+    }
+
+    public void loadMembership(){
+        Optional<Member> memberOptional = memberRepo.findMemberByUser(user);
+        memberOptional.ifPresent(value -> member = value);
+        Optional<Membership> membershipOptional = membershipService.getMembershipForUser(user.getEmail()).getData();
+        membershipOptional.ifPresent(value -> {
+            membership=value;
+            membershipStatus = true;
+        });
+        if(memberOptional.isPresent())
+            loadCalendarList();
+        else calendarList = new ArrayList<>();
     }
 
 }

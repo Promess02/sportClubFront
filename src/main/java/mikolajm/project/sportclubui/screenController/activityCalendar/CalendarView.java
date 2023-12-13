@@ -9,7 +9,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import lombok.Getter;
 import mikolaj.project.backendapp.model.Activity;
-import mikolaj.project.backendapp.service.CalendarService;
 
 import java.time.LocalDate;
 import java.time.YearMonth;

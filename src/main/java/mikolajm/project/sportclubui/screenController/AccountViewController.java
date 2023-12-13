@@ -1,16 +1,25 @@
 package mikolajm.project.sportclubui.screenController;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import mikolaj.project.backendapp.model.Member;
 import mikolaj.project.backendapp.model.User;
+import mikolajm.project.sportclubui.ClubApplication;
 import mikolajm.project.sportclubui.CurrentSessionUser;
+import mikolajm.project.sportclubui.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
 
 @Component
 public class AccountViewController {
@@ -26,6 +35,7 @@ public class AccountViewController {
     @FXML private CheckBox membershipStatusCb;
 
     private final CurrentSessionUser currentSessionUser;
+    private ConfigurableApplicationContext context;
     @Autowired
     public AccountViewController(CurrentSessionUser currentSessionUser) {
         this.currentSessionUser = currentSessionUser;
@@ -51,5 +61,51 @@ public class AccountViewController {
         membershipStatusBtn.setVisible(!currentSessionUser.isMembershipStatus());
         Image image = new Image("/images/profileImage.png");
         userImage.setImage(image);
+        initMembershipBtn();
+        initCreditCardBtn();
+    }
+
+    private void initCreditCardBtn(){
+        creditCardBtn.setOnAction(e ->{
+            try{
+                context = ClubApplication.getApplicationContext();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/creditCardView.fxml"));
+                loader.setControllerFactory(context::getBean);
+                Parent root = loader.load();
+                CreditCardController creditCardController = loader.getController();
+                creditCardController.initialize();
+                Scene scene = new Scene(root);
+                // Set the Scene to the primaryStage or a new Stage
+                Stage primaryStage = new Stage(); // You might use your existing primaryStage here
+                primaryStage.setScene(scene);
+                primaryStage.show();
+            }catch(IOException exception){
+                throw new RuntimeException("unable to load membership type view");
+            }
+        });
+    }
+
+    private void initMembershipBtn(){
+        membershipStatusBtn.setOnAction( e-> {
+            try{
+                if(currentSessionUser.getUser().getCreditCard()==null) {
+                    Utils utils = new Utils();
+                    utils.showErrorMessage("credit card info not provided");
+                    return;
+                }
+                context = ClubApplication.getApplicationContext();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/membership.fxml"));
+                loader.setControllerFactory(context::getBean);
+                Parent root = loader.load();
+                MembershipUiController membershipUiController = loader.getController();
+                Scene scene = new Scene(root);
+                // Set the Scene to the primaryStage or a new Stage
+                Stage primaryStage = new Stage(); // You might use your existing primaryStage here
+                primaryStage.setScene(scene);
+                primaryStage.show();
+            }catch(IOException exception){
+                throw new RuntimeException("unable to load membership type view");
+            }
+        });
     }
 }

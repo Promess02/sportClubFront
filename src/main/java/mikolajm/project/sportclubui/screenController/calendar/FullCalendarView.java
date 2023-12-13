@@ -8,7 +8,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import mikolaj.project.backendapp.model.Calendar;
-import mikolajm.project.sportclubui.screenController.activityCalendar.ActivityNode;
 
 import java.time.LocalDate;
 import java.time.YearMonth;

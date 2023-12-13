@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane prefHeight="350.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mikolajm.project.sportclubui.screenController.CreditCardController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="350.0" prefWidth="450.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="48.0" prefWidth="450.0" text="Provide credit card info" textAlignment="CENTER">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="57.0" prefWidth="450.0">
+               <children>
+                  <Label contentDisplay="CENTER" prefHeight="57.0" prefWidth="139.0" text="Credit card number: " wrapText="true">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="numberTF" alignment="CENTER" prefHeight="49.0" prefWidth="310.0" promptText="enter credit card number here">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+            </HBox>
+             <HBox alignment="CENTER" prefHeight="57.0" prefWidth="450.0">
+                 <children>
+                     <Label prefHeight="57.0" prefWidth="139.0" text="CVV: " wrapText="true">
+                         <font>
+                             <Font size="14.0" />
+                         </font>
+                         <HBox.margin>
+                             <Insets left="5.0" />
+                         </HBox.margin>
+                     </Label>
+                     <TextField fx:id = "cvvTF" alignment="CENTER" prefHeight="49.0" prefWidth="150.0" promptText="enter cvv here">
+                         <font>
+                             <Font size="15.0" />
+                         </font>
+                         <HBox.margin>
+                             <Insets right="5.0" />
+                         </HBox.margin>
+                     </TextField>
+                 </children>
+             </HBox>
+             <HBox alignment="CENTER" prefHeight="57.0" prefWidth="450.0">
+                 <children>
+                     <Label prefHeight="57.0" prefWidth="139.0" text="Expiration date: " wrapText="true">
+                         <font>
+                             <Font size="14.0" />
+                         </font>
+                         <HBox.margin>
+                             <Insets left="5.0" />
+                         </HBox.margin>
+                     </Label>
+                     <TextField fx:id = "expDateTF" alignment="CENTER" prefHeight="49.0" prefWidth="170.0" promptText="YYYY-MM-DD">
+                         <font>
+                             <Font size="15.0" />
+                         </font>
+                         <HBox.margin>
+                             <Insets right="5.0" />
+                         </HBox.margin>
+                     </TextField>
+                 </children>
+             </HBox>
+             <HBox alignment="CENTER" prefHeight="57.0" prefWidth="450.0">
+                 <children>
+                     <Label prefHeight="57.0" prefWidth="139.0" text="Bank name: " wrapText="true">
+                         <font>
+                             <Font size="14.0" />
+                         </font>
+                         <HBox.margin>
+                             <Insets left="5.0" />
+                         </HBox.margin>
+                     </Label>
+                     <TextField fx:id="bankTF" alignment="CENTER" prefHeight="49.0" prefWidth="170.0" promptText="enter bank name">
+                         <font>
+                             <Font size="15.0" />
+                         </font>
+                         <HBox.margin>
+                             <Insets right="5.0" />
+                         </HBox.margin>
+                     </TextField>
+                 </children>
+             </HBox>
+            <Button fx:id = "confirmBtn" mnemonicParsing="false" prefHeight="47.0" prefWidth="106.0" text="CONFIRM">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -1,8 +1,6 @@
 package mikolajm.project.sportclubui.screenController.activityCalendar;
 
-import jakarta.persistence.Cache;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -10,11 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import lombok.Getter;
-import lombok.Setter;
 import mikolaj.project.backendapp.model.Activity;
-import mikolaj.project.backendapp.model.Calendar;
 import mikolaj.project.backendapp.model.Member;
-import mikolaj.project.backendapp.service.ActivityService;
 import mikolaj.project.backendapp.service.CalendarService;
 import mikolajm.project.sportclubui.CurrentSessionUser;
 import org.springframework.stereotype.Component;

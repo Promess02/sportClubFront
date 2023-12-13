@@ -7,24 +7,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import lombok.Getter;
-import mikolaj.project.backendapp.model.Activity;
 import mikolaj.project.backendapp.model.Calendar;
 import mikolajm.project.sportclubui.ClubApplication;
-import mikolajm.project.sportclubui.screenController.activityCalendar.ActivityCalendarController;
 import mikolajm.project.sportclubui.screenController.activityCalendar.ActivitySignupController;
-import mikolajm.project.sportclubui.screenController.activityCalendar.CalendarView;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.YearMonth;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Create an anchor pane that can store additional data.
