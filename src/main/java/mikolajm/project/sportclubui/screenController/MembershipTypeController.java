@@ -1,6 +1,9 @@
 package mikolajm.project.sportclubui.screenController;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -10,9 +13,12 @@ import lombok.Getter;
 import lombok.Setter;
 import mikolaj.project.backendapp.model.MembershipType;
 import mikolaj.project.backendapp.service.MembershipService;
+import mikolajm.project.sportclubui.ClubApplication;
 import mikolajm.project.sportclubui.CurrentSessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
 
 @Getter
 @Setter
@@ -47,11 +53,36 @@ public class MembershipTypeController {
 
     private void initBtn(){
         getBtn.setOnAction(e->{
-            membershipService.buyMembership(currentSessionUser.getUser().getEmail(), membershipType.getDescription(), null);
-            currentSessionUser.loadMembership();
-            Stage stage = (Stage) getBtn.getScene().getWindow();
-            stage.close();
+            if(currentSessionUser.getMembership()!=null){
+                try{
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/warningView.fxml"));
+                    Parent root = loader.load();
+                    WarningViewController warningViewController = loader.getController();
+                    warningViewController.initialize("You already have a membership");
+                    Scene scene = new Scene(root);
+                    warningViewController.getOkBtn().setOnAction(exp->{
+                        saveMembership();
+                        Stage stage = (Stage) warningViewController.getOkBtn().getScene().getWindow();
+                        stage.close();
+                    });
+                    // Set the Scene to the primaryStage or a new Stage
+                    Stage primaryStage = new Stage(); // You might use your existing primaryStage here
+                    primaryStage.setScene(scene);
+                    primaryStage.show();
+                }catch (IOException ex){
+                    throw new RuntimeException("failed loading warning view");
+                }
+
+            }
+            saveMembership();
         });
+    }
+
+    private void saveMembership(){
+        membershipService.buyMembership(currentSessionUser.getUser().getEmail(), membershipType.getDescription(), null);
+        currentSessionUser.loadMembership();
+        Stage stage = (Stage) getBtn.getScene().getWindow();
+        stage.close();
     }
 
 

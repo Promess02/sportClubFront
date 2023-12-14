@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="150.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mikolajm.project.sportclubui.screenController.WarningViewController">
+    <children>
+        <HBox alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="300.0">
+            <children>
+                <ImageView fx:id="exclamationImg" fitHeight="86.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true" />
+            <VBox prefHeight="150.0" prefWidth="205.0">
+               <children>
+                      <Label fx:id="warningMsg" prefHeight="127.0" prefWidth="193.0" text="error message" wrapText="true">
+                          <font>
+                              <Font size="20.0" />
+                          </font>
+                      </Label>
+                  <HBox alignment="CENTER" prefHeight="82.0" prefWidth="200.0" spacing="15.0">
+                     <children>
+                        <Button fx:id="okBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="70.0" text="OK" />
+                        <Button fx:id="cancelBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="70.0" text="CANCEL" />
+                     </children>
+                  </HBox>
+               </children>
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </VBox>
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>
