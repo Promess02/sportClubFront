@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import lombok.Getter;
 import mikolaj.project.backendapp.model.Team;
 import mikolaj.project.backendapp.model.Trainer;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class TeamView {
     public TeamView() {
     }
 
+    @FXML
     public void initialize(Team team, int currentTeamMembers, List<Trainer> trainerList){
         this.team = team;
         Image image = new Image("/images/newsPostSample.jpg");

@@ -85,6 +85,7 @@ public class MainScreenController {
         initActivityBtn();
         initMembershipTypeBtn();
         initTeamsBtn();
+        initTrainersBtn();
     }
 
     private void initAccountBtn(){
@@ -109,6 +110,25 @@ public class MainScreenController {
                 }
             });
     }
+
+    private void initTrainersBtn(){
+        trainersBtn.setOnAction( e ->{
+            try {
+                context = ClubApplication.getApplicationContext();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/trainerView.fxml"));
+                loader.setControllerFactory(context::getBean);
+                Parent root = loader.load();
+                TrainersViewController trainersViewController = loader.getController();
+                Scene scene = new Scene(root);
+                Stage primaryStage = new Stage(); // You might use your existing primaryStage here
+                primaryStage.setScene(scene);
+                primaryStage.show();
+            }catch (IOException ex){
+                Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+    }
+
     private void initTeamsBtn(){
         teamsBtn.setOnAction( event ->
         {
@@ -118,7 +138,7 @@ public class MainScreenController {
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 TeamsViewController teamsViewController = loader.getController();
-                teamsViewController.initialize();
+                //teamsViewController.initialize();
                 Scene scene = new Scene(root);
                 Stage primaryStage = new Stage(); // You might use your existing primaryStage here
                 primaryStage.setScene(scene);
