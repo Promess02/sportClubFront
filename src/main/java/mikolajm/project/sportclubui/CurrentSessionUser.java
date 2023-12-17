@@ -49,14 +49,18 @@ public class CurrentSessionUser {
         this.activityService = activityService;
     }
 
-    public void getAlreadySignedList(){
+    public List<Activity> getAlreadySignedList(){
         listOfActivities = new HashMap<>();
         List<Activity> listOfAllActivities = activityService.getAllActivities().getData().orElse(new ArrayList<>());
+        List<Activity> listOfSignedActivities = new ArrayList<>();
         for(Activity activity: listOfAllActivities){
-            if(!calendarRepo.findCalendarsByActivityAndMember(activity,member).isEmpty())
+            if(!calendarRepo.findCalendarsByActivityAndMember(activity,member).isEmpty()){
                 listOfActivities.put(activity,true);
+                listOfSignedActivities.add(activity);
+            }
             else listOfActivities.put(activity,false);
         }
+        return listOfSignedActivities;
     }
     public void setUser(User user) {
         Optional<User> userDb = userRepo.findByEmailIgnoreCase(user.getEmail());

@@ -22,17 +22,25 @@ import java.util.logging.Logger;
 
 @Getter
 @Component
-public class TrainersViewController implements Initializable {
+public class TrainersViewController {
     public VBox trainersVBox;
-    private final List<Trainer> trainerList;
+    private List<Trainer> trainerList;
+    private final TrainerRepo trainerRepo;
 
     @Autowired
     public TrainersViewController(TrainerRepo trainerRepo) {
-        trainerList = trainerRepo.findAll();
+        this.trainerRepo = trainerRepo;
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle){
+    public void initialize(){
+        this.trainerList = trainerRepo.findAll();
+    initView();
+    }
+    public void initializeCustom(List<Trainer> trainerList){
+        this.trainerList = trainerList;
+        initView();
+    }
+    private void initView(){
         for(Trainer trainer: trainerList){
             try{
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/trainerProfile.fxml"));

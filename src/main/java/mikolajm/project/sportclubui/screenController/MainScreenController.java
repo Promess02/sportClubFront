@@ -66,8 +66,8 @@ public class MainScreenController {
 
     @FXML
     public void initialize(){
-        Image image = new Image("/images/newsPostSample.jpg");
-        logoView = new ImageView(image);
+        Image image = new Image("/images/clubLogo.jpg");
+        logoView.setImage(image);
         Optional<List<Activity>> activityList;
         activityList = activityService.getAllActivities().getData();
         Optional<List<NewsPost>> newsPostList;
@@ -138,7 +138,6 @@ public class MainScreenController {
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 TeamsViewController teamsViewController = loader.getController();
-                //teamsViewController.initialize();
                 Scene scene = new Scene(root);
                 Stage primaryStage = new Stage(); // You might use your existing primaryStage here
                 primaryStage.setScene(scene);
@@ -180,9 +179,9 @@ public class MainScreenController {
                         // Get the controller and add the calendar view to it
                         ActivityCalendarController controller = loader.getController();
                         List<Activity> listOfActivities = activityService.getAllActivities().getData().orElse(new ArrayList<>());
-                        currentSessionUser.getAlreadySignedList();
+                        List<Activity> alreadySignedList =  currentSessionUser.getAlreadySignedList();
                         controller.getActivityPane().getChildren().add(
-                                new CalendarView(YearMonth.now(), listOfActivities, currentSessionUser.getListOfActivities()).getView());
+                                new CalendarView(YearMonth.now(), listOfActivities, alreadySignedList).getView());
                         Scene scene = new Scene(root);
                         Stage stage = new Stage();
                         stage.setScene(scene);

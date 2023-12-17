@@ -2,15 +2,22 @@ package mikolajm.project.sportclubui;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import mikolajm.project.sportclubui.screenController.EnterScreenController;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
+
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 @SpringBootApplication
@@ -29,12 +36,24 @@ public class ClubApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Scene scene = new Scene(new StackPane());
-        LoginManager loginManager = new LoginManager(scene, applicationContext);
-        loginManager.showLoginScreen();
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Application");
-        primaryStage.show();
+//        Scene scene = new Scene(new StackPane());
+//        LoginManager loginManager = new LoginManager(scene, applicationContext);
+//        loginManager.showLoginScreen();
+//        primaryStage.setScene(scene);
+//        primaryStage.setTitle("Application");
+//        primaryStage.show();
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/EnterScreen.fxml"));
+            Parent root = loader.load();
+            EnterScreenController enterScreenController = loader.getController();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        }catch (IOException exception){
+            Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, exception);
+        }
+
         log.info("APP STARTED");
     }
 

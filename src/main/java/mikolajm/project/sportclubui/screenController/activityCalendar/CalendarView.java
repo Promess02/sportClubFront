@@ -30,9 +30,9 @@ public class CalendarView {
     private HBox titleBar;
     private Button nextMonth;
     private Button previousMonth;
-    private Map<Activity, Boolean> activityMap;
+    private List<Activity> activityMap;
 
-    public CalendarView(YearMonth yearMonth, List<Activity> activityList, Map<Activity, Boolean> activityMap) {
+    public CalendarView(YearMonth yearMonth, List<Activity> activityList, List<Activity> activityMap) {
         this.activityMap = activityMap;
         currentYearMonth = yearMonth;
         mapOfCalendar = activityList.stream()
@@ -117,7 +117,8 @@ public class CalendarView {
             if(mapOfCalendar.containsKey(calendarDate)){
                 boolean isSigned;
                 Activity activity = mapOfCalendar.get(calendarDate);
-                isSigned = activityMap.keySet().stream().filter(act -> act.equals(activity)).toList().isEmpty();
+                isSigned = activityMap.contains(activity);
+               // isSigned = activityMap.keySet().stream().filter(act -> act.equals(activity)).toList().isEmpty();
                 ap.setActivity(activity, isSigned);
             }
 

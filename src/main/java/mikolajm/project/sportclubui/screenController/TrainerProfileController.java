@@ -65,11 +65,11 @@ public class TrainerProfileController {
     public void initTeamsBtn(){
         viewTeamsBtn.setOnAction( e->{
             try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/trainerView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/TeamView.fxml"));
                 Parent root = loader.load();
                 TeamView teamView = loader.getController();
                 int currentTeamMembers = memberRepo.findAllByTeam(trainer.getTeam()).size();
-                teamView.initialize(trainer.getTeam(), currentTeamMembers, null);
+                teamView.initialize(trainer.getTeam(), currentTeamMembers);
                 Scene scene = new Scene(root);
                 Stage primaryStage = new Stage(); // You might use your existing primaryStage here
                 primaryStage.setScene(scene);

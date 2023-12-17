@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mikolajm.project.sportclubui.screenController.EnterScreenController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="800.0" prefWidth="600.0" spacing="15.0" AnchorPane.leftAnchor="0.0">
+         <children>
+            <Label prefHeight="116.0" prefWidth="598.0" text="Welcome in the Sport Club Management System" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="31.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="logoImage" fitHeight="279.0" fitWidth="281.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="registerUserBtn" mnemonicParsing="false" prefHeight="79.0" prefWidth="282.0" text="Register User">
+               <font>
+                  <Font size="21.0" />
+               </font></Button>
+            <Button fx:id="loginMemberBtn" mnemonicParsing="false" prefHeight="79.0" prefWidth="282.0" text="Login as Member">
+               <font>
+                  <Font size="21.0" />
+               </font></Button>
+            <Button fx:id="loginTrainerBtn" mnemonicParsing="false" prefHeight="79.0" prefWidth="282.0" text="Login as Trainer">
+               <font>
+                  <Font size="21.0" />
+               </font></Button>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

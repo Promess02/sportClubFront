@@ -22,30 +22,29 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 @Component
-public class TeamsViewController implements Initializable {
+public class TeamsViewController {
     @FXML private VBox teamsVBox;
     private List<Team> list;
     private final TeamRepo teamRepo;
     private final MemberRepo memberRepo;
+
     @Autowired
     public TeamsViewController(TeamRepo teamRepo, MemberRepo memberRepo) {
         this.teamRepo = teamRepo;
         this.memberRepo = memberRepo;
 
     }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle){
-        int teamMembers;
-        TeamView teamView;
+    public void initialize(){
+        ConfigurableApplicationContext context = ClubApplication.getApplicationContext();
         list = teamRepo.findAll();
         for(Team team: list){
                 try{
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/TeamView.fxml"));
+               loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
-                teamView = loader.getController();
-                teamMembers = memberRepo.findAllByTeam(team).size();
-                teamView.initialize(team,teamMembers,null);
+                TeamView teamView = loader.getController();
+                int teamMembers = memberRepo.findAllByTeam(team).size();
+                teamView.initialize(team,teamMembers);
                 teamsVBox.getChildren().add(teamView.getFullView());
             }catch (IOException ex){
                 throw new RuntimeException("unable to load team view");

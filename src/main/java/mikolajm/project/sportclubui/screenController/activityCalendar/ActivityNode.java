@@ -76,8 +76,8 @@ public class ActivityNode extends AnchorPane {
             enableBtn = false;
         }else getActivityBtn.setText("Sign up");
 
-        getActivityBtn.setFont(new Font(15.0));
-        getActivityBtn.setMaxWidth(50.0);
+        getActivityBtn.setFont(new Font(12.0));
+        getActivityBtn.setMaxWidth(70.0);
         getActivityBtn.setMaxHeight(25.0);
         getActivityBtn.setAlignment(Pos.CENTER);
         vbox.getChildren().add(getActivityBtn);
