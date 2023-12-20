@@ -47,7 +47,8 @@ public class LoginController {
                 String session = authorize();
                 if (session != null) {
                     log.info("session id:" + session);
-                    openMainScreenView();
+                    if(currentSessionUser.getUser().getEmail().equals("admin")) openAdminView();
+                    else openMainScreenView();
                     Stage stage = (Stage) loginButton.getScene().getWindow();
                     stage.close();
                 }
@@ -58,6 +59,20 @@ public class LoginController {
                 password.setText("");
             }
         });
+    }
+
+    private void openAdminView(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/adminView.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        }catch (IOException exception){
+            throw new RuntimeException("unable to load admin view");
+        }
+
     }
 
     private void openMainScreenView(){

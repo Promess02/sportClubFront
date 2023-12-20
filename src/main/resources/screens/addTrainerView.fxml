@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import javafx.collections.FXCollections?>
+<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mikolajm.project.sportclubui.screenController.AddTrainerViewController">
+   <children>
+      <VBox prefHeight="300.0" prefWidth="400.0">
+         <children>
+            <Label prefHeight="45.0" prefWidth="164.0" text="Add trainer">
+               <font>
+                  <Font size="22.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="10.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="400.0">
+               <children>
+                  <Label contentDisplay="CENTER" prefHeight="52.0" prefWidth="122.0" text="Specialization: ">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="SpecializationCb" prefHeight="44.0" prefWidth="201.0">
+                      <items>
+                          <FXCollections fx:factory="observableArrayList">
+                          </FXCollections>
+                      </items>
+                  </ChoiceBox>
+               </children>
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+            </HBox>
+             <HBox alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="400.0">
+                 <children>
+                     <Label contentDisplay="CENTER" prefHeight="52.0" prefWidth="122.0" text="team: ">
+                         <font>
+                             <Font size="16.0" />
+                         </font>
+                     </Label>
+                     <ChoiceBox fx:id="teamCb" prefHeight="44.0" prefWidth="201.0">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                            </FXCollections>
+                        </items>
+                     </ChoiceBox>
+                 </children>
+                 <VBox.margin>
+                     <Insets left="10.0" right="10.0" />
+                 </VBox.margin>
+             </HBox>
+             <HBox alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="400.0">
+                 <children>
+                     <Label contentDisplay="CENTER" prefHeight="52.0" prefWidth="122.0" text="user:">
+                         <font>
+                             <Font size="16.0" />
+                         </font>
+                     </Label>
+                     <ChoiceBox fx:id="userCb" prefHeight="44.0" prefWidth="201.0" >
+                         <items>
+                             <FXCollections fx:factory="observableArrayList">
+                             </FXCollections>
+                         </items>
+                     </ChoiceBox>
+                 </children>
+                 <VBox.margin>
+                     <Insets left="10.0" right="10.0" />
+                 </VBox.margin>
+             </HBox>
+            <HBox alignment="CENTER" prefHeight="61.0" prefWidth="400.0">
+               <children>
+                  <Button fx:id="hireBtn" mnemonicParsing="false" prefHeight="52.0" prefWidth="116.0" text="Hire Trainer" />
+               </children>
+            </HBox>
+
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
