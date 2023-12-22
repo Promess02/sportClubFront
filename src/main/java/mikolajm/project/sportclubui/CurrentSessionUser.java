@@ -82,6 +82,11 @@ public class CurrentSessionUser {
         else calendarList = new ArrayList<>();
     }
 
+    public void updateUserImage(String dbUrl){
+        user.setProfileImageUrl(dbUrl);
+        userRepo.save(user);
+    }
+
     public void loadCalendarList(){
             calendarService.getEntriesForMember(member).getData().ifPresent(calendars -> calendarList=calendars);
     }

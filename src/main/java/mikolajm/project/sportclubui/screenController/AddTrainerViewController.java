@@ -14,7 +14,6 @@ import mikolaj.project.backendapp.repo.TeamRepo;
 import mikolaj.project.backendapp.repo.UserRepo;
 import mikolaj.project.backendapp.service.TrainerService;
 import mikolajm.project.sportclubui.Utils;
-import org.hibernate.annotations.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

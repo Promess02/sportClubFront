@@ -14,11 +14,9 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import mikolaj.project.backendapp.model.Trainer;
 import mikolaj.project.backendapp.repo.MemberRepo;
-import mikolaj.project.backendapp.repo.TeamRepo;
 import mikolaj.project.backendapp.service.TrainerService;
 import mikolajm.project.sportclubui.CurrentSessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CurrencyEditor;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;

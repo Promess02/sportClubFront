@@ -44,7 +44,7 @@ public class TeamView {
 
     public void initialize(Team team, int currentTeamMembers){
         this.team = team;
-        Image image = new Image("/images/newsPostSample.jpg");
+        Image image = new Image(team.getLogoIconUrl());
         imageView.setImage(image);
         teamName.setText(team.getName());
         membersLimit.setText("Members: " + currentTeamMembers + "/" + team.getMaxMembers());

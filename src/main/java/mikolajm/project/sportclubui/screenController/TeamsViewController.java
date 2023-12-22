@@ -2,12 +2,8 @@ package mikolajm.project.sportclubui.screenController;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import mikolaj.project.backendapp.model.Member;
 import mikolaj.project.backendapp.model.Team;
 import mikolaj.project.backendapp.repo.MemberRepo;
 import mikolaj.project.backendapp.repo.TeamRepo;
@@ -17,9 +13,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 
 @Component
 public class TeamsViewController {

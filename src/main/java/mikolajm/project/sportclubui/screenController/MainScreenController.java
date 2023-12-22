@@ -220,14 +220,14 @@ public class MainScreenController {
     private void loadNewsPostRow(List<NewsPost> list){
         for (NewsPost newsPost : list) {
             try {
-                context = ClubApplication.getApplicationContext();
+               // context = ClubApplication.getApplicationContext();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/NewsPost.fxml"));
-                loader.setControllerFactory(context::getBean);
+                //loader.setControllerFactory(context::getBean);
                 // Load the root node from the FXML file
                 Parent root = loader.load();
                 // Get the MembershipTypeController from the loader
                 NewsPostViewController newsPostViewController = loader.getController();
-                newsPostViewController.initialize(newsPost); // You can initialize if needed
+                newsPostViewController.setNewsPost(newsPost);
                 newsRow.getChildren().add(newsPostViewController.getMainView());
             } catch (IOException ex) {
                 Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -238,14 +238,14 @@ public class MainScreenController {
     private void loadActivityPostRow(List<Activity> list){
         for (Activity activity : list) {
             try {
-                context = ClubApplication.getApplicationContext();
+                //context = ClubApplication.getApplicationContext();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/ActivityView.fxml"));
-                loader.setControllerFactory(context::getBean);
+                //loader.setControllerFactory(context::getBean);
                 // Load the root node from the FXML file
                 Parent root = loader.load();
                 // Get the MembershipTypeController from the loader
                 ActivityViewController activityViewController = loader.getController();
-                activityViewController.initialize(activity); // You can initialize if needed
+                activityViewController.setActivity(activity); // You can initialize if needed
                 activityRow.getChildren().add(activityViewController.getMainView());
             } catch (IOException ex) {
                 Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);

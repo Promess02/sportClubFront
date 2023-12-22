@@ -27,7 +27,9 @@ public class NewsPostController {
         articleName.setText(newsPost.getName());
         articleContent.setText(newsPost.getContent());
         postDate.setText("date: " + newsPost.getDateOfPosting().toString());
-        Image image = new Image("/images/newsPostSample.jpg");
+        Image image;
+        if(newsPost.getImageUrl()==null)image = new Image("/images/newsPostSample.jpg");
+        else image = new Image(newsPost.getImageUrl());
         articleImage.setImage(image);
         if(newsPost.getActivity()==null) activityBtn.setVisible(false);
         else initActivityBtn();
@@ -38,6 +40,8 @@ public class NewsPostController {
         articleContent.setEditable(false);
         articleName.setEditable(false);
     }
+
+
 
     private void initActivityBtn(){}
     private void initLocationBtn(){}

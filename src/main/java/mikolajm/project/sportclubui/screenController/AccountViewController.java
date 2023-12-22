@@ -9,6 +9,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import mikolaj.project.backendapp.model.Member;
 import mikolaj.project.backendapp.model.User;
@@ -19,10 +20,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.io.IOException;
 
 @Component
 public class AccountViewController {
+    @FXML private Button addImageBtn;
     @FXML private Button membershipStatusBtn;
     @FXML private Button creditCardBtn;
     @FXML private ImageView userImage;
@@ -36,6 +39,7 @@ public class AccountViewController {
 
     private final CurrentSessionUser currentSessionUser;
     private ConfigurableApplicationContext context;
+    private File selectedFile;
     @Autowired
     public AccountViewController(CurrentSessionUser currentSessionUser) {
         this.currentSessionUser = currentSessionUser;
@@ -59,10 +63,45 @@ public class AccountViewController {
         if(user.getCreditCard()==null) creditCardBtn.setVisible(true);
         membershipStatusCb.setSelected(currentSessionUser.isMembershipStatus());
         membershipStatusBtn.setVisible(!currentSessionUser.isMembershipStatus());
-        Image image = new Image("/images/profileImage.png");
+        Image image;
+        if(currentSessionUser.getUser().getProfileImageUrl()==null){
+            image = new Image("/images/profileImage.png");
+        }else{
+            image = new Image(currentSessionUser.getUser().getProfileImageUrl());
+            addImageBtn.setText("Change image");
+        }
         userImage.setImage(image);
         initMembershipBtn();
         initCreditCardBtn();
+        initAddImageBtn();
+    }
+
+    private void initAddImageBtn(){
+        addImageBtn.setOnAction( e->{
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+            selectedFile = fileChooser.showOpenDialog(addImageBtn.getScene().getWindow());
+
+            if (selectedFile != null) {
+                // Display the selected imag
+                Utils utils = new Utils();
+                String fileName = selectedFile.getName();
+                int dotIndex = fileName.lastIndexOf('.');
+                String name = currentSessionUser.getUser().toString();
+                String imageExtension = (dotIndex > 0) ? fileName.substring(dotIndex) : "";
+                fileName = "/home/mikolajmichalczyk/IdeaProjects/sportClub/sportClubUi/src/main/resources/images/" + name.replaceAll("\\s", "")+ imageExtension;
+                utils.saveImage(selectedFile.toPath(), fileName);
+                String dbUrl = "/images/" + name.replaceAll("\\s", "")+imageExtension;
+                currentSessionUser.updateUserImage(dbUrl);
+                userImage.setImage(new Image(dbUrl));
+                Stage stage = (Stage) addImageBtn.getScene().getWindow();
+                stage.close();
+                //addImageBtn.setVisible(false);
+                // Save the selected image to the resources/images directory
+//                utils.saveImage(selectedFile.toPath(), "resources/images/" + selectedFile.getName());
+            }
+        });
+
     }
 
     private void initCreditCardBtn(){

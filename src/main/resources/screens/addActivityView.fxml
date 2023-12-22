@@ -123,7 +123,7 @@
                         <DatePicker fx:id="datePicker" prefHeight="35.0" prefWidth="202.0" promptText="enter the first date" />
                        </children>
                    </HBox>
-                   <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="380.0" spacing="10.0">
+                   <HBox fx:id="weeksHBox" alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="380.0" spacing="10.0">
                        <VBox.margin>
                            <Insets left="10.0" right="10.0" top="10.0" />
                        </VBox.margin>
@@ -133,23 +133,23 @@
                                    <Font size="20.0" />
                                </font>
                            </Label>
-                           <Slider fx:id="weeksSlider" blockIncrement="5.0" majorTickUnit="1" max="15" min="1" minorTickCount="0" prefHeight="40.0" prefWidth="249.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
-                               <value>
-                                   <!-- Set default or initial value here -->
-                                   <Double fx:value="1.0" />
-                               </value>
-                               <majorTickUnit>
-                                   <!-- Set the major tick unit based on the breakpoints -->
-                                   <Double fx:value="5.0" />
-                               </majorTickUnit>
-                               <minorTickCount>
-                                   <!-- Set the minor tick count (0 means no minor ticks) -->
-                                   <Integer fx:value="1" />
-                               </minorTickCount>
-                           </Slider>
+<!--                           <Slider fx:id="weeksSlider" blockIncrement="5" majorTickUnit="1" max="15" min="1" minorTickCount="0" prefHeight="40.0" prefWidth="249.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">-->
+<!--                               <value>-->
+<!--                                   &lt;!&ndash; Set default or initial value here &ndash;&gt;-->
+<!--                                   <Integer fx:value="1" />-->
+<!--                               </value>-->
+<!--                               <majorTickUnit>-->
+<!--                                   &lt;!&ndash; Set the major tick unit based on the breakpoints &ndash;&gt;-->
+<!--                                   <Integer fx:value="5" />-->
+<!--                               </majorTickUnit>-->
+<!--                               <minorTickCount>-->
+<!--                                   &lt;!&ndash; Set the minor tick count (0 means no minor ticks) &ndash;&gt;-->
+<!--                                   <Integer fx:value="1" />-->
+<!--                               </minorTickCount>-->
+<!--                           </Slider>-->
                        </children>
                    </HBox>
-                   <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="380.0" spacing="10.0">
+                   <HBox fx:id="minutesHBox" alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="380.0" spacing="10.0">
                        <VBox.margin>
                            <Insets left="10.0" right="10.0" top="10.0" />
                        </VBox.margin>
@@ -159,17 +159,17 @@
                                    <Font size="20.0" />
                                </font>
                            </Label>
-                           <Slider fx:id="minutesSlider" blockIncrement="15.0" majorTickUnit="1" max="90.0" min="30.0" minorTickCount="1" prefHeight="40.0" prefWidth="249.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
-                               <value>
-                                   <!-- Set default or initial value here -->
-                                   <Double fx:value="30.0" />
-                               </value>
-                               <majorTickUnit>
-                                   <!-- Set the major tick unit based on the breakpoints -->
-                                   <Double fx:value="15.0" />
-                               </majorTickUnit>
-      
-                           </Slider>
+<!--                           <Slider fx:id="minutesSlider" blockIncrement="15" majorTickUnit="1" max="90" min="30" minorTickCount="1" prefHeight="40" prefWidth="249.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">-->
+<!--                               <value>-->
+<!--                                   &lt;!&ndash; Set default or initial value here &ndash;&gt;-->
+<!--                                   <Integer fx:value="30" />-->
+<!--                               </value>-->
+<!--                               <majorTickUnit>-->
+<!--                                   &lt;!&ndash; Set the major tick unit based on the breakpoints &ndash;&gt;-->
+<!--                                   <Integer fx:value="15" />-->
+<!--                               </majorTickUnit>-->
+<!--      -->
+<!--                           </Slider>-->
                        </children>
                    </HBox>
                    <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="400.0" spacing="10.0">
@@ -189,7 +189,7 @@
                            </TextField>
                        </children>
                    </HBox>
-                   <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="380.0" spacing="10.0">
+                   <HBox fx:id="membersHBox" alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="380.0" spacing="10.0">
                        <VBox.margin>
                            <Insets left="10.0" right="10.0" top="10.0" />
                        </VBox.margin>
@@ -199,16 +199,16 @@
                                    <Font size="17.0" />
                                </font>
                            </Label>
-                           <Slider fx:id="memberLimitSlider" blockIncrement="15.0" majorTickUnit="1" max="70.0" min="2.0" minorTickCount="1" prefHeight="40.0" prefWidth="249.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
-                               <value>
-                                   <!-- Set default or initial value here -->
-                                   <Double fx:value="3.0" />
-                               </value>
-                               <majorTickUnit>
-                                   <!-- Set the major tick unit based on the breakpoints -->
-                                   <Double fx:value="15.0" />
-                               </majorTickUnit>
-                           </Slider>
+<!--                           <Slider fx:id="memberLimitSlider" blockIncrement="15.0" majorTickUnit="1" max="70.0" min="2.0" minorTickCount="1" prefHeight="40.0" prefWidth="249.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">-->
+<!--                               <value>-->
+<!--                                   &lt;!&ndash; Set default or initial value here &ndash;&gt;-->
+<!--                                   <Integer fx:constant="MIN_VALUE" />-->
+<!--                               </value>-->
+<!--                               <majorTickUnit>-->
+<!--                                   &lt;!&ndash; Set the major tick unit based on the breakpoints &ndash;&gt;-->
+<!--                                   <Integer fx:value="15" />-->
+<!--                               </majorTickUnit>-->
+<!--                           </Slider>-->
                        </children>
                    </HBox>
                </children>

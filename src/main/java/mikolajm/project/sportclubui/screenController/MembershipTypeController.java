@@ -13,7 +13,6 @@ import lombok.Getter;
 import lombok.Setter;
 import mikolaj.project.backendapp.model.MembershipType;
 import mikolaj.project.backendapp.service.MembershipService;
-import mikolajm.project.sportclubui.ClubApplication;
 import mikolajm.project.sportclubui.CurrentSessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

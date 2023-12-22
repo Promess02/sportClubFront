@@ -34,9 +34,10 @@
                    </Button>
                    <MenuButton mnemonicParsing="false" prefHeight="180.0" prefWidth="350.0" text="Edit Activities" textAlignment="CENTER" wrapText="true">
                        <items>
-                           <MenuItem fx:id="editActivityBtn" mnemonicParsing="false" text="edit activity" />
-                           <MenuItem fx:id ="deleteActivityBtn" mnemonicParsing="false" text="delete activity" />
+<!--                           <MenuItem fx:id="editActivityBtn" mnemonicParsing="false" text="edit activity" />-->
                            <MenuItem fx:id="addActivityBtn" mnemonicParsing="false" text="add activity" />
+                           <MenuItem fx:id ="deleteActivityBtn" mnemonicParsing="false" text="delete activity" />
+
                        </items>
                        <font>
                            <Font size="30.0" />
@@ -59,11 +60,17 @@
                              <Font size="30.0" />
                          </font>
                      </Button>
-                     <Button fx:id = "editTeamsBtn" mnemonicParsing="false" prefHeight="180.0" prefWidth="350.0" text="Edit Teams" textAlignment="CENTER" wrapText="true">
+                     <MenuButton mnemonicParsing="false" prefHeight="180.0" prefWidth="350.0" text="Edit Teams" textAlignment="CENTER" wrapText="true">
+                         <items>
+                             <!--                           <MenuItem fx:id="editActivityBtn" mnemonicParsing="false" text="edit activity" />-->
+                             <MenuItem fx:id="addTeamsBtn" mnemonicParsing="false" text="add activity" />
+                             <MenuItem fx:id ="deleteTeamsBtn" mnemonicParsing="false" text="delete activity" />
+
+                         </items>
                          <font>
                              <Font size="30.0" />
                          </font>
-                     </Button>
+                     </MenuButton>
                  </children>
              </HBox>
              <HBox alignment="CENTER" prefHeight="224.0" prefWidth="1170.0" spacing="45.0">

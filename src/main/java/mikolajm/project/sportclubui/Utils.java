@@ -7,6 +7,9 @@ import javafx.stage.Stage;
 import mikolajm.project.sportclubui.screenController.ErrorMessageController;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 public class Utils {
 
@@ -24,4 +27,13 @@ public class Utils {
             throw new RuntimeException("failed loading error view");
         }
     }
+
+    public void saveImage(Path sourcePath, String destinationPath) {
+        try {
+            Files.copy(sourcePath, Path.of(destinationPath), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

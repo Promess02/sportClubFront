@@ -16,13 +16,11 @@ import mikolajm.project.sportclubui.ClubApplication;
 import mikolajm.project.sportclubui.LoginManager;
 import mikolajm.project.sportclubui.screenController.activityCalendar.ActivitySignupController;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@Component
 @Getter
 public class ActivityViewController {
     @FXML private ImageView imageView;
@@ -37,6 +35,10 @@ public class ActivityViewController {
 
     @FXML
     public void initialize(Activity activity){
+
+    }
+
+    public void setActivity(Activity activity){
         activityName.setText(activity.getName());
         Image image = new Image("/images/newsPostSample.jpg");
         imageView.setImage(image);

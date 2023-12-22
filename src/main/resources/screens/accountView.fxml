@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.*?>
+
 <AnchorPane fx:id="mainView" prefHeight="600.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mikolajm.project.sportclubui.screenController.AccountViewController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="700.0" prefWidth="450.0">
@@ -13,6 +14,10 @@
                <VBox.margin>
                   <Insets top="40.0" />
                </VBox.margin></ImageView>
+            <Button fx:id="addImageBtn" mnemonicParsing="false" prefHeight="36.0" prefWidth="144.0" text="Add profile image">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin></Button>
             <HBox alignment="CENTER" prefHeight="44.0" prefWidth="450.0">
                <children>
                   <Label text="Name: " />
@@ -55,7 +60,7 @@
                      <CheckBox fx:id="membershipStatusCb" mnemonicParsing="false" />
                  </children>
              </HBox>
-            <Button fx:id = "membershipStatusBtn" mnemonicParsing="false" text="Buy Membership">
+            <Button fx:id="membershipStatusBtn" mnemonicParsing="false" text="Buy Membership">
                <font>
                   <Font size="17.0" />
                </font>
@@ -63,7 +68,7 @@
                   <Insets top="20.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id = "creditCardBtn" mnemonicParsing="false" text="Add Credit Card">
+            <Button fx:id="creditCardBtn" mnemonicParsing="false" text="Add Credit Card">
                <font>
                   <Font size="17.0" />
                </font>

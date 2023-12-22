@@ -5,7 +5,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import lombok.Getter;
 import mikolaj.project.backendapp.DTO.ServiceResponse;
 import mikolaj.project.backendapp.model.User;
 import mikolaj.project.backendapp.service.Impl.ServiceMessages;

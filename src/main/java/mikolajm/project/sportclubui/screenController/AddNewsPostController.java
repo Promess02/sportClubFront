@@ -1,11 +1,14 @@
 package mikolajm.project.sportclubui.screenController;
 
 import javafx.collections.FXCollections;
-import javafx.scene.Scene;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import mikolaj.project.backendapp.DTO.NewsPostForm;
 import mikolaj.project.backendapp.model.Activity;
@@ -14,11 +17,12 @@ import mikolaj.project.backendapp.model.MembershipType;
 import mikolaj.project.backendapp.repo.ActivityRepo;
 import mikolaj.project.backendapp.repo.LocationRepo;
 import mikolaj.project.backendapp.repo.MembershipTypeRepo;
-import javafx.collections.*;
 import mikolaj.project.backendapp.service.NewsPostService;
+import mikolajm.project.sportclubui.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,6 +41,13 @@ public class AddNewsPostController {
     private final ActivityRepo activityRepo;
     private final LocationRepo locationRepo;
     private final NewsPostService newsPostService;
+    public Button addImageBtn;
+    public ImageView imageView;
+    private File selectedFile;
+    private String imageDbPath;
+    private String fileName;
+
+    private Utils utils = new Utils();
 
     @Autowired
     public AddNewsPostController(MembershipTypeRepo membershipTypeRepo, ActivityRepo activityRepo,
@@ -50,6 +61,35 @@ public class AddNewsPostController {
     public void initialize(){
        initCheckBoxes();
        initSubmitBtn();
+       initAddImageBtn();
+    }
+
+    private void initAddImageBtn(){
+
+        addImageBtn.setOnAction( e->{
+            if(tileField.getText().isBlank()){
+            utils.showErrorMessage("please enter article title");
+            return;}
+
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+            selectedFile = fileChooser.showOpenDialog(addImageBtn.getScene().getWindow());
+
+            if (selectedFile != null) {
+                // Display the selected imag
+                fileName = selectedFile.getName();
+                int dotIndex = fileName.lastIndexOf('.');
+                String name = tileField.getText();
+                String imageExtension = (dotIndex > 0) ? fileName.substring(dotIndex) : "";
+                fileName = "/home/mikolajmichalczyk/IdeaProjects/sportClub/sportClubUi/src/main/resources/images/" + name.replaceAll("\\s", "")+ imageExtension;
+                utils.saveImage(selectedFile.toPath(), fileName);
+                imageDbPath = "/images/" + name.replaceAll("\\s", "")+imageExtension;
+                String imageName = imageDbPath;
+                imageView.setImage(new Image(imageName));
+                // Save the selected image to the resources/images directory
+//                utils.saveImage(selectedFile.toPath(), "resources/images/" + selectedFile.getName());
+            }
+        });
     }
     private void initCheckBoxes(){
         List<Location> locationList = locationRepo.findAll();
@@ -81,7 +121,8 @@ public class AddNewsPostController {
             if(locationCheckBox.getValue()!=null) newsPostForm.setLocationId(locationCheckBox.getValue().getId());
             newsPostForm.setContent(contentArea.getText());
             newsPostForm.setTitle(tileField.getText());
-            newsPostForm.setImageUrl("paddedImageUrl");
+            newsPostForm.setImageUrl(imageDbPath);
+            utils.saveImage(selectedFile.toPath(), fileName);
             newsPostService.addNewsPost(newsPostForm);
             Stage stage = (Stage) submitBtn.getScene().getWindow();
             stage.close();

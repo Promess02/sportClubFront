@@ -14,14 +14,13 @@ import lombok.Getter;
 import mikolaj.project.backendapp.model.NewsPost;
 import mikolajm.project.sportclubui.LoginManager;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@Component
 @Getter
+//@Component
 public class NewsPostViewController {
     @FXML private Button button;
     @FXML private Label dateLabel;
@@ -34,12 +33,16 @@ public class NewsPostViewController {
     public NewsPostViewController() {
     }
 
-    @FXML
-    public void initialize(NewsPost newsPost){
+    public void initialize(){
+    }
+
+    public void setNewsPost(NewsPost newsPost){
         this.newsPost = newsPost;
         dateLabel.setText(newsPost.getDateOfPosting().toString());
         articleName.setText(newsPost.getName());
-        Image sampleimage = new Image("/images/newsPostSample.jpg");
+        Image sampleimage;
+        if(newsPost.getImageUrl()==null) sampleimage = new Image("/images/newsPostSample.jpg");
+        else sampleimage = new Image(newsPost.getImageUrl());
         imageView.setImage(sampleimage);
         initBtn();
     }
