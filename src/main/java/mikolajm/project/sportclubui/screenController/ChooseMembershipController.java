@@ -54,7 +54,7 @@ public class ChooseMembershipController {
             MembershipType membershipType = membershipCheckBox.getValue();
             try {
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/MembershipTypeView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/admin/MembershipTypeView.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 MembershipTypeEditController membershipTypeEditController = loader.getController();
@@ -75,7 +75,7 @@ public class ChooseMembershipController {
         addNewBtn.setOnAction( e->{
             try {
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/MembershipTypeView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/admin/MembershipTypeView.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 Stage thisStage = (Stage) addNewBtn.getScene().getWindow();

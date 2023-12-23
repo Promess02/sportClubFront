@@ -63,7 +63,7 @@ public class LoginController {
 
     private void openAdminView(){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/adminView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/admin/adminView.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();

@@ -45,4 +45,11 @@ public class CreditCardController {
         });
     }
 
+    public void setCreditCard(CreditCard creditCard){
+        numberTF.setText(creditCard.getNumber().toString());
+        cvvTF.setText(creditCard.getCvv().toString());
+        expDateTF.setText(creditCard.getExpirationDate().toString());
+        bankTF.setText(creditCard.getBank());
+    }
+
 }

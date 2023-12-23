@@ -39,6 +39,7 @@ import java.util.stream.Collectors;
 @Setter
 public class MainScreenController {
 
+    @FXML private Button locationsBtn;
     @FXML private HBox activityRow;
     @FXML private HBox newsRow;
     @FXML private MenuItem TeamsBtn;
@@ -86,6 +87,7 @@ public class MainScreenController {
         initMembershipTypeBtn();
         initTeamsBtn();
         initTrainersBtn();
+        initLocationsBtn();
     }
 
     private void initAccountBtn(){
@@ -109,6 +111,26 @@ public class MainScreenController {
                     Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
                 }
             });
+    }
+
+    private void initLocationsBtn(){
+        locationsBtn.setOnAction( e-> {
+            try {
+                context = ClubApplication.getApplicationContext();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/locationsView.fxml"));
+                loader.setControllerFactory(context::getBean);
+                // Load the root node from the FXML file
+                Parent root = loader.load();
+                // Create a new Scene with the root node
+                Scene scene = new Scene(root);
+                // Set the Scene to the primaryStage or a new Stage
+                Stage primaryStage = new Stage(); // You might use your existing primaryStage here
+                primaryStage.setScene(scene);
+                primaryStage.show();
+            }catch (IOException ex){
+                Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
     }
 
     private void initTrainersBtn(){

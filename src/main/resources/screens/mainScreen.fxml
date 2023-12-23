@@ -29,6 +29,7 @@
                </items>
             </MenuButton>
            <Button fx:id="membershipTypeBtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="110.0" text="Membership Offer" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
+            <Button fx:id="locationsBtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="110.0" text="Locations" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
          </children>
       </HBox>
       <VBox layoutY="150.0" prefHeight="700.0" prefWidth="1200.0">

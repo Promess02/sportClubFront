@@ -15,7 +15,7 @@
                <children>
                       <Label fx:id="warningMsg" prefHeight="127.0" prefWidth="193.0" text="error message" wrapText="true">
                           <font>
-                              <Font size="20.0" />
+                              <Font size="15.0" />
                           </font>
                       </Label>
                   <HBox alignment="CENTER" prefHeight="82.0" prefWidth="200.0" spacing="15.0">

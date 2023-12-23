@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import javafx.collections.FXCollections?>
+<AnchorPane prefHeight="220.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mikolajm.project.sportclubui.screenController.ChooseLocationController">
+    <children>
+        <VBox alignment="TOP_CENTER" prefHeight="220.0" prefWidth="400.0" spacing="15.0">
+            <children>
+                <Label prefHeight="35.0" prefWidth="390.0" text="Choose one Location to edit" textAlignment="CENTER">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                    </VBox.margin>
+                </Label>
+                <ChoiceBox fx:id="locationCheckBox" prefHeight="38.0" prefWidth="161.0" >
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                        </FXCollections>
+                    </items>
+                </ChoiceBox>
+                <Button fx:id="confirmBtn" mnemonicParsing="false" prefHeight="37.0" prefWidth="95.0" text="Confirm" />
+                <Button fx:id="addNewBtn" mnemonicParsing="false" prefHeight="37.0" prefWidth="95.0" text="Add new" />
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

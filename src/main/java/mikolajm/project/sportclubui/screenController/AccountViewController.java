@@ -25,6 +25,7 @@ import java.io.IOException;
 
 @Component
 public class AccountViewController {
+    @FXML private Label membershipName;
     @FXML private Button addImageBtn;
     @FXML private Button membershipStatusBtn;
     @FXML private Button creditCardBtn;
@@ -35,7 +36,6 @@ public class AccountViewController {
     @FXML private Label phoneNumber;
     @FXML private Label team;
     @FXML private CheckBox creditCardCb;
-    @FXML private CheckBox membershipStatusCb;
 
     private final CurrentSessionUser currentSessionUser;
     private ConfigurableApplicationContext context;
@@ -57,12 +57,15 @@ public class AccountViewController {
         else team.setText(member.getTeam().getName());
         //disable checkboxes
         creditCardCb.setDisable(true);
-        membershipStatusCb.setDisable(true);
         creditCardCb.setSelected(user.getCreditCard() != null);
-        creditCardBtn.setVisible(false);
-        if(user.getCreditCard()==null) creditCardBtn.setVisible(true);
-        membershipStatusCb.setSelected(currentSessionUser.isMembershipStatus());
-        membershipStatusBtn.setVisible(!currentSessionUser.isMembershipStatus());
+        if(user.getCreditCard()!=null) {
+            creditCardBtn.setText("show card");
+        }
+
+        if(currentSessionUser.isMembershipStatus()) {
+            membershipStatusBtn.setText("show membership");
+            membershipName.setText(currentSessionUser.getMembership().getMembershipType().getName());
+        }else membershipName.setText("not active");
         Image image;
         if(currentSessionUser.getUser().getProfileImageUrl()==null){
             image = new Image("/images/profileImage.png");
@@ -112,7 +115,7 @@ public class AccountViewController {
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 CreditCardController creditCardController = loader.getController();
-                creditCardController.initialize();
+                if(currentSessionUser.getUser().getCreditCard()!=null) creditCardController.setCreditCard(currentSessionUser.getUser().getCreditCard());
                 Scene scene = new Scene(root);
                 // Set the Scene to the primaryStage or a new Stage
                 Stage primaryStage = new Stage(); // You might use your existing primaryStage here

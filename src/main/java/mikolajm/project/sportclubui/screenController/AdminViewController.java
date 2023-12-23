@@ -39,12 +39,13 @@ public class AdminViewController {
         initAddActivityBtn();
         initAddTeamsBtn();
         initEditMembershipBtn();
+        initEditLocationBtn();
     }
 
     private void initNewsPostBtn(){
         newsPostBtn.setOnAction(e->{
             try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/addNewsPost.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/admin/addNewsPost.fxml"));
                 context = ClubApplication.getApplicationContext();
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
@@ -59,6 +60,24 @@ public class AdminViewController {
         });
     }
 
+    private void initEditLocationBtn(){
+        editLocationBtn.setOnAction( e->{
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/admin/chooseLocation.fxml"));
+                context = ClubApplication.getApplicationContext();
+                loader.setControllerFactory(context::getBean);
+                Parent root = loader.load();
+                //AddNewsPostController controller = loader.getController();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.show();
+            }catch (IOException exception){
+                throw new RuntimeException("unable to load choose location view");
+            }
+        });
+    }
+
     private void initDeleteActivityBtn(){
 
     }
@@ -66,7 +85,7 @@ public class AdminViewController {
     private void initEditMembershipBtn(){
         editMembershipTypeBtn.setOnAction( e->{
             try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/chooseMembership.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/admin/chooseMembership.fxml"));
                 context = ClubApplication.getApplicationContext();
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
@@ -84,7 +103,7 @@ public class AdminViewController {
     private void initAddTeamsBtn(){
         addTeamsBtn.setOnAction( e->{
             try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/addTeamBtn.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/admin/addTeamBtn.fxml"));
                 context = ClubApplication.getApplicationContext();
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
@@ -102,7 +121,7 @@ public class AdminViewController {
     private void initAddTrainerBtn(){
         addTrainerBtn.setOnAction(e->{
             try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/addTrainerView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/admin/addTrainerView.fxml"));
                 context = ClubApplication.getApplicationContext();
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
@@ -120,7 +139,7 @@ public class AdminViewController {
     private void initAddActivityBtn(){
         addActivityBtn.setOnAction( e-> {
             try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/addActivityView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/admin/addActivityView.fxml"));
                 context = ClubApplication.getApplicationContext();
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();

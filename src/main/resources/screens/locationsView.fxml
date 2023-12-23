@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="700.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mikolajm.project.sportclubui.screenController.LocationsViewController">
+    <children>
+        <VBox alignment="TOP_CENTER" prefHeight="700.0" prefWidth="400.0">
+            <children>
+                <Label prefHeight="57.0" prefWidth="172.0" text="Locations:">
+                    <font>
+                        <Font size="32.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets left="10.0" />
+                    </VBox.margin>
+                </Label>
+                <ScrollPane fitToHeight="true" hbarPolicy="NEVER" prefHeight="633.0" prefWidth="400.0">
+                    <content>
+                        <VBox fx:id="locationsVBox" alignment="TOP_CENTER" prefHeight="633.0" prefWidth="400.0" spacing="15.0" />
+                    </content>
+                </ScrollPane>
+            </children>
+        </VBox>
+    </children>
+
+</AnchorPane>
