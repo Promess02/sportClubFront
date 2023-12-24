@@ -40,6 +40,7 @@ public class AdminViewController {
         initAddTeamsBtn();
         initEditMembershipBtn();
         initEditLocationBtn();
+        initAssignTrainerBtn();
     }
 
     private void initNewsPostBtn(){
@@ -80,6 +81,23 @@ public class AdminViewController {
 
     private void initDeleteActivityBtn(){
 
+    }
+
+    private void initAssignTrainerBtn(){
+        assignTrainerBtn.setOnAction( e->{
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/admin/AssignTrainerView.fxml"));
+                context = ClubApplication.getApplicationContext();
+                loader.setControllerFactory(context::getBean);
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.show();
+            }catch (IOException exception){
+                throw new RuntimeException("unable to load assign trainer view");
+            }
+        });
     }
 
     private void initEditMembershipBtn(){

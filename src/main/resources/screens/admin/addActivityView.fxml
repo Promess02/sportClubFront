@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -133,20 +132,11 @@
                                    <Font size="20.0" />
                                </font>
                            </Label>
-<!--                           <Slider fx:id="weeksSlider" blockIncrement="5" majorTickUnit="1" max="15" min="1" minorTickCount="0" prefHeight="40.0" prefWidth="249.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">-->
-<!--                               <value>-->
-<!--                                   &lt;!&ndash; Set default or initial value here &ndash;&gt;-->
-<!--                                   <Integer fx:value="1" />-->
-<!--                               </value>-->
-<!--                               <majorTickUnit>-->
-<!--                                   &lt;!&ndash; Set the major tick unit based on the breakpoints &ndash;&gt;-->
-<!--                                   <Integer fx:value="5" />-->
-<!--                               </majorTickUnit>-->
-<!--                               <minorTickCount>-->
-<!--                                   &lt;!&ndash; Set the minor tick count (0 means no minor ticks) &ndash;&gt;-->
-<!--                                   <Integer fx:value="1" />-->
-<!--                               </minorTickCount>-->
-<!--                           </Slider>-->
+                           <TextField fx:id="weeksTF" prefHeight="38.0" prefWidth="257.0" promptText="enter member limit in range 1-15">
+                               <font>
+                                   <Font size="14.0" />
+                               </font>
+                           </TextField>
                        </children>
                    </HBox>
                    <HBox fx:id="minutesHBox" alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="380.0" spacing="10.0">
@@ -199,6 +189,7 @@
                                    <Font size="17.0" />
                                </font>
                            </Label>
+
 <!--                           <Slider fx:id="memberLimitSlider" blockIncrement="15.0" majorTickUnit="1" max="70.0" min="2.0" minorTickCount="1" prefHeight="40.0" prefWidth="249.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">-->
 <!--                               <value>-->
 <!--                                   &lt;!&ndash; Set default or initial value here &ndash;&gt;-->
