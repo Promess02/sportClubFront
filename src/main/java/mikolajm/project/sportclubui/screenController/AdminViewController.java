@@ -13,18 +13,16 @@ import org.springframework.context.ConfigurableApplicationContext;
 import java.io.IOException;
 
 public class AdminViewController {
+    @FXML private MenuItem updateActivityBtn;
+    @FXML private MenuItem updateTeamsBtn;
     @FXML private MenuItem addTeamsBtn;
     @FXML private MenuItem deleteTeamsBtn;
-    //@FXML private MenuItem editActivityBtn;
     @FXML private MenuItem deleteActivityBtn;
     @FXML private MenuItem addActivityBtn;
     @FXML private Button newsPostBtn;
     @FXML private Button addTrainerBtn;
-    @FXML private Button editActivitiesBtn;
     @FXML private Button editMembershipTypeBtn;
     @FXML private Button fireTrainerBtn;
-    //@FXML private Button editTeamsBtn;
-
     @FXML private Button assignTrainerBtn;
     @FXML private Button editLocationBtn;
     @FXML private Button editSocialBtn;
@@ -41,6 +39,12 @@ public class AdminViewController {
         initEditMembershipBtn();
         initEditLocationBtn();
         initAssignTrainerBtn();
+        initFireTrainerBtn();
+        initEditSocialBtn();
+        initUpdateActivityBtn();
+        initDeleteActivityBtn();
+        initUpdateTeamsBtn();
+        initDeleteTeamsBtn();
     }
 
     private void initNewsPostBtn(){
@@ -61,6 +65,84 @@ public class AdminViewController {
         });
     }
 
+    private void initUpdateTeamsBtn(){
+        updateTeamsBtn.setOnAction( e-> {
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/admin/editTeamsView.fxml"));
+                context = ClubApplication.getApplicationContext();
+                loader.setControllerFactory(context::getBean);
+                Parent root = loader.load();
+                EditTeamsViewController editTeamsViewController = loader.getController();
+                editTeamsViewController.setUpdateView();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.show();
+            }catch (IOException exception){
+                throw new RuntimeException("unable to load update teams view");
+            }
+        });
+    }
+
+    private void initDeleteTeamsBtn(){
+        deleteTeamsBtn.setOnAction( e-> {
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/admin/editTeamsView.fxml"));
+                context = ClubApplication.getApplicationContext();
+                loader.setControllerFactory(context::getBean);
+                Parent root = loader.load();
+                EditTeamsViewController editTeamsViewController = loader.getController();
+                editTeamsViewController.setDeleteView();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.show();
+            }catch (IOException exception){
+                throw new RuntimeException("unable to load delete teams view");
+            }
+        });
+    }
+
+    private void initUpdateActivityBtn(){
+        updateActivityBtn.setOnAction( e-> {
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/admin/editActivity.fxml"));
+                context = ClubApplication.getApplicationContext();
+                loader.setControllerFactory(context::getBean);
+                Parent root = loader.load();
+                EditActivityController editActivityController = loader.getController();
+                editActivityController.setUpdateView();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.show();
+            }catch (IOException exception){
+                throw new RuntimeException("unable to load update activity view");
+            }
+        });
+    }
+
+    private void initDeleteActivityBtn(){
+        deleteActivityBtn.setOnAction( e-> {
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/admin/editActivity.fxml"));
+                context = ClubApplication.getApplicationContext();
+                loader.setControllerFactory(context::getBean);
+                Parent root = loader.load();
+                EditActivityController editActivityController = loader.getController();
+                editActivityController.setDeleteView();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.show();
+            }catch (IOException exception){
+                throw new RuntimeException("unable to load delete activity view");
+            }
+        });
+    }
+
+
+
     private void initEditLocationBtn(){
         editLocationBtn.setOnAction( e->{
             try{
@@ -79,8 +161,37 @@ public class AdminViewController {
         });
     }
 
-    private void initDeleteActivityBtn(){
-
+    private void initEditSocialBtn(){
+        editSocialBtn.setOnAction( e->{
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/admin/addSocialMedia.fxml"));
+                context = ClubApplication.getApplicationContext();
+                loader.setControllerFactory(context::getBean);
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.show();
+            }catch (IOException exception){
+                throw new RuntimeException("unable to load edit socials view");
+            }
+        });
+    }
+    private void initFireTrainerBtn(){
+        fireTrainerBtn.setOnAction( e-> {
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/admin/fireTrainerView.fxml"));
+                context = ClubApplication.getApplicationContext();
+                loader.setControllerFactory(context::getBean);
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.show();
+            }catch (IOException exception){
+                throw new RuntimeException("unable to load 'fire trainer' view");
+            }
+        });
     }
 
     private void initAssignTrainerBtn(){

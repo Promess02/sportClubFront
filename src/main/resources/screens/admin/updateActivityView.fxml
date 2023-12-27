@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mikolajm.project.sportclubui.screenController.UpdateActivityController">
+    <children>
+        <HBox prefHeight="700.0" prefWidth="700.0">
+            <children>
+                <VBox prefHeight="700.0" prefWidth="400.0">
+                    <children>
+                        <Label prefHeight="55.0" prefWidth="270.0" text="edit an activity">
+                            <font>
+                                <Font size="28.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets left="10.0" top="10.0" />
+                            </VBox.margin>
+                        </Label>
+                        <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="400.0" spacing="10.0">
+                            <VBox.margin>
+                                <Insets left="10.0" right="10.0" top="10.0" />
+                            </VBox.margin>
+                            <children>
+                                <Label prefHeight="42.0" prefWidth="115.0" text="name:">
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="activityName" prefHeight="46.0" prefWidth="262.0" promptText="enter name here">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                </TextField>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="400.0" spacing="10.0">
+                            <VBox.margin>
+                                <Insets left="10.0" right="10.0" top="10.0" />
+                            </VBox.margin>
+                            <children>
+                                <Label prefHeight="42.0" prefWidth="115.0" text="Sport:">
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                                </Label>
+                                <ChoiceBox fx:id="sportCb" prefHeight="44.0" prefWidth="201.0">
+                                    <items>
+                                        <FXCollections fx:factory="observableArrayList">
+                                        </FXCollections>
+                                    </items>
+                                </ChoiceBox>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="400.0" spacing="10.0">
+                            <VBox.margin>
+                                <Insets left="10.0" right="10.0" top="10.0" />
+                            </VBox.margin>
+                            <children>
+                                <Label prefHeight="42.0" prefWidth="115.0" text="location:">
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                                </Label>
+                                <ChoiceBox fx:id="locationCb" prefHeight="44.0" prefWidth="201.0">
+                                    <items>
+                                        <FXCollections fx:factory="observableArrayList">
+                                        </FXCollections>
+                                    </items>
+                                </ChoiceBox>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="400.0" spacing="10.0">
+                            <VBox.margin>
+                                <Insets left="10.0" right="10.0" top="10.0" />
+                            </VBox.margin>
+                            <children>
+                                <Label prefHeight="42.0" prefWidth="115.0" text="team:">
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                                </Label>
+                                <ChoiceBox fx:id="TeamCb" prefHeight="44.0" prefWidth="201.0">
+                                    <items>
+                                        <FXCollections fx:factory="observableArrayList">
+                                        </FXCollections>
+                                    </items>
+                                </ChoiceBox>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="400.0" spacing="10.0">
+                            <VBox.margin>
+                                <Insets left="10.0" right="10.0" top="10.0" />
+                            </VBox.margin>
+                            <children>
+                                <Label prefHeight="42.0" prefWidth="115.0" text="trainer:">
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                                </Label>
+                                <ChoiceBox fx:id="TrainerCb" prefHeight="44.0" prefWidth="201.0">
+                                    <items>
+                                        <FXCollections fx:factory="observableArrayList">
+                                        </FXCollections>
+                                    </items>
+                                </ChoiceBox>
+                            </children>
+                        </HBox>
+                        <HBox fx:id="minutesHBox" alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="380.0" spacing="10.0">
+                            <VBox.margin>
+                                <Insets left="10.0" right="10.0" top="10.0" />
+                            </VBox.margin>
+                            <children>
+                                <Label prefHeight="42.0" prefWidth="115.0" text="minutes:">
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                                </Label>
+                                <!--                           <Slider fx:id="minutesSlider" blockIncrement="15" majorTickUnit="1" max="90" min="30" minorTickCount="1" prefHeight="40" prefWidth="249.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">-->
+                                <!--                               <value>-->
+                                <!--                                   &lt;!&ndash; Set default or initial value here &ndash;&gt;-->
+                                <!--                                   <Integer fx:value="30" />-->
+                                <!--                               </value>-->
+                                <!--                               <majorTickUnit>-->
+                                <!--                                   &lt;!&ndash; Set the major tick unit based on the breakpoints &ndash;&gt;-->
+                                <!--                                   <Integer fx:value="15" />-->
+                                <!--                               </majorTickUnit>-->
+                                <!--      -->
+                                <!--                           </Slider>-->
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="400.0" spacing="10.0">
+                            <VBox.margin>
+                                <Insets left="10.0" right="10.0" top="10.0" />
+                            </VBox.margin>
+                            <children>
+                                <Label prefHeight="42.0" prefWidth="115.0" text="time:">
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="timeField" prefHeight="46.0" prefWidth="262.0" promptText="enter time o'clock like: HH:MM">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                </TextField>
+                            </children>
+                        </HBox>
+                        <HBox fx:id="membersHBox" alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="380.0" spacing="10.0">
+                            <VBox.margin>
+                                <Insets left="10.0" right="10.0" top="10.0" />
+                            </VBox.margin>
+                            <children>
+                                <Label prefHeight="71.0" prefWidth="115.0" text="member limit:" wrapText="true">
+                                    <font>
+                                        <Font size="17.0" />
+                                    </font>
+                                </Label>
+
+                                <!--                           <Slider fx:id="memberLimitSlider" blockIncrement="15.0" majorTickUnit="1" max="70.0" min="2.0" minorTickCount="1" prefHeight="40.0" prefWidth="249.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">-->
+                                <!--                               <value>-->
+                                <!--                                   &lt;!&ndash; Set default or initial value here &ndash;&gt;-->
+                                <!--                                   <Integer fx:constant="MIN_VALUE" />-->
+                                <!--                               </value>-->
+                                <!--                               <majorTickUnit>-->
+                                <!--                                   &lt;!&ndash; Set the major tick unit based on the breakpoints &ndash;&gt;-->
+                                <!--                                   <Integer fx:value="15" />-->
+                                <!--                               </majorTickUnit>-->
+                                <!--                           </Slider>-->
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+                <VBox alignment="TOP_CENTER" prefHeight="700.0" prefWidth="300.0">
+                    <children>
+                        <TextArea fx:id="descriptionArea" prefHeight="537.0" prefWidth="300.0" promptText="Enter Activity description here" wrapText="true">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets left="10.0" right="10.0" top="20.0" />
+                            </VBox.margin>
+                        </TextArea>
+                        <Button fx:id="createBtn" mnemonicParsing="false" prefHeight="85.0" prefWidth="144.0" text="Update Activity">
+                            <VBox.margin>
+                                <Insets top="20.0" />
+                            </VBox.margin>
+                            <font>
+                                <Font size="17.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </VBox>
+            </children></HBox>
+    </children>
+</AnchorPane>

@@ -37,7 +37,7 @@
 <!--                           <MenuItem fx:id="editActivityBtn" mnemonicParsing="false" text="edit activity" />-->
                            <MenuItem fx:id="addActivityBtn" mnemonicParsing="false" text="add activity" />
                            <MenuItem fx:id ="deleteActivityBtn" mnemonicParsing="false" text="delete activity" />
-
+                           <MenuItem fx:id ="updateActivityBtn" mnemonicParsing="false" text="update activity" />
                        </items>
                        <font>
                            <Font size="30.0" />
@@ -65,6 +65,7 @@
                              <!--                           <MenuItem fx:id="editActivityBtn" mnemonicParsing="false" text="edit activity" />-->
                              <MenuItem fx:id="addTeamsBtn" mnemonicParsing="false" text="add team" />
                              <MenuItem fx:id ="deleteTeamsBtn" mnemonicParsing="false" text="delete team" />
+                             <MenuItem fx:id ="updateTeamsBtn" mnemonicParsing="false" text="update team" />
 
                          </items>
                          <font>

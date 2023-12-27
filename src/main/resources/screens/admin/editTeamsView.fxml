@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.collections.FXCollections?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="mikolajm.project.sportclubui.screenController.EditTeamsViewController"
+            prefHeight="200.0" prefWidth="300.0">
+    <children>
+        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="300.0" spacing="15.0">
+            <children>
+                <Label fx:id="label" contentDisplay="CENTER" prefHeight="46.0" prefWidth="305.0" text="Choose team to edit" textAlignment="CENTER">
+                    <font>
+                        <Font size="23.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets left="10.0" />
+                    </VBox.margin>
+                </Label>
+                <ChoiceBox fx:id="teamCb" prefHeight="46.0" prefWidth="184.0">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                        </FXCollections>
+                    </items>
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
+                </ChoiceBox>
+                <Button fx:id="submitBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="131.0" text="Submit">
+                    <font>
+                        <Font size="18.0" />
+                    </font></Button>
+            </children></VBox>
+    </children>
+
+</AnchorPane>

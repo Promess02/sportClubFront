@@ -92,7 +92,7 @@ public class AccountViewController {
                 int dotIndex = fileName.lastIndexOf('.');
                 String name = currentSessionUser.getUser().toString();
                 String imageExtension = (dotIndex > 0) ? fileName.substring(dotIndex) : "";
-                fileName = "/home/mikolajmichalczyk/IdeaProjects/sportClub/sportClubUi/src/main/resources/images/" + name.replaceAll("\\s", "")+ imageExtension;
+                fileName = utils.imagesPath + name.replaceAll("\\s", "")+ imageExtension;
                 utils.saveImage(selectedFile.toPath(), fileName);
                 String dbUrl = "/images/" + name.replaceAll("\\s", "")+imageExtension;
                 currentSessionUser.updateUserImage(dbUrl);

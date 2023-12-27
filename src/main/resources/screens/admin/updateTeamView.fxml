@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="650.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mikolajm.project.sportclubui.screenController.UpdateTeamController">
+    <children>
+        <VBox alignment="TOP_CENTER" prefHeight="650.0" prefWidth="400.0">
+            <children>
+                <Label prefHeight="47.0" prefWidth="400.0" text="Update team:">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                    </VBox.margin>
+                </Label>
+                <HBox alignment="CENTER_LEFT" prefHeight="77.0" prefWidth="400.0">
+                    <children>
+                        <Label prefHeight="48.0" prefWidth="139.0" text="Team name:">
+                            <font>
+                                <Font size="19.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="teamName" prefHeight="46.0" prefWidth="229.0" promptText="enter team name here" />
+                    </children>
+                    <VBox.margin>
+                        <Insets left="10.0" />
+                    </VBox.margin>
+                </HBox>
+                <HBox alignment="CENTER_LEFT" prefHeight="77.0" prefWidth="400.0">
+                    <children>
+                        <Label prefHeight="48.0" prefWidth="139.0" text="Max members:">
+                            <font>
+                                <Font size="19.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="maxNumber" prefHeight="46.0" prefWidth="229.0" promptText="enter max number of members" />
+                    </children>
+                    <VBox.margin>
+                        <Insets left="10.0" />
+                    </VBox.margin>
+                </HBox>
+                <HBox alignment="CENTER_LEFT" prefHeight="77.0" prefWidth="400.0">
+                    <children>
+                        <Label prefHeight="48.0" prefWidth="139.0" text="Sport: ">
+                            <font>
+                                <Font size="19.0" />
+                            </font>
+                        </Label>
+                        <ChoiceBox fx:id="SportCb" prefHeight="44.0" prefWidth="201.0">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                </FXCollections>
+                            </items>
+                        </ChoiceBox>
+                    </children>
+                    <VBox.margin>
+                        <Insets left="10.0" />
+                    </VBox.margin>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="77.0" prefWidth="400.0">
+                    <children>
+                        <Button fx:id="imageBtn" mnemonicParsing="false" prefHeight="46.0" prefWidth="219.0" text="Choose Image">
+                            <font>
+                                <Font size="17.0" />
+                            </font></Button>
+
+                    </children>
+                    <VBox.margin>
+                        <Insets left="10.0" />
+                    </VBox.margin>
+                </HBox>
+                <ImageView fx:id="teamImage" fitHeight="190.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true" />
+                <Button fx:id="submitBtn" mnemonicParsing="false" prefHeight="67.0" prefWidth="121.0" text="Update">
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font size="23.0" />
+                    </font>
+                </Button>
+            </children></VBox>
+    </children>
+</AnchorPane>

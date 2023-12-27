@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import javafx.collections.FXCollections?>
+<AnchorPane prefHeight="500.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mikolajm.project.sportclubui.screenController.AddSocialsController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="300.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="40.0" prefWidth="301.0" text="Add social media" textAlignment="CENTER">
+               <font>
+                  <Font size="25.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Label>
+             <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="300.0" spacing="10">
+                 <children>
+                     <Label prefHeight="24.0" prefWidth="84.0" text="name:">
+                         <font>
+                             <Font size="17.0" />
+                         </font>
+                     </Label>
+                  <TextField fx:id="socialMediaField" prefHeight="38.0" prefWidth="177.0" promptText="enter social media name" />
+                 </children>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+             </HBox>
+             <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="300.0" spacing="10">
+                 <children>
+                     <Label prefHeight="24.0" prefWidth="84.0" text="url:">
+                         <font>
+                             <Font size="17.0" />
+                         </font>
+                     </Label>
+                     <TextField fx:id="urlField" prefHeight="38.0" prefWidth="177.0" promptText="enter url" />
+                 </children>
+                 <VBox.margin>
+                     <Insets left="10.0" />
+                 </VBox.margin>
+             </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="300.0" spacing="10">
+               <children>
+                  <Label prefHeight="24.0" prefWidth="105.0" text="Location: ">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ChoiceBox fx:id="locationCb" prefHeight="37.0" prefWidth="125.0">
+                      <items>
+                          <FXCollections fx:factory="observableArrayList">
+                          </FXCollections>
+                      </items>
+                  </ChoiceBox>
+               </children>
+            </HBox>
+            <Button fx:id="chooseImgBtn" mnemonicParsing="false" prefHeight="54.0" prefWidth="109.0" text="choose image" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="imageView" fitHeight="125.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin></ImageView>
+            <Button fx:id="submitBtn" mnemonicParsing="false" prefHeight="49.0" prefWidth="147.0" text="Submit">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Button>
+         </children></VBox>
+   </children>
+</AnchorPane>

@@ -18,6 +18,8 @@ import java.util.regex.Pattern;
 
 public class Utils {
 
+    public String imagesPath = "/home/mikolajmichalczyk/IdeaProjects/sportClub/sportClubUi/src/main/resources/images/";
+
     public void showErrorMessage(String error){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/errorMsg.fxml"));

@@ -7,7 +7,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-import mikolaj.project.backendapp.DTO.ServiceResponse;
 import mikolaj.project.backendapp.enums.Sport;
 import mikolaj.project.backendapp.model.Activity;
 import mikolaj.project.backendapp.model.Location;
@@ -30,32 +29,30 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Component
-public class AddActivityViewController {
-    public TextField weeksTF;
-    @FXML private HBox weeksHBox;
-    @FXML private HBox minutesHBox;
-    @FXML private HBox membersHBox;
+public class UpdateActivityController {
     @FXML private TextField activityName;
     @FXML private ChoiceBox<Sport> sportCb;
     @FXML private ChoiceBox<Location> locationCb;
     @FXML private ChoiceBox<Team> TeamCb;
     @FXML private ChoiceBox<Trainer> TrainerCb;
-    @FXML private DatePicker datePicker;
-//    private Slider weeksSlider;
-    private Slider minutesSlider;
-    private Slider membersSlider;
+
     @FXML private TextField timeField;
+    @FXML private HBox membersHBox;
     @FXML private TextArea descriptionArea;
     @FXML private Button createBtn;
-
+    @FXML private HBox minutesHBox;
+    private Slider minutesSlider;
+    private Slider membersSlider;
     private final LocationRepo locationRepo;
     private final TeamRepo teamRepo;
     private final TrainerRepo trainerRepo;
     private final ActivityRepo activityRepo;
 
+    private Activity activity;
+
     @Autowired
-    public AddActivityViewController(LocationRepo locationRepo, TeamRepo teamRepo,
-                                     TrainerRepo trainerRepo, ActivityRepo activityRepo) {
+    public UpdateActivityController(LocationRepo locationRepo, TeamRepo teamRepo,
+                                    TrainerRepo trainerRepo, ActivityRepo activityRepo) {
         this.locationRepo = locationRepo;
         this.activityRepo = activityRepo;
         this.teamRepo = teamRepo;
@@ -113,19 +110,18 @@ public class AddActivityViewController {
         membersHBox.getChildren().add(membersSlider);
     }
 
-    private StringConverter<Double> createLabelFormatter(int multiple, int startVal){
-        return new StringConverter<>() {
-            @Override
-            public String toString(Double value) {
-                if(value == startVal) return String.valueOf(value.intValue());
-                return (value) % multiple == 0 ? String.valueOf(value.intValue()) : null;
-            }
-
-            @Override
-            public Double fromString(String string) {
-                return null;
-            }
-        };
+    public void setActivity(Activity activity){
+        this.activity = activity;
+        activityName.setText(activity.getName());
+        timeField.setText(activity.getTime().toString());
+        minutesSlider.setValue(activity.getMinutes());
+        membersSlider.setValue(activity.getMemberLimit());
+        descriptionArea.setText(activity.getDescription());
+        sportCb.setValue(activity.getSport());
+        TeamCb.setValue(activity.getTeam());
+        locationCb.setValue(activity.getLocation());
+        TrainerCb.setValue(activity.getTrainer());
+        activityName.setDisable(true);
     }
 
     private void initButton(){
@@ -160,35 +156,20 @@ public class AddActivityViewController {
                 handleError("please provide name");
                 return;
             } else activity.setTrainer(TrainerCb.getValue());
-            if(datePicker.getValue()==null) {
-                handleError("please provide date");
-                return;
-            } else activity.setDate(datePicker.getValue());
-            activity.setMinutes((int) minutesSlider.getValue());
-            
+
             if(TeamCb.getValue()!=null) activity.setTeam(TeamCb.getValue());
             if(descriptionArea.getText()!=null) activity.setDescription(descriptionArea.getText());
             activity.setMemberLimit((int) membersSlider.getValue());
+            activity.setMinutes((int) minutesSlider.getValue());
 
-            int numOfWeeks;
-            if(weeksTF.getText()==null || !weeksTF.getText().matches("[1-9]|1[0-5]")){
-                handleError("please provide a number in range 1-15");
-                return;
-            }else numOfWeeks = Integer.parseInt(weeksTF.getText());
-            //int numOfWeeks = (int)weeksSlider.getValue();
+            List<Activity> activityList = activityRepo.findAll();
 
-
-            for(int i=1; i<=numOfWeeks; i++){
-                if (activityRepo.findActivityByDate(activity.getDate()).isPresent()) {
-                    handleError("activity already exists in that date");
-                    return;
+            for(Activity dbActivity: activityList){
+                if(dbActivity.getName().equals(activity.getName())) {
+                    activity.setDate(dbActivity.getDate());
+                    activity.setId(dbActivity.getId());
+                    activityRepo.save(activity);
                 }
-                Activity dbActivity = new Activity(activity.getName(), activity.getDate(), activity.getTime(),
-                        activity.getMinutes(),activity.getDescription(), activity.getSport(),0,activity.getMemberLimit(),activity.getLocation(),
-                        activity.getTrainer(), activity.getTeam());
-                activityRepo.save(dbActivity);
-                LocalDate date = activity.getDate();
-                activity.setDate(date.plusWeeks(1));
             }
 
             Stage stage = (Stage) createBtn.getScene().getWindow();
@@ -196,6 +177,22 @@ public class AddActivityViewController {
 
         });
     }
+
+    private StringConverter<Double> createLabelFormatter(int multiple, int startVal){
+        return new StringConverter<>() {
+            @Override
+            public String toString(Double value) {
+                if(value == startVal) return String.valueOf(value.intValue());
+                return (value) % multiple == 0 ? String.valueOf(value.intValue()) : null;
+            }
+
+            @Override
+            public Double fromString(String string) {
+                return null;
+            }
+        };
+    }
+
     private LocalTime formatStringToTime(String timeString){
         if (!isValidFormat(timeString)) {
             throw new IllegalArgumentException("Invalid time format. Use HH:mm format.");
@@ -214,6 +211,5 @@ public class AddActivityViewController {
         Matcher matcher = TIME_PATTERN.matcher(timeString);
         return matcher.matches();
     }
-
 
 }

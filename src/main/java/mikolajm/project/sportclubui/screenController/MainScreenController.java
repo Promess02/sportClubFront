@@ -14,6 +14,8 @@ import lombok.Getter;
 import lombok.Setter;
 import mikolaj.project.backendapp.model.Activity;
 import mikolaj.project.backendapp.model.NewsPost;
+import mikolaj.project.backendapp.model.SocialMedia;
+import mikolaj.project.backendapp.repo.SocialMediaRepo;
 import mikolaj.project.backendapp.service.ActivityService;
 import mikolaj.project.backendapp.service.CalendarService;
 import mikolaj.project.backendapp.service.NewsPostService;
@@ -39,6 +41,7 @@ import java.util.stream.Collectors;
 @Setter
 public class MainScreenController {
 
+    @FXML private HBox socialsRow;
     @FXML private Button locationsBtn;
     @FXML private HBox activityRow;
     @FXML private HBox newsRow;
@@ -55,14 +58,16 @@ public class MainScreenController {
     private final NewsPostService newsPostService;
     private final CalendarService calendarService;
     private final CurrentSessionUser currentSessionUser;
+    private final SocialMediaRepo socialMediaRepo;
     ConfigurableApplicationContext context = ClubApplication.getApplicationContext();
 
-    public MainScreenController(ActivityService activityService, NewsPostService newsPostService,
+    public MainScreenController(ActivityService activityService, SocialMediaRepo socialMediaRepo, NewsPostService newsPostService,
                                 CurrentSessionUser currentSessionUser, CalendarService calendarService) {
         this.activityService = activityService;
         this.newsPostService = newsPostService;
         this.currentSessionUser = currentSessionUser;
         this.calendarService = calendarService;
+        this.socialMediaRepo = socialMediaRepo;
     }
 
     @FXML
@@ -81,6 +86,7 @@ public class MainScreenController {
         List<Activity> distinctActivities = set.stream().toList();
         loadNewsPostRow(newsPostList.get());
         loadActivityPostRow(distinctActivities);
+        loadSocialsRow();
         initAccountBtn();
         initCalendarBtn();
         initActivityBtn();
@@ -131,6 +137,22 @@ public class MainScreenController {
                 Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+    }
+
+    private void loadSocialsRow(){
+        List<SocialMedia> socialMediaList = socialMediaRepo.findAll();
+        for(SocialMedia socialMedia: socialMediaList){
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/admin/socialsNode.fxml"));
+                Parent root = loader.load();
+                SocialsNodeController socialsNodeController = loader.getController();
+                socialsNodeController.setSocial(socialMedia);
+                socialsRow.getChildren().add(socialsNodeController.getFullView());
+            }catch (IOException exception){
+                Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, exception);
+            }
+
+        }
     }
 
     private void initTrainersBtn(){
