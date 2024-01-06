@@ -5,7 +5,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import mikolajm.project.sportclubui.screenController.ErrorMessageController;
-import org.springframework.cglib.core.Local;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -56,11 +55,11 @@ public class Utils {
     }
 
     public boolean isInteger(String string){
-        return !string.matches("\\d+");
+        return string.matches("\\d+");
     }
 
     public boolean isDouble(String string){
-        return !string.matches("\\d+\\.\\d+");
+        return string.matches("\\d+\\.\\d+");
     }
 
 

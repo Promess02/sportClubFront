@@ -20,11 +20,7 @@
                <font>
                   <Font size="21.0" />
                </font></Button>
-            <Button fx:id="loginMemberBtn" mnemonicParsing="false" prefHeight="79.0" prefWidth="282.0" text="Login as Member">
-               <font>
-                  <Font size="21.0" />
-               </font></Button>
-            <Button fx:id="loginTrainerBtn" mnemonicParsing="false" prefHeight="79.0" prefWidth="282.0" text="Login as Trainer">
+            <Button fx:id="loginMemberBtn" mnemonicParsing="false" prefHeight="79.0" prefWidth="282.0" text="Login User">
                <font>
                   <Font size="21.0" />
                </font></Button>

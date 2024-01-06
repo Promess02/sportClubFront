@@ -35,12 +35,6 @@ public class ClubApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-//        Scene scene = new Scene(new StackPane());
-//        LoginManager loginManager = new LoginManager(scene, applicationContext);
-//        loginManager.showLoginScreen();
-//        primaryStage.setScene(scene);
-//        primaryStage.setTitle("Application");
-//        primaryStage.show();
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/EnterScreen.fxml"));
             Parent root = loader.load();

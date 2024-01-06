@@ -37,15 +37,16 @@ public class AccountViewController {
     @FXML private Label team;
     @FXML private CheckBox creditCardCb;
 
-    private final CurrentSessionUser currentSessionUser;
+    private CurrentSessionUser currentSessionUser;
     private ConfigurableApplicationContext context;
+    private Image accountImage;
     private File selectedFile;
+    Utils utils = new Utils();
     @Autowired
     public AccountViewController(CurrentSessionUser currentSessionUser) {
         this.currentSessionUser = currentSessionUser;
     }
 
-    @FXML
     public void initialize(){
         User user = currentSessionUser.getUser();
         Member member = currentSessionUser.getMember();
@@ -61,16 +62,16 @@ public class AccountViewController {
         if(user.getCreditCard()!=null) {
             creditCardBtn.setText("show card");
         }
-
         if(currentSessionUser.isMembershipStatus()) {
             membershipStatusBtn.setText("show membership");
             membershipName.setText(currentSessionUser.getMembership().getMembershipType().getName());
         }else membershipName.setText("not active");
         Image image;
         if(currentSessionUser.getUser().getProfileImageUrl()==null){
-            image = new Image("/images/profileImage.png");
+            image = new Image("/images/profileImage.png", false);
         }else{
-            image = new Image(currentSessionUser.getUser().getProfileImageUrl());
+            if(accountImage==null) image = new Image(currentSessionUser.getUser().getProfileImageUrl(), false);
+            else image = accountImage;
             addImageBtn.setText("Change image");
         }
         userImage.setImage(image);
@@ -86,25 +87,22 @@ public class AccountViewController {
             selectedFile = fileChooser.showOpenDialog(addImageBtn.getScene().getWindow());
 
             if (selectedFile != null) {
-                // Display the selected imag
-                Utils utils = new Utils();
-                String fileName = selectedFile.getName();
-                int dotIndex = fileName.lastIndexOf('.');
-                String name = currentSessionUser.getUser().toString();
-                String imageExtension = (dotIndex > 0) ? fileName.substring(dotIndex) : "";
-                fileName = utils.imagesPath + name.replaceAll("\\s", "")+ imageExtension;
-                utils.saveImage(selectedFile.toPath(), fileName);
-                String dbUrl = "/images/" + name.replaceAll("\\s", "")+imageExtension;
-                currentSessionUser.updateUserImage(dbUrl);
-                userImage.setImage(new Image(dbUrl));
-                Stage stage = (Stage) addImageBtn.getScene().getWindow();
-                stage.close();
-                //addImageBtn.setVisible(false);
-                // Save the selected image to the resources/images directory
-//                utils.saveImage(selectedFile.toPath(), "resources/images/" + selectedFile.getName());
+                Image selectedImage = new Image(selectedFile.toURI().toString());
+                userImage.setImage(selectedImage);
+                accountImage = selectedImage;
+                setImage();
             }
         });
-
+    }
+    private void setImage(){
+        String fileName = selectedFile.getName();
+        int dotIndex = fileName.lastIndexOf('.');
+        String name = currentSessionUser.getUser().toString();
+        String imageExtension = (dotIndex > 0) ? fileName.substring(dotIndex) : "";
+        fileName = utils.imagesPath + name.replaceAll("\\s", "")+ imageExtension;
+        utils.saveImage(selectedFile.toPath(), fileName);
+        String dbUrl = "/images/" + name.replaceAll("\\s", "")+imageExtension;
+        currentSessionUser.updateUserImage(dbUrl);
     }
 
     private void initCreditCardBtn(){
@@ -115,10 +113,10 @@ public class AccountViewController {
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 CreditCardController creditCardController = loader.getController();
-                if(currentSessionUser.getUser().getCreditCard()!=null) creditCardController.setCreditCard(currentSessionUser.getUser().getCreditCard());
+                if(currentSessionUser.getUser().getCreditCard()!=null)
+                    creditCardController.setCreditCard(currentSessionUser.getUser().getCreditCard());
                 Scene scene = new Scene(root);
-                // Set the Scene to the primaryStage or a new Stage
-                Stage primaryStage = new Stage(); // You might use your existing primaryStage here
+                Stage primaryStage = new Stage();
                 primaryStage.setScene(scene);
                 primaryStage.show();
             }catch(IOException exception){
@@ -141,8 +139,7 @@ public class AccountViewController {
                 Parent root = loader.load();
                 MembershipUiController membershipUiController = loader.getController();
                 Scene scene = new Scene(root);
-                // Set the Scene to the primaryStage or a new Stage
-                Stage primaryStage = new Stage(); // You might use your existing primaryStage here
+                Stage primaryStage = new Stage();
                 primaryStage.setScene(scene);
                 primaryStage.show();
             }catch(IOException exception){

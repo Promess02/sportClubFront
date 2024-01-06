@@ -42,7 +42,7 @@ public class NewsPostViewController {
         articleName.setText(newsPost.getName());
         Image sampleimage;
         if(newsPost.getImageUrl()==null) sampleimage = new Image("/images/newsPostSample.jpg");
-        else sampleimage = new Image(newsPost.getImageUrl());
+        else sampleimage = new Image(newsPost.getImageUrl(), false);
         imageView.setImage(sampleimage);
         initBtn();
     }

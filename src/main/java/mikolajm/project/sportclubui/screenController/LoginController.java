@@ -39,6 +39,7 @@ public class LoginController {
     private Button loginButton;
     private final UserController userController;
     private final CurrentSessionUser currentSessionUser;
+    private ConfigurableApplicationContext context = ClubApplication.getApplicationContext();
 
     public void initialize() {
         loginButton.setOnAction(event -> {
@@ -48,7 +49,10 @@ public class LoginController {
                 if (session != null) {
                     log.info("session id:" + session);
                     if(currentSessionUser.getUser().getEmail().equals("admin")) openAdminView();
-                    else openMainScreenView();
+                    else{
+                        if(currentSessionUser.getTrainer()!=null) openTrainerView();
+                        else openMainScreenView();
+                    }
                     Stage stage = (Stage) loginButton.getScene().getWindow();
                     stage.close();
                 }
@@ -61,6 +65,22 @@ public class LoginController {
         });
     }
 
+    private void openTrainerView(){
+        try {
+            context = ClubApplication.getApplicationContext();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/TrainerMainScreen.fxml"));
+            loader.setControllerFactory(context::getBean);
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+            closeStage();
+        }catch (IOException exception){
+            throw new RuntimeException("unable to load trainer view");
+        }
+    }
+
     private void openAdminView(){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/admin/adminView.fxml"));
@@ -69,6 +89,7 @@ public class LoginController {
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.show();
+            closeStage();
         }catch (IOException exception){
             throw new RuntimeException("unable to load admin view");
         }
@@ -78,17 +99,14 @@ public class LoginController {
     private void openMainScreenView(){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/mainScreen.fxml"));
-            ConfigurableApplicationContext context = ClubApplication.getApplicationContext();
+            context = ClubApplication.getApplicationContext();
             loader.setControllerFactory(context::getBean);
-            // Load the root node from the FXML file
             Parent root = loader.load();
-            // Create a new Scene with the root node
             Scene scene = new Scene(root);
-            // Set the Scene to the primaryStage or a new Stage
             Stage primaryStage = new Stage(); // You might use your existing primaryStage here
             primaryStage.setScene(scene);
             primaryStage.show();
-
+            closeStage();
         } catch (IOException ex) {
             Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -107,12 +125,21 @@ public class LoginController {
      */
     private String authorize() {
         User createdUser = new User(user.getText(), password.getText());
-        Optional<User> userDb = userController.loginUser(createdUser).getStatusCode().isSameCodeAs(HttpStatus.OK)
+        Optional<User> userDb = userController.loginUser(createdUser).
+                getStatusCode().isSameCodeAs(HttpStatus.OK)
                 ? Optional.of(createdUser)
                 : Optional.empty();
         return userDb.isPresent()
                 ? generateSessionID(createdUser)
                 : null;
+    }
+
+    private void closeStage(){
+        Stage curStage = (Stage) user.getScene().getWindow();
+        curStage.close();
+        context = ClubApplication.getApplicationContext();
+        EnterScreenController enterScreenController = context.getBean(EnterScreenController.class);
+        enterScreenController.closeStage();
     }
 
     private static int sessionID = 0;

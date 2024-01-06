@@ -16,6 +16,7 @@ import mikolaj.project.backendapp.model.Trainer;
 import mikolaj.project.backendapp.repo.TrainerRepo;
 import mikolajm.project.sportclubui.ClubApplication;
 import mikolajm.project.sportclubui.LoginManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -38,18 +39,22 @@ public class TeamView {
     private Team team;
     private ConfigurableApplicationContext context;
     private final TrainerRepo trainerRepo;
+    @Autowired
     public TeamView(TrainerRepo trainerRepo) {
     this.trainerRepo = trainerRepo;
     }
 
-    public void initialize(Team team, int currentTeamMembers){
+    public void initialize(){
+        initTrainerBtn();
+    }
+
+    public void setTeam(Team team, int currentTeamMembers){
         this.team = team;
         Image image = new Image(team.getLogoIconUrl());
         imageView.setImage(image);
         teamName.setText(team.getName());
         membersLimit.setText("Members: " + currentTeamMembers + "/" + team.getMaxMembers());
         sportLabel.setText(team.getSport().toString());
-        initTrainerBtn();
     }
 
     private void initTrainerBtn(){

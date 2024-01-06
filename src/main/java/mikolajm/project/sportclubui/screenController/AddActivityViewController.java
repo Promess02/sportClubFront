@@ -18,6 +18,7 @@ import mikolaj.project.backendapp.repo.LocationRepo;
 import mikolaj.project.backendapp.repo.TeamRepo;
 import mikolaj.project.backendapp.repo.TrainerRepo;
 import mikolaj.project.backendapp.service.ActivityService;
+import mikolaj.project.backendapp.service.TrainerService;
 import mikolajm.project.sportclubui.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -32,6 +33,7 @@ import java.util.regex.Pattern;
 @Component
 public class AddActivityViewController {
     public TextField weeksTF;
+    @FXML private HBox trainerHBox;
     @FXML private HBox weeksHBox;
     @FXML private HBox minutesHBox;
     @FXML private HBox membersHBox;
@@ -50,16 +52,21 @@ public class AddActivityViewController {
 
     private final LocationRepo locationRepo;
     private final TeamRepo teamRepo;
+    private final TrainerService trainerService;
     private final TrainerRepo trainerRepo;
     private final ActivityRepo activityRepo;
+    private final ActivityService activityService;
+    private Trainer trainer;
 
     @Autowired
-    public AddActivityViewController(LocationRepo locationRepo, TeamRepo teamRepo,
-                                     TrainerRepo trainerRepo, ActivityRepo activityRepo) {
+    public AddActivityViewController(LocationRepo locationRepo, TrainerRepo trainerRepo, TeamRepo teamRepo,
+                                     ActivityRepo activityRepo, ActivityService activityService, TrainerService trainerService) {
         this.locationRepo = locationRepo;
         this.activityRepo = activityRepo;
         this.teamRepo = teamRepo;
+        this.trainerService = trainerService;
         this.trainerRepo = trainerRepo;
+        this.activityService = activityService;
     }
 
     public void initialize(){
@@ -89,6 +96,12 @@ public class AddActivityViewController {
         sportCb.setItems(sportItems);
     }
 
+    public void setTrainer(Trainer trainer){
+        trainerHBox.setVisible(false);
+        this.trainer = trainer;
+        TeamCb.setItems(FXCollections.observableArrayList(trainer.getTeam()));
+        TeamCb.setValue(trainer.getTeam());
+    }
     private void initSliders(){
         minutesSlider = new Slider(30, 90,30);
         minutesSlider.setShowTickMarks(true);
@@ -130,71 +143,89 @@ public class AddActivityViewController {
 
     private void initButton(){
         createBtn.setOnAction( e->{
-            Activity activity = new Activity();
-            if(activityName.getText().isEmpty()) {
-                handleError("please provide name");
-                return;
-            }else activity.setName(activityName.getText());
-            if(timeField.getText().isEmpty()) {
-                handleError("please provide time");
-                return;
-            }else {
-                LocalTime time;
-                try{
-                    time = formatStringToTime(timeField.getText());
-                }catch (IllegalArgumentException exception){
-                    handleError("give time in format HH:MM");
-                    return;
-                }
-                activity.setTime(time);
-            }
-            if(sportCb.getValue()==null) {
-                handleError("please provide sport");
-                return;
-            }else activity.setSport(sportCb.getValue());
-            if(locationCb.getValue()==null) {
-                handleError("please provide name");
-                return;
-            } else  activity.setLocation(locationCb.getValue());
-            if(TrainerCb.getValue()==null) {
-                handleError("please provide name");
-                return;
-            } else activity.setTrainer(TrainerCb.getValue());
-            if(datePicker.getValue()==null) {
-                handleError("please provide date");
-                return;
-            } else activity.setDate(datePicker.getValue());
-            activity.setMinutes((int) minutesSlider.getValue());
-            
-            if(TeamCb.getValue()!=null) activity.setTeam(TeamCb.getValue());
-            if(descriptionArea.getText()!=null) activity.setDescription(descriptionArea.getText());
-            activity.setMemberLimit((int) membersSlider.getValue());
-
-            int numOfWeeks;
-            if(weeksTF.getText()==null || !weeksTF.getText().matches("[1-9]|1[0-5]")){
-                handleError("please provide a number in range 1-15");
-                return;
-            }else numOfWeeks = Integer.parseInt(weeksTF.getText());
-            //int numOfWeeks = (int)weeksSlider.getValue();
-
-
+            Activity activity;
+            if(!validateFields()) return;
+            if(createActivity()!=null) activity = createActivity();
+            else return;
+            int numOfWeeks = Integer.parseInt(weeksTF.getText());
             for(int i=1; i<=numOfWeeks; i++){
-                if (activityRepo.findActivityByDate(activity.getDate()).isPresent()) {
-                    handleError("activity already exists in that date");
+                Activity dbActivity = new Activity(activity.getName(), activity.getDate(),
+                        activity.getTime(), activity.getMinutes(),activity.getDescription(),
+                        activity.getSport(), 0,activity.getMemberLimit(),
+                        activity.getLocation(), activity.getTrainer(), activity.getTeam());
+
+                ServiceResponse<?> serviceResponse = activityService.addActivity(dbActivity);
+                if(serviceResponse.getMessage().equals("location is busy during that time")){
+                    handleError("location is busy during that time");
                     return;
                 }
-                Activity dbActivity = new Activity(activity.getName(), activity.getDate(), activity.getTime(),
-                        activity.getMinutes(),activity.getDescription(), activity.getSport(),0,activity.getMemberLimit(),activity.getLocation(),
-                        activity.getTrainer(), activity.getTeam());
-                activityRepo.save(dbActivity);
+                if(serviceResponse.getMessage().equals("trainer is busy during that time")){
+                    handleError("trainer is busy during that time");
+                    return;
+                }
                 LocalDate date = activity.getDate();
                 activity.setDate(date.plusWeeks(1));
             }
-
             Stage stage = (Stage) createBtn.getScene().getWindow();
             stage.close();
-
         });
+    }
+
+    private boolean validateFields(){
+        if(activityName.getText().isEmpty()) {
+            handleError("please provide name");
+            return false;
+        }
+        if(timeField.getText().isEmpty()) {
+            handleError("please provide time");
+            return false;
+        }
+        if(sportCb.getValue()==null) {
+            handleError("please provide sport");
+            return false;
+        }
+        if(locationCb.getValue()==null) {
+            handleError("please provide location name");
+            return false;
+        }
+        if(trainer == null && TrainerCb.getValue()==null) {
+            handleError("please provide trainer name");
+            return false;
+        }
+        if(datePicker.getValue()==null) {
+            handleError("please provide date");
+            return false;
+        }
+
+        if(weeksTF.getText()==null || !weeksTF.getText().matches("[1-9]|1[0-5]")){
+            handleError("please provide a number in range 1-15");
+            return false;
+        }
+        return true;
+    }
+
+    private Activity createActivity(){
+        Activity activity = new Activity();
+        activity.setName(activityName.getText());
+        LocalTime time;
+        try{
+            time = formatStringToTime(timeField.getText());
+        }catch (IllegalArgumentException exception){
+            handleError("give time in format HH:MM");
+            return null;
+        }
+        activity.setTime(time);
+        activity.setSport(sportCb.getValue());
+        activity.setLocation(locationCb.getValue());
+        if(trainer==null) activity.setTrainer(TrainerCb.getValue());
+        else activity.setTrainer(trainer);
+        activity.setDate(datePicker.getValue());
+        activity.setMinutes((int) minutesSlider.getValue());
+
+        if(TeamCb.getValue()!=null) activity.setTeam(TeamCb.getValue());
+        if(descriptionArea.getText()!=null) activity.setDescription(descriptionArea.getText());
+        activity.setMemberLimit((int) membersSlider.getValue());
+        return activity;
     }
     private LocalTime formatStringToTime(String timeString){
         if (!isValidFormat(timeString)) {

@@ -11,14 +11,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import lombok.Getter;
+import mikolaj.project.backendapp.DTO.ServiceResponse;
 import mikolaj.project.backendapp.model.Activity;
 import mikolaj.project.backendapp.model.Member;
 import mikolaj.project.backendapp.repo.MemberRepo;
-import mikolaj.project.backendapp.repo.TeamRepo;
 import mikolaj.project.backendapp.service.CalendarService;
 import mikolajm.project.sportclubui.ClubApplication;
 import mikolajm.project.sportclubui.CurrentSessionUser;
-import mikolajm.project.sportclubui.screenController.MembershipTypeController;
+import mikolajm.project.sportclubui.Utils;
 import mikolajm.project.sportclubui.screenController.TeamView;
 import mikolajm.project.sportclubui.screenController.TrainerProfileController;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -46,6 +46,8 @@ public class ActivitySignupController {
     private final CalendarService calendarService;
     private ConfigurableApplicationContext context;
     private final MemberRepo memberRepo;
+
+    Utils utils = new Utils();
 
     public ActivitySignupController(CurrentSessionUser currentSessionUser,
                                     CalendarService calendarService, MemberRepo memberRepo) {
@@ -95,7 +97,7 @@ public class ActivitySignupController {
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
                 TrainerProfileController trainerProfileController = loader.getController();
-                trainerProfileController.initialize(activity.getTrainer());
+                trainerProfileController.setTrainer(activity.getTrainer());
                 // Set the Scene to the primaryStage or a new Stage
                 Stage primaryStage = new Stage(); // You might use your existing primaryStage here
                 primaryStage.setScene(scene);
@@ -116,7 +118,7 @@ public class ActivitySignupController {
                 Scene scene = new Scene(root);
                 TeamView teamView = loader.getController();
                 int currTeamMembers = memberRepo.findAllByTeam(activity.getTeam()).size();
-                teamView.initialize(activity.getTeam(), currTeamMembers);
+                teamView.setTeam(activity.getTeam(), currTeamMembers);
                 // Set the Scene to the primaryStage or a new Stage
                 Stage primaryStage = new Stage(); // You might use your existing primaryStage here
                 primaryStage.setScene(scene);
@@ -135,11 +137,21 @@ public class ActivitySignupController {
         signUpBtn.setOnAction(e->
         {
             Member member = currentSessionUser.getMember();
-            calendarService.signUpForActivity(member, activity);
+            ServiceResponse<?> serviceResponse = calendarService.signUpForActivity(member, activity);
+            if(serviceResponse.getMessage().equals("member is busy")) {
+                handleError("you have an activity during that time");
+                return;
+            }
             currentSessionUser.loadCalendarList();
-            //close screen
+            context = ClubApplication.getApplicationContext();
+            CalendarView calendarView = context.getBean(CalendarView.class);
+            calendarView.refreshView();
             Stage stage = (Stage) signUpBtn.getScene().getWindow();
             stage.close();
         });
+    }
+
+    private void handleError(String error){
+        utils.showErrorMessage(error);
     }
 }

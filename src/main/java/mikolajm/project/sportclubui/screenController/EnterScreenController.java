@@ -7,19 +7,23 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import lombok.Getter;
 import mikolajm.project.sportclubui.ClubApplication;
 import mikolajm.project.sportclubui.LoginManager;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+@Component
 public class EnterScreenController {
     @FXML private ImageView logoImage;
+    @Getter
     @FXML private Button registerUserBtn;
     @FXML private Button loginMemberBtn;
-    @FXML private Button loginTrainerBtn;
     private ConfigurableApplicationContext context;
 
     public EnterScreenController() {
@@ -28,10 +32,10 @@ public class EnterScreenController {
     public void initialize(){
         Image image = new Image("/images/clubLogo.jpg");
         logoImage.setImage(image);
-        initLoginMemberBtn();
+        initLoginBtn();
         initRegisterBtn();
     }
-    private void initLoginMemberBtn(){
+    private void initLoginBtn(){
         loginMemberBtn.setOnAction(e->{
             Scene scene = new Scene(new StackPane());
             context = ClubApplication.getApplicationContext();
@@ -60,7 +64,10 @@ public class EnterScreenController {
             }catch (IOException exception){
                 throw new RuntimeException("failed loading registration view");
             }
-
         });
+    }
+    public void closeStage(){
+//        registerUserBtn = new Button();
+        registerUserBtn.getScene().getWindow().hide();
     }
 }

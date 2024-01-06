@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mikolajm.project.sportclubui.screenController.AddMemberTeamController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="300.0" prefWidth="400.0" spacing="10.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="60.0" prefWidth="125.0" text="Enter member:">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+                  <ChoiceBox fx:id="memberCb" prefHeight="60.0" prefWidth="177.0" />
+               </children></HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="83.0" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="60.0" prefWidth="125.0" text="Enter team:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="teamCb" prefHeight="60.0" prefWidth="177.0" />
+               </children>
+            </HBox>
+            <Button fx:id="submitBtn" mnemonicParsing="false" prefHeight="44.0" prefWidth="97.0" text="Submit" />
+         </children></VBox>
+   </children>
+</AnchorPane>

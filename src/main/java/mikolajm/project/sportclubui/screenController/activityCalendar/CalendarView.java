@@ -8,7 +8,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import lombok.Getter;
+import lombok.Setter;
 import mikolaj.project.backendapp.model.Activity;
+import mikolajm.project.sportclubui.CurrentSessionUser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -17,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Component
 public class CalendarView {
     private ArrayList<ActivityNode> allCalendarDays = new ArrayList<>(35);
     @Getter
@@ -24,16 +29,24 @@ public class CalendarView {
     private Text calendarTitle;
     private YearMonth currentYearMonth;
     private Map<LocalDate, Activity> mapOfCalendar;
+    private Map<LocalDate, Activity> mapOfAlreadySigned;
     private GridPane calendar;
     private Text[] dayNames;
     private GridPane dayLabels;
     private HBox titleBar;
     private Button nextMonth;
     private Button previousMonth;
-    private List<Activity> activityMap;
+    private List<Activity> alreadySignedList;
 
-    public CalendarView(YearMonth yearMonth, List<Activity> activityList, List<Activity> activityMap) {
-        this.activityMap = activityMap;
+    private final CurrentSessionUser currentSessionUser;
+
+    @Autowired
+    public CalendarView(CurrentSessionUser currentSessionUser) {
+        this.currentSessionUser = currentSessionUser;
+    }
+
+    public void initView(YearMonth yearMonth, List<Activity> activityList, List<Activity> alreadySignedList){
+        this.alreadySignedList = alreadySignedList;
         currentYearMonth = yearMonth;
         mapOfCalendar = activityList.stream()
                 .collect(Collectors.toMap(Activity::getDate, activity -> activity));
@@ -69,13 +82,10 @@ public class CalendarView {
         refreshBtn.setPadding(new Insets(0,0,0,15));
         refreshBtn.setOnAction( e -> {
             refreshView();
-            populateCalendar(currentYearMonth);
         });
         titleBar = new HBox(previousMonth, calendarTitle, nextMonth, refreshBtn);
         titleBar.setAlignment(Pos.CENTER);
-        // Populate calendar with the appropriate day numbers
-        populateCalendar(currentYearMonth);
-        // Create the calendar view
+
         view = new VBox(titleBar, dayLabels, calendar);
         view.setSpacing(10.0);
     }
@@ -84,6 +94,7 @@ public class CalendarView {
         calendar.getChildren().clear();
         calendar.setPrefSize(800, 600);
         calendar.setGridLinesVisible(true);
+        alreadySignedList = currentSessionUser.getAlreadySignedList();
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 7; j++) {
                 ActivityNode ap = new ActivityNode();
@@ -92,6 +103,7 @@ public class CalendarView {
                 allCalendarDays.add(ap);
             }
         }
+        populateCalendar(currentYearMonth);
     }
     /**
      * Set the days of the calendar to correspond to the appropriate date
@@ -115,13 +127,15 @@ public class CalendarView {
             ap.setLeftAnchor(txt, 5.0);
             ap.getChildren().add(txt);
             if(mapOfCalendar.containsKey(calendarDate)){
-                boolean isSigned;
+                boolean isSigned = false;
                 Activity activity = mapOfCalendar.get(calendarDate);
-                isSigned = activityMap.contains(activity);
-               // isSigned = activityMap.keySet().stream().filter(act -> act.equals(activity)).toList().isEmpty();
+                for(Activity signedActivity: alreadySignedList)
+                    if(signedActivity.getName().equals(activity.getName()) && signedActivity.getDate().equals(activity.getDate())){
+                        isSigned = true;
+                        break;
+                    }
                 ap.setActivity(activity, isSigned);
             }
-
             calendarDate = calendarDate.plusDays(1);
         }
         // Change the title of the calendar

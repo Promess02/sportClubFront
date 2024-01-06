@@ -15,8 +15,10 @@ import lombok.Getter;
 import mikolaj.project.backendapp.model.Trainer;
 import mikolaj.project.backendapp.repo.MemberRepo;
 import mikolaj.project.backendapp.service.TrainerService;
+import mikolajm.project.sportclubui.ClubApplication;
 import mikolajm.project.sportclubui.CurrentSessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -38,6 +40,7 @@ public class TrainerProfileController {
     private final MemberRepo memberRepo;
     private final TrainerService trainerService;
     private final CurrentSessionUser currentSessionUser;
+    private ConfigurableApplicationContext context;
     @Autowired
     public TrainerProfileController(TrainerService trainerService,
                                     MemberRepo memberRepo,
@@ -47,7 +50,12 @@ public class TrainerProfileController {
         this.currentSessionUser = currentSessionUser;
     }
 
-    public void initialize(Trainer trainer){
+    public void initialize(){
+        initTeamsBtn();
+        initSaveGradeBtn();
+    }
+
+    public void setTrainer(Trainer trainer){
         this.trainer = trainer;
         trainerName.setText(trainer.getUser().getName());
         trainerSurname.setText(trainer.getUser().getSurname());
@@ -56,18 +64,17 @@ public class TrainerProfileController {
         imageView.setImage(image);
         specializationLabel.setText(trainer.getSpecialization());
         grade.setText("Trainer grade: " + trainer.getGrade());
-        initTeamsBtn();
-        initSaveGradeBtn();
     }
 
     public void initTeamsBtn(){
         viewTeamsBtn.setOnAction( e->{
             try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/TeamView.fxml"));
+                context = ClubApplication.getApplicationContext();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/teamsView.fxml"));
+                loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
-                TeamView teamView = loader.getController();
-                int currentTeamMembers = memberRepo.findAllByTeam(trainer.getTeam()).size();
-                teamView.initialize(trainer.getTeam(), currentTeamMembers);
+                TeamsViewController teamsViewController = loader.getController();
+                teamsViewController.initForATrainer(trainer);
                 Scene scene = new Scene(root);
                 Stage primaryStage = new Stage(); // You might use your existing primaryStage here
                 primaryStage.setScene(scene);

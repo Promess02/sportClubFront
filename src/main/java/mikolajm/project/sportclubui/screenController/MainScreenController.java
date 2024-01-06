@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
 import mikolaj.project.backendapp.model.Activity;
+import mikolaj.project.backendapp.model.Calendar;
 import mikolaj.project.backendapp.model.NewsPost;
 import mikolaj.project.backendapp.model.SocialMedia;
 import mikolaj.project.backendapp.repo.SocialMediaRepo;
@@ -30,6 +31,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.*;
 import java.util.logging.Level;
@@ -94,6 +96,25 @@ public class MainScreenController {
         initTeamsBtn();
         initTrainersBtn();
         initLocationsBtn();
+        initLogoutBtn();
+    }
+
+    private void initLogoutBtn(){
+        logoutBtn.setOnAction( e-> {
+            Stage primaryStage = (Stage) locationsBtn.getScene().getWindow();
+            primaryStage.close();
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/EnterScreen.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.show();
+            }catch (IOException exception){
+                Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, exception);
+            }
+            currentSessionUser.logout();
+        });
     }
 
     private void initAccountBtn(){
@@ -163,6 +184,7 @@ public class MainScreenController {
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 TrainersViewController trainersViewController = loader.getController();
+                trainersViewController.initView();
                 Scene scene = new Scene(root);
                 Stage primaryStage = new Stage(); // You might use your existing primaryStage here
                 primaryStage.setScene(scene);
@@ -182,6 +204,7 @@ public class MainScreenController {
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 TeamsViewController teamsViewController = loader.getController();
+                teamsViewController.initAll();
                 Scene scene = new Scene(root);
                 Stage primaryStage = new Stage(); // You might use your existing primaryStage here
                 primaryStage.setScene(scene);
@@ -224,8 +247,11 @@ public class MainScreenController {
                         ActivityCalendarController controller = loader.getController();
                         List<Activity> listOfActivities = activityService.getAllActivities().getData().orElse(new ArrayList<>());
                         List<Activity> alreadySignedList =  currentSessionUser.getAlreadySignedList();
+                        context = ClubApplication.getApplicationContext();
+                        CalendarView calendarView = context.getBean(CalendarView.class);
+                        calendarView.initView(YearMonth.now(), listOfActivities, alreadySignedList);
                         controller.getActivityPane().getChildren().add(
-                                new CalendarView(YearMonth.now(), listOfActivities, alreadySignedList).getView());
+                                calendarView.getView());
                         Scene scene = new Scene(root);
                         Stage stage = new Stage();
                         stage.setScene(scene);

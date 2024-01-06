@@ -1,5 +1,6 @@
 package mikolajm.project.sportclubui;
 
+import javafx.scene.image.Image;
 import lombok.Getter;
 import mikolaj.project.backendapp.model.Calendar;
 import mikolaj.project.backendapp.model.*;
@@ -67,17 +68,22 @@ public class CurrentSessionUser {
         if(userDb.isEmpty()) throw new RuntimeException("Couldn't find the user in Current Session user class");
         this.user = userDb.get();
         Optional<Member> memberOptional = memberRepo.findMemberByUser(userDb.get());
-        memberOptional.ifPresent(value -> member = value);
+        member = memberOptional.orElse(null);
         Optional<Trainer> trainerOptional = trainerRepo.findTrainerByUser(userDb.get());
-        trainerOptional.ifPresent(value -> trainer = value);
+        trainer = trainerOptional.orElse(null);
+        if(trainerOptional.isPresent()) member = null;
+        if(memberOptional.isPresent()) trainer = null;
         Optional<Membership> membershipOptional = membershipService.getMembershipForUser(user.getEmail()).getData();
-        membershipOptional.ifPresent(value -> {
-            membership=value;
+        if(membershipOptional.isPresent()){
+            membership = membershipOptional.get();
             membershipStatus = true;
-        });
+        }else{
+            membership = null;
+            membershipStatus = false;
+        }
         creditCard = user.getCreditCard();
 
-        if(memberOptional.isPresent())
+        if(memberOptional.isPresent() || trainerOptional.isPresent())
         loadCalendarList();
         else calendarList = new ArrayList<>();
     }
@@ -88,7 +94,20 @@ public class CurrentSessionUser {
     }
 
     public void loadCalendarList(){
-            calendarService.getEntriesForMember(member).getData().ifPresent(calendars -> calendarList=calendars);
+            if(member!=null)
+                calendarService.getEntriesForMember(member).getData().ifPresent(calendars -> calendarList=calendars);
+            if(trainer!=null)
+                calendarService.getEntriesForTrainer(trainer).getData().ifPresent(calendars -> calendarList=calendars);
+    }
+
+    public void logout(){
+        user = null;
+        member = null;
+        trainer = null;
+        membership = null;
+        creditCard = null;
+        calendarList = null;
+        membershipStatus = false;
     }
 
     public void loadCreditCard(){

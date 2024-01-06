@@ -44,8 +44,6 @@ public class AddNewsPostController {
     public Button addImageBtn;
     public ImageView imageView;
     private File selectedFile;
-    private String imageDbPath;
-    private String fileName;
 
     private Utils utils = new Utils();
 
@@ -76,18 +74,8 @@ public class AddNewsPostController {
             selectedFile = fileChooser.showOpenDialog(addImageBtn.getScene().getWindow());
 
             if (selectedFile != null) {
-                // Display the selected imag
-                fileName = selectedFile.getName();
-                int dotIndex = fileName.lastIndexOf('.');
-                String name = tileField.getText();
-                String imageExtension = (dotIndex > 0) ? fileName.substring(dotIndex) : "";
-                fileName = "/home/mikolajmichalczyk/IdeaProjects/sportClub/sportClubUi/src/main/resources/images/" + name.replaceAll("\\s", "")+ imageExtension;
-                utils.saveImage(selectedFile.toPath(), fileName);
-                imageDbPath = "/images/" + name.replaceAll("\\s", "")+imageExtension;
-                String imageName = imageDbPath;
-                imageView.setImage(new Image(imageName));
-                // Save the selected image to the resources/images directory
-//                utils.saveImage(selectedFile.toPath(), "resources/images/" + selectedFile.getName());
+                Image selectedImage = new Image(selectedFile.toURI().toString());
+                imageView.setImage(selectedImage);
             }
         });
     }
@@ -121,8 +109,15 @@ public class AddNewsPostController {
             if(locationCheckBox.getValue()!=null) newsPostForm.setLocationId(locationCheckBox.getValue().getId());
             newsPostForm.setContent(contentArea.getText());
             newsPostForm.setTitle(tileField.getText());
-            newsPostForm.setImageUrl(imageDbPath);
-            utils.saveImage(selectedFile.toPath(), fileName);
+            if(imageView.getImage()!=null){
+                String fileName = selectedFile.getName();
+                int dotIndex = fileName.lastIndexOf('.');
+                String imageExtension = (dotIndex > 0) ? fileName.substring(dotIndex) : "";
+                fileName = utils.imagesPath + newsPostForm.getTitle().replaceAll("\\s", "")+ imageExtension;
+                utils.saveImage(selectedFile.toPath(), fileName);
+                String dbUrl = "/images/" + newsPostForm.getTitle().replaceAll("\\s", "")+imageExtension;
+                newsPostForm.setImageUrl(dbUrl);
+            } else newsPostForm.setImageUrl("/images/clubLogo.jpg");
             newsPostService.addNewsPost(newsPostForm);
             Stage stage = (Stage) submitBtn.getScene().getWindow();
             stage.close();

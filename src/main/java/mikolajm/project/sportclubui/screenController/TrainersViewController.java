@@ -31,13 +31,12 @@ public class TrainersViewController {
 
     public void initialize(){
         this.trainerList = trainerRepo.findAll();
-    initView();
     }
     public void initializeCustom(List<Trainer> trainerList){
         this.trainerList = trainerList;
         initView();
     }
-    private void initView(){
+    public void initView(){
         for(Trainer trainer: trainerList){
             try{
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/trainerProfile.fxml"));
@@ -45,7 +44,7 @@ public class TrainersViewController {
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 TrainerProfileController trainerProfileController = loader.getController();
-                trainerProfileController.initialize(trainer);
+                trainerProfileController.setTrainer(trainer);
                 trainersVBox.getChildren().add(trainerProfileController.getFullView());
             }catch (IOException exception){
                 Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, exception);

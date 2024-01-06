@@ -13,9 +13,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import lombok.Getter;
+import lombok.Setter;
 import mikolaj.project.backendapp.model.Activity;
 import mikolajm.project.sportclubui.ClubApplication;
+import mikolajm.project.sportclubui.CurrentSessionUser;
 import mikolajm.project.sportclubui.LoginManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -32,6 +35,7 @@ public class ActivityNode extends AnchorPane {
     private Button getActivityBtn;
     private boolean enableBtn = true;
     private ConfigurableApplicationContext context;
+
 
     public ActivityNode() {
         // Add action handler for mouse clicked
@@ -72,7 +76,7 @@ public class ActivityNode extends AnchorPane {
             Label alreadySignedText = new Label("Signed!");
             alreadySignedText.setFont(new Font(15.0));
             vbox.getChildren().add(alreadySignedText);
-            getActivityBtn.setText("=>");
+            getActivityBtn.setText("show");
             enableBtn = false;
         }else getActivityBtn.setText("Sign up");
 
@@ -98,15 +102,12 @@ public class ActivityNode extends AnchorPane {
                 context = ClubApplication.getApplicationContext();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/ActivitySignUp.fxml"));
                 loader.setControllerFactory(context::getBean);
-                // Load the root node from the FXML file
                 Parent root = loader.load();
-                // Create a new Scene with the root node
                 ActivitySignupController activitySignUpController = loader.getController();
                 activitySignUpController.setActivity(activity);
                 if(!enableBtn) activitySignUpController.disableSignUp();
                 Scene scene = new Scene(root);
-                // Set the Scene to the primaryStage or a new Stage
-                Stage primaryStage = new Stage(); // You might use your existing primaryStage here
+                Stage primaryStage = new Stage();
                 primaryStage.setScene(scene);
                 primaryStage.show();
             }catch (IOException ex){

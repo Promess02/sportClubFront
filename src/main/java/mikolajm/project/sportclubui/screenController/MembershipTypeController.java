@@ -64,21 +64,20 @@ public class MembershipTypeController {
                         Stage stage = (Stage) warningViewController.getOkBtn().getScene().getWindow();
                         stage.close();
                     });
-                    // Set the Scene to the primaryStage or a new Stage
-                    Stage primaryStage = new Stage(); // You might use your existing primaryStage here
+                    Stage primaryStage = new Stage();
                     primaryStage.setScene(scene);
                     primaryStage.show();
                 }catch (IOException ex){
                     throw new RuntimeException("failed loading warning view");
                 }
-
             }
             saveMembership();
         });
     }
 
     private void saveMembership(){
-        membershipService.buyMembership(currentSessionUser.getUser().getEmail(), membershipType.getDescription(), null);
+        membershipService.buyMembership(currentSessionUser.getUser().getEmail(),
+                membershipType.getDescription(), null);
         currentSessionUser.loadMembership();
         Stage stage = (Stage) getBtn.getScene().getWindow();
         stage.close();
