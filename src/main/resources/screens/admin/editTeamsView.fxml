@@ -10,7 +10,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="mikolajm.project.sportclubui.screenController.EditTeamsViewController"
+            fx:controller="mikolajm.project.sportclubui.screenController.adminScreens.EditTeamsViewController"
             prefHeight="200.0" prefWidth="300.0">
     <children>
         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="300.0" spacing="15.0">

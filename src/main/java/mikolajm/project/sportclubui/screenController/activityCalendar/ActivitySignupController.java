@@ -13,18 +13,22 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import mikolaj.project.backendapp.DTO.ServiceResponse;
 import mikolaj.project.backendapp.model.Activity;
+import mikolaj.project.backendapp.model.Calendar;
 import mikolaj.project.backendapp.model.Member;
+import mikolaj.project.backendapp.repo.CalendarRepo;
 import mikolaj.project.backendapp.repo.MemberRepo;
 import mikolaj.project.backendapp.service.CalendarService;
 import mikolajm.project.sportclubui.ClubApplication;
 import mikolajm.project.sportclubui.CurrentSessionUser;
 import mikolajm.project.sportclubui.Utils;
-import mikolajm.project.sportclubui.screenController.TeamView;
-import mikolajm.project.sportclubui.screenController.TrainerProfileController;
+import mikolajm.project.sportclubui.screenController.generalScreens.LocationViewController;
+import mikolajm.project.sportclubui.screenController.generalScreens.TeamView;
+import mikolajm.project.sportclubui.screenController.generalScreens.TrainerProfileController;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.List;
 
 @Component
 @Getter
@@ -45,13 +49,15 @@ public class ActivitySignupController {
     private final CurrentSessionUser currentSessionUser;
     private final CalendarService calendarService;
     private ConfigurableApplicationContext context;
+    private final CalendarRepo calendarRepo;
     private final MemberRepo memberRepo;
 
     Utils utils = new Utils();
 
-    public ActivitySignupController(CurrentSessionUser currentSessionUser,
+    public ActivitySignupController(CurrentSessionUser currentSessionUser, CalendarRepo calendarRepo,
                                     CalendarService calendarService, MemberRepo memberRepo) {
         this.currentSessionUser = currentSessionUser;
+        this.calendarRepo = calendarRepo;
         this.calendarService = calendarService;
         this.memberRepo = memberRepo;
     }
@@ -59,7 +65,9 @@ public class ActivitySignupController {
     public void setActivity(Activity activity) {
         this.activity = activity;
         nameLabel.setText(activity.getName());
-        Image image = new Image("/images/newsPostSample.jpg");
+        Image image;
+        if(activity.getImageUrl()==null) image = new Image("/images/newsPostSample.jpg");
+        else image = new Image(activity.getImageUrl());
         imageView.setImage(image);
         String timeTxt = activity.getDate().toString()+": " + activity.getTime() + " " + activity.getMinutes()+" minutes";
         timeLabel.setText(timeTxt);
@@ -78,13 +86,44 @@ public class ActivitySignupController {
         initSignUpBtn();
         initTrainerBtn();
         initTeamBtn();
+        initLocationBtn();
     }
 
     public void disableSignUp(){
-        signUpBtn.setText("OK");
+        signUpBtn.setText("Cancel");
         signUpBtn.setOnAction(e-> {
+            activity.cancel();
+            List<Calendar> calendars = calendarRepo.findCalendarsByActivityAndMember(activity, currentSessionUser.getMember());
+            for(Calendar calendar: calendars){
+                calendarRepo.delete(calendar);
+            }
+            currentSessionUser.loadCalendarList();
+            context = ClubApplication.getApplicationContext();
+            CalendarView calendarView = context.getBean(CalendarView.class);
+            calendarView.refreshView();
             Stage stage = (Stage) signUpBtn.getScene().getWindow();
             stage.close();
+        });
+    }
+
+    private void initLocationBtn(){
+        locationBtn.setOnAction( e-> {
+            try{
+                context = ClubApplication.getApplicationContext();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/locationView.fxml"));
+                loader.setControllerFactory(context::getBean);
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                LocationViewController locationViewController = loader.getController();
+                locationViewController.setLocation(activity.getLocation());
+                locationViewController.setViewOnly();
+                // Set the Scene to the primaryStage or a new Stage
+                Stage primaryStage = new Stage(); // You might use your existing primaryStage here
+                primaryStage.setScene(scene);
+                primaryStage.show();
+            }catch (IOException exception){
+                throw new RuntimeException("unable to load activity view");
+            }
         });
     }
 

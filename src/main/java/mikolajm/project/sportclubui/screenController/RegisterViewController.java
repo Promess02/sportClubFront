@@ -1,6 +1,9 @@
 package mikolajm.project.sportclubui.screenController;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -9,9 +12,14 @@ import mikolaj.project.backendapp.DTO.ServiceResponse;
 import mikolaj.project.backendapp.model.User;
 import mikolaj.project.backendapp.service.Impl.ServiceMessages;
 import mikolaj.project.backendapp.service.RegistrationService;
+import mikolajm.project.sportclubui.LoginManager;
 import mikolajm.project.sportclubui.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Component
 public class RegisterViewController {
@@ -50,6 +58,16 @@ public class RegisterViewController {
             showErrorMsg("account created");
             Stage stage = (Stage) confirmBtn.getScene().getWindow();
             stage.close();
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/EnterScreen.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                Stage primaryStage = new Stage();
+                primaryStage.setScene(scene);
+                primaryStage.show();
+            }catch (IOException exception){
+                Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, exception);
+            }
         });
     }
 

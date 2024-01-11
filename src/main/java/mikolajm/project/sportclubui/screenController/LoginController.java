@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +35,7 @@ public class LoginController {
     @FXML
     private TextField user;
     @FXML
-    private TextField password;
+    private PasswordField password;
     @FXML
     private Button loginButton;
     private final UserController userController;
@@ -117,12 +118,7 @@ public class LoginController {
         this.userController = userController;
         this.currentSessionUser = currentSessionUser;
     }
-    /**
-     * Check authorization credentials.
-     * <p>
-     * If accepted, return a sessionID for the authorized session
-     * otherwise, return null.
-     */
+
     private String authorize() {
         User createdUser = new User(user.getText(), password.getText());
         Optional<User> userDb = userController.loginUser(createdUser).
@@ -137,9 +133,6 @@ public class LoginController {
     private void closeStage(){
         Stage curStage = (Stage) user.getScene().getWindow();
         curStage.close();
-        context = ClubApplication.getApplicationContext();
-        EnterScreenController enterScreenController = context.getBean(EnterScreenController.class);
-        enterScreenController.closeStage();
     }
 
     private static int sessionID = 0;

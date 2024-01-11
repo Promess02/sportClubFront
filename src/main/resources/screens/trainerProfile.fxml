@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -8,9 +7,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="fullView" prefHeight="300.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mikolajm.project.sportclubui.screenController.TrainerProfileController">
+<AnchorPane fx:id="fullView" prefHeight="400.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mikolajm.project.sportclubui.screenController.generalScreens.TrainerProfileController">
     <children>
-        <VBox alignment="CENTER" prefHeight="300.0" prefWidth="350.0">
+        <VBox alignment="CENTER" prefHeight="400.0" prefWidth="350.0" spacing="8.0">
             <children>
                 <HBox alignment="CENTER_LEFT" prefHeight="149.0" prefWidth="350.0">
                     <children>
@@ -59,22 +58,18 @@
 
                     </children>
                 </HBox>
-            <HBox spacing="15.0" alignment="CENTER" prefHeight="54.0" prefWidth="350.0">
+            <HBox alignment="CENTER" prefHeight="54.0" prefWidth="350.0" spacing="15.0">
                <children>
                       <ChoiceBox fx:id="starRatingChoiceBox" prefHeight="44.0" prefWidth="121.0">
-                      <items>
-                          <FXCollections fx:factory="observableArrayList">
-                              <String fx:value="1 Star" />
-                              <String fx:value="2 Stars" />
-                              <String fx:value="3 Stars" />
-                              <String fx:value="4 Stars" />
-                              <String fx:value="5 Stars" />
-                          </FXCollections>
-                      </items>
+                          <items>
+                              <FXCollections fx:factory="observableArrayList">
+                              </FXCollections>
+                          </items>
                   </ChoiceBox>
                   <Button fx:id="saveGradeBtn" mnemonicParsing="false" prefHeight="43.0" prefWidth="91.0" text="Save Grade" />
                </children>
             </HBox>
+            <Button fx:id="sendEmailBtn" mnemonicParsing="false" prefHeight="43.0" prefWidth="102.0" text="send email" />
             </children>
         </VBox>
     </children>

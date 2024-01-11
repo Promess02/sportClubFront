@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 
 <?import javafx.collections.FXCollections?>
-<AnchorPane prefHeight="220.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mikolajm.project.sportclubui.screenController.ChooseMembershipController">
+<AnchorPane prefHeight="220.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mikolajm.project.sportclubui.screenController.adminScreens.ChooseMembershipController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="220.0" prefWidth="400.0" spacing="15.0">
          <children>

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="fullView" prefHeight="100.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mikolajm.project.sportclubui.screenController.SocialsNodeController">
+<AnchorPane fx:id="fullView" prefHeight="100.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mikolajm.project.sportclubui.screenController.generalScreens.SocialsNodeController">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="250.0">
          <children>

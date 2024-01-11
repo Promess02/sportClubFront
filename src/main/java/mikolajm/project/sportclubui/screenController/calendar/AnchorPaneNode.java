@@ -15,7 +15,9 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import mikolaj.project.backendapp.model.Calendar;
 import mikolajm.project.sportclubui.ClubApplication;
+import mikolajm.project.sportclubui.CurrentSessionUser;
 import mikolajm.project.sportclubui.screenController.activityCalendar.ActivitySignupController;
+import mikolajm.project.sportclubui.screenController.trainerScreens.AddPersonalTrainingController;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import java.io.IOException;
@@ -79,19 +81,30 @@ public class AnchorPaneNode extends AnchorPane {
         getActivityBtn.setOnAction(e-> {
             try {
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/ActivitySignUp.fxml"));
-                loader.setControllerFactory(context::getBean);
-                // Load the root node from the FXML file
-                Parent root = loader.load();
-                // Create a new Scene with the root node
-                ActivitySignupController activitySignUpController = loader.getController();
-                activitySignUpController.setActivity(calendar.getActivity());
-                activitySignUpController.disableSignUp();
-                Scene scene = new Scene(root);
-                // Set the Scene to the primaryStage or a new Stage
-                Stage primaryStage = new Stage(); // You might use your existing primaryStage here
-                primaryStage.setScene(scene);
-                primaryStage.show();
+                if(calendar.getActivity()!=null){
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/ActivitySignUp.fxml"));
+                    loader.setControllerFactory(context::getBean);
+                    Parent root = loader.load();
+                    ActivitySignupController activitySignUpController = loader.getController();
+                    activitySignUpController.setActivity(calendar.getActivity());
+                    activitySignUpController.disableSignUp();
+                    Scene scene = new Scene(root);
+                    Stage primaryStage = new Stage();
+                    primaryStage.setScene(scene);
+                    primaryStage.show();
+                }else{
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/addPersonalTraining.fxml"));
+                    loader.setControllerFactory(context::getBean);
+                    Parent root = loader.load();
+                    AddPersonalTrainingController controller = loader.getController();
+                    CurrentSessionUser currentSessionUser = context.getBean(CurrentSessionUser.class);
+                    controller.setCalendar(calendar);
+                    if(currentSessionUser.getTrainer()==null) controller.setViewOnly();
+                    Scene scene = new Scene(root);
+                    Stage primaryStage = new Stage();
+                    primaryStage.setScene(scene);
+                    primaryStage.show();
+                }
             } catch (IOException ex) {
                 throw new RuntimeException("failed loading calendar activity view");
             }

@@ -79,23 +79,6 @@
                      <PasswordField fx:id="confPasswordField" prefHeight="40.0" prefWidth="342.0" promptText="repeat to make sure you typed it well the first time" />
                  </children>
              </HBox>
-             <HBox prefHeight="40.0" prefWidth="570.0" spacing="15.0">
-                 <children>
-                     <Label alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="178.0" text="Select one">
-                         <font>
-                             <Font size="23.0" />
-                         </font>
-                     </Label>
-                     <ChoiceBox fx:id="userTypeChoiceBox" prefHeight="44.0" prefWidth="121.0">
-                         <items>
-                             <FXCollections fx:factory="observableArrayList">
-                                 <String fx:value="Member" />
-                                 <String fx:value="Trainer" />
-                             </FXCollections>
-                         </items>
-                     </ChoiceBox>
-                 </children>
-             </HBox>
             <Button fx:id="confirmBtn" mnemonicParsing="false" prefHeight="68.0" prefWidth="211.0" text="Confirm">
                <VBox.margin>
                   <Insets top="30.0" />

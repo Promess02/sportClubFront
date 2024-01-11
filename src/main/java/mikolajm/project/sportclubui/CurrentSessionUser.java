@@ -2,18 +2,17 @@ package mikolajm.project.sportclubui;
 
 import javafx.scene.image.Image;
 import lombok.Getter;
+import mikolaj.project.backendapp.enums.MembershipStatus;
 import mikolaj.project.backendapp.model.Calendar;
 import mikolaj.project.backendapp.model.*;
-import mikolaj.project.backendapp.repo.CalendarRepo;
-import mikolaj.project.backendapp.repo.MemberRepo;
-import mikolaj.project.backendapp.repo.TrainerRepo;
-import mikolaj.project.backendapp.repo.UserRepo;
+import mikolaj.project.backendapp.repo.*;
 import mikolaj.project.backendapp.service.ActivityService;
 import mikolaj.project.backendapp.service.CalendarService;
 import mikolaj.project.backendapp.service.MembershipService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Component
@@ -31,6 +30,7 @@ public class CurrentSessionUser {
     private final TrainerRepo trainerRepo;
     private final UserRepo userRepo;
     private final CalendarRepo calendarRepo;
+    private final MembershipRepo membershipRepo;
     private final ActivityService activityService;
     private Map<Activity, Boolean> listOfActivities;
     private final CalendarService calendarService;
@@ -40,7 +40,8 @@ public class CurrentSessionUser {
                               MemberRepo memberRepo,
                               TrainerRepo trainerRepo,
                               UserRepo userRepo, CalendarRepo calendarRepo, ActivityService activityService,
-                              CalendarService calendarService) {
+                              CalendarService calendarService, MembershipRepo membershipRepo) {
+        this.membershipRepo = membershipRepo;
         this.calendarService = calendarService;
         this.membershipService = membershipService;
         this.memberRepo = memberRepo;
@@ -76,7 +77,14 @@ public class CurrentSessionUser {
         Optional<Membership> membershipOptional = membershipService.getMembershipForUser(user.getEmail()).getData();
         if(membershipOptional.isPresent()){
             membership = membershipOptional.get();
-            membershipStatus = true;
+            if(membership.getEndDate().isBefore(LocalDate.now())){
+                Utils utils = new Utils();
+                utils.showErrorMessage("your membership has expired");
+                membership.setMembershipStatus(MembershipStatus.EXPIRED);
+                membershipRepo.save(membership);
+                membershipStatus = false;
+            }
+             else membershipStatus = true;
         }else{
             membership = null;
             membershipStatus = false;
@@ -119,8 +127,15 @@ public class CurrentSessionUser {
         memberOptional.ifPresent(value -> member = value);
         Optional<Membership> membershipOptional = membershipService.getMembershipForUser(user.getEmail()).getData();
         membershipOptional.ifPresent(value -> {
-            membership=value;
-            membershipStatus = true;
+            membership = value;
+            if(membership.getEndDate().isBefore(LocalDate.now())){
+                Utils utils = new Utils();
+                utils.showErrorMessage("your membership has expired");
+                membership.setMembershipStatus(MembershipStatus.EXPIRED);
+                membershipRepo.save(membership);
+                membershipStatus = false;
+            }
+            else membershipStatus = true;
         });
         if(memberOptional.isPresent())
             loadCalendarList();
