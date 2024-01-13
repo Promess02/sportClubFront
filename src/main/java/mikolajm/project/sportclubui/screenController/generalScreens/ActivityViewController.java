@@ -53,18 +53,15 @@ public class ActivityViewController {
         {
             try {
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/ActivitySignUp.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/user/ActivitySignUp.fxml"));
                 loader.setControllerFactory(context::getBean);
-                // Load the root node from the FXML file
                 Parent root = loader.load();
-                // Create a new Scene with the root node
                 ActivitySignupController activitySignUpController = loader.getController();
                 activitySignUpController.setActivity(activity);
                 activitySignUpController.disableSignUp();
                 activitySignUpController.disableSpecificActivity();
                 Scene scene = new Scene(root);
-                // Set the Scene to the primaryStage or a new Stage
-                Stage primaryStage = new Stage(); // You might use your existing primaryStage here
+                Stage primaryStage = new Stage();
                 primaryStage.setScene(scene);
                 primaryStage.show();
             }catch (IOException ex){

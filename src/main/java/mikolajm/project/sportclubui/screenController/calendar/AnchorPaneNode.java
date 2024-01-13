@@ -23,27 +23,17 @@ import org.springframework.context.ConfigurableApplicationContext;
 import java.io.IOException;
 import java.time.LocalDate;
 
-/**
- * Create an anchor pane that can store additional data.
- */
 
 @Getter
 public class AnchorPaneNode extends AnchorPane {
 
-    // Date associated with this pane
     private LocalDate date;
     private Calendar calendar;
     private Button getActivityBtn;
     private ConfigurableApplicationContext context;
 
-    /**
-     * Create a anchor pane node. Date is not assigned in the constructor.
-     * @param children children of the anchor pane
-     */
-
     public AnchorPaneNode(Node... children) {
         super(children);
-        // Add action handler for mouse clicked
         this.setOnMouseClicked(e -> {
             System.out.println("This pane's date is: " + date);
             if(calendar!=null) System.out.println("This pane's calendar entity name:  " + calendar.getName());
@@ -82,7 +72,7 @@ public class AnchorPaneNode extends AnchorPane {
             try {
                 context = ClubApplication.getApplicationContext();
                 if(calendar.getActivity()!=null){
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/ActivitySignUp.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/user/ActivitySignUp.fxml"));
                     loader.setControllerFactory(context::getBean);
                     Parent root = loader.load();
                     ActivitySignupController activitySignUpController = loader.getController();
@@ -93,7 +83,7 @@ public class AnchorPaneNode extends AnchorPane {
                     primaryStage.setScene(scene);
                     primaryStage.show();
                 }else{
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/addPersonalTraining.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/trainer/addPersonalTraining.fxml"));
                     loader.setControllerFactory(context::getBean);
                     Parent root = loader.load();
                     AddPersonalTrainingController controller = loader.getController();

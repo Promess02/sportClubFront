@@ -8,7 +8,6 @@ import mikolaj.project.backendapp.model.Trainer;
 import mikolaj.project.backendapp.repo.TrainerRepo;
 import mikolajm.project.sportclubui.ClubApplication;
 import mikolajm.project.sportclubui.LoginManager;
-import mikolajm.project.sportclubui.screenController.generalScreens.TrainerProfileController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
@@ -40,7 +39,7 @@ public class TrainersViewController {
     public void initView(){
         for(Trainer trainer: trainerList){
             try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/trainerProfile.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/user/trainerProfile.fxml"));
                 ConfigurableApplicationContext context = ClubApplication.getApplicationContext();
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();

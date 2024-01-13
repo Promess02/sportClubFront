@@ -50,7 +50,7 @@ public class ChooseLocationController {
             }
             Location location = locationCheckBox.getValue();
             try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/locationView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/userAndTrainer/locationView.fxml"));
                 context = ClubApplication.getApplicationContext();
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
@@ -73,11 +73,10 @@ public class ChooseLocationController {
     public void initAddNewBtn(){
         addNewBtn.setOnAction( e->{
             try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/locationView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/userAndTrainer/locationView.fxml"));
                 context = ClubApplication.getApplicationContext();
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
-                LocationViewController locationViewController = loader.getController();
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
                 stage.setScene(scene);

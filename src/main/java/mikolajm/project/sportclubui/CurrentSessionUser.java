@@ -1,6 +1,5 @@
 package mikolajm.project.sportclubui;
 
-import javafx.scene.image.Image;
 import lombok.Getter;
 import mikolaj.project.backendapp.enums.MembershipStatus;
 import mikolaj.project.backendapp.model.Calendar;
@@ -119,7 +118,8 @@ public class CurrentSessionUser {
     }
 
     public void loadCreditCard(){
-        creditCard = userRepo.findById(user.getId()).get().getCreditCard();
+        if(userRepo.findById(user.getId()).isPresent())
+            creditCard = userRepo.findById(user.getId()).get().getCreditCard();
     }
 
     public void loadMembership(){

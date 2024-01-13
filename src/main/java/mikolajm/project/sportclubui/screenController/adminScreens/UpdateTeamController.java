@@ -31,8 +31,6 @@ public class UpdateTeamController {
 
     private final TeamRepo teamRepo;
     private File selectedFile;
-    private Utils utils = new Utils();
-    private Team team;
 
     @Autowired
     public UpdateTeamController(TeamRepo teamRepo) {
@@ -46,7 +44,6 @@ public class UpdateTeamController {
     }
 
     public void setTeam(Team team){
-        this.team = team;
         teamName.setText(team.getName());
         teamName.setDisable(true);
         maxNumber.setText(team.getMaxMembers().toString());
@@ -61,16 +58,13 @@ public class UpdateTeamController {
 
     private void initChooseImg() {
         imageBtn.setOnAction(event -> {
-            // Open a file chooser dialog
             FileChooser fileChooser = new FileChooser();
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
             selectedFile = fileChooser.showOpenDialog(imageBtn.getScene().getWindow());
 
             if (selectedFile != null) {
-                // Display the selected image
                 Image selectedImage = new Image(selectedFile.toURI().toString());
                 teamImage.setImage(selectedImage);
-                // Save the selected image to the resources/images directory
             }
         });
     }

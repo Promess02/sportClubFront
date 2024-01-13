@@ -40,7 +40,7 @@ public class TeamsViewController {
         context = ClubApplication.getApplicationContext();
         for(Team team: list){
             try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/TeamView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/user/TeamView.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 TeamView teamView = loader.getController();
@@ -57,7 +57,7 @@ public class TeamsViewController {
         Team team = trainer.getTeam();
         try{
             context = ClubApplication.getApplicationContext();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/TeamView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/user/TeamView.fxml"));
             loader.setControllerFactory(context::getBean);
             Parent root = loader.load();
             TeamView teamView = loader.getController();

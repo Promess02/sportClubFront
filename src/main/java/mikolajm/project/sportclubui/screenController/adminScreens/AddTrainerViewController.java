@@ -1,9 +1,5 @@
 package mikolajm.project.sportclubui.screenController.adminScreens;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,11 +10,9 @@ import mikolaj.project.backendapp.enums.Sport;
 import mikolaj.project.backendapp.model.Team;
 import mikolaj.project.backendapp.model.Trainer;
 import mikolaj.project.backendapp.model.User;
-import mikolaj.project.backendapp.repo.SQL.TeamRepoSQL;
 import mikolaj.project.backendapp.repo.TeamRepo;
 import mikolaj.project.backendapp.repo.TrainerRepo;
 import mikolaj.project.backendapp.repo.UserRepo;
-import mikolaj.project.backendapp.service.TrainerService;
 import mikolajm.project.sportclubui.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,25 +27,17 @@ public class AddTrainerViewController {
     @FXML private ChoiceBox<User> userCb;
     @FXML private Button hireBtn;
 
-    private final TrainerService trainerService;
     private final TrainerRepo trainerRepo;
     private final TeamRepo teamRepo;
     private final UserRepo userRepo;
 
-    @PersistenceContext
-    private EntityManager entityManager;
-    private final TeamRepoSQL teamRepoSQL;
-
 
     @Autowired
-    public AddTrainerViewController(TrainerService trainerService, TeamRepo teamRepo,
-                                    UserRepo userRepo, TrainerRepo trainerRepo,
-                                    TeamRepoSQL teamRepoSQL) {
-    this.trainerService = trainerService;
+    public AddTrainerViewController(TeamRepo teamRepo,
+                                    UserRepo userRepo, TrainerRepo trainerRepo) {
     this.teamRepo = teamRepo;
     this.userRepo = userRepo;
     this.trainerRepo = trainerRepo;
-        this.teamRepoSQL = teamRepoSQL;
     }
 
     public void initialize(){

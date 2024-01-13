@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane prefHeight="580.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mikolajm.project.sportclubui.screenController.trainerScreens.TrainerMainScreenController">
+   <children>
+      <VBox prefHeight="580.0" prefWidth="880.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="130.0" prefWidth="880.0" spacing="25.0">
+               <children>
+                  <ImageView fx:id="loginImageView" fitHeight="84.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true" />
+                  <Button fx:id="addActivityBtn" alignment="CENTER" mnemonicParsing="false" prefHeight="85.0" prefWidth="96.0" text="Add activity" />
+                  <Button fx:id="addPersonalTraining" alignment="CENTER" layoutX="169.0" layoutY="35.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="96.0" text="Add personal training" wrapText="true" />
+                  <Button fx:id="calendarBtn" alignment="CENTER" layoutX="159.0" layoutY="55.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="96.0" text="Calendar" />
+                  <MenuButton alignment="CENTER" layoutX="270.0" layoutY="55.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="96.0" text="My Account" wrapText="true">
+                      <items>
+                          <MenuItem fx:id="accountBtn" mnemonicParsing="false" text="see Account" />
+                          <MenuItem fx:id="logoutBtn" mnemonicParsing="false" text="logout" />
+                      </items>
+                  </MenuButton>
+                  <MenuButton alignment="CENTER" layoutX="381.0" layoutY="55.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="96.0" text="Edit Teams" wrapText="true">
+                      <items>
+                          <MenuItem fx:id="addMemberBtn" mnemonicParsing="false" text="Add member to a team" />
+                          <MenuItem fx:id="deleteMembersBtn" mnemonicParsing="false" text="Delete member from a team" />
+                          <MenuItem fx:id="showMembersBtn" mnemonicParsing="false" text="show team members" />
+                      </items>
+                  </MenuButton>
+                  <Button fx:id="addNewsPost" alignment="CENTER" layoutX="411.0" layoutY="35.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="96.0" text="Add a news Post" wrapText="true" />
+               </children>
+               <padding>
+                  <Insets left="15.0" top="5.0" />
+               </padding>
+            </HBox>
+             <Label prefHeight="50.0" prefWidth="230.0" text="News">
+                 <font>
+                     <Font size="36.0" />
+                 </font>
+                 <padding>
+                     <Insets left="20.0" />
+                 </padding>
+             </Label>
+             <ScrollPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="270.0" prefWidth="799.0" vbarPolicy="NEVER">
+                 <content>
+                     <HBox fx:id="newsRow" alignment="CENTER" prefHeight="270.0" prefWidth="880.0" />
+                 </content>
+             </ScrollPane>
+             <ScrollPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="130.0" prefWidth="8800.0" vbarPolicy="NEVER">
+                 <content>
+                     <HBox fx:id="socialsRow" alignment="CENTER_LEFT" prefHeight="120.0" prefWidth="880.0" />
+                 </content>
+             </ScrollPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

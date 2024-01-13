@@ -33,8 +33,8 @@ public class AddSocialsController {
     private final LocationRepo locationRepo;
     private final SocialMediaRepo socialMediaRepo;
     private File selectedFile;
-    private Utils utils = new Utils();
-    private SocialMedia socialMedia = new SocialMedia();
+    private final Utils utils = new Utils();
+    private final SocialMedia socialMedia = new SocialMedia();
 
 
     @Autowired

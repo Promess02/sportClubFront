@@ -14,7 +14,7 @@ import lombok.Setter;
 import mikolaj.project.backendapp.model.MembershipType;
 import mikolaj.project.backendapp.service.MembershipService;
 import mikolajm.project.sportclubui.CurrentSessionUser;
-import mikolajm.project.sportclubui.screenController.WarningViewController;
+import mikolajm.project.sportclubui.screenController.UtilityScreens.WarningViewController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -55,7 +55,7 @@ public class MembershipTypeController {
         getBtn.setOnAction(e->{
             if(currentSessionUser.getMembership()!=null){
                 try{
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/warningView.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/popups/warningView.fxml"));
                     Parent root = loader.load();
                     WarningViewController warningViewController = loader.getController();
                     warningViewController.initialize("You already have a membership");

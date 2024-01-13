@@ -19,8 +19,6 @@ public class LocationsViewController {
     @FXML
     private VBox locationsVBox;
     private final LocationRepo locationRepo;
-    private List<Location> locationList;
-    private ConfigurableApplicationContext context;
 
     @Autowired
     public LocationsViewController(LocationRepo locationRepo) {
@@ -28,11 +26,11 @@ public class LocationsViewController {
     }
 
     public void initialize(){
-        locationList = locationRepo.findAll();
+        List<Location> locationList = locationRepo.findAll();
         for(Location location: locationList){
             try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/locationView.fxml"));
-                context = ClubApplication.getApplicationContext();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/userAndTrainer/locationView.fxml"));
+                ConfigurableApplicationContext context = ClubApplication.getApplicationContext();
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 LocationViewController locationViewController = loader.getController();

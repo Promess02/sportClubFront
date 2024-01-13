@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import mikolaj.project.backendapp.model.Member;
 import mikolaj.project.backendapp.model.Team;
 import mikolaj.project.backendapp.repo.MemberRepo;
-import mikolajm.project.sportclubui.screenController.trainerScreens.DeleteMemberRowController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -58,7 +57,7 @@ public class DeleteMembersTeamController {
         membersColumn.getChildren().clear();
         for(Member member: memberList){
             try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/deleteMemberRow.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/trainer/deleteMemberRow.fxml"));
                 Parent root = loader.load();
                 DeleteMemberRowController memberRowController = loader.getController();
                 memberRowController.setMember(member);
@@ -90,7 +89,5 @@ public class DeleteMembersTeamController {
             member.setTeam(null);
             memberRepo.save(member);
         }
-//        loadMembers();
-//        Platform.runLater(this::loadMembers);
     }
 }

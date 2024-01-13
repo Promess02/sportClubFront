@@ -36,7 +36,7 @@ public class ClubApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/EnterScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/loginRegister/EnterScreen.fxml"));
             Parent root = loader.load();
             EnterScreenController enterScreenController = loader.getController();
             Scene scene = new Scene(root);

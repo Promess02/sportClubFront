@@ -12,7 +12,6 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import mikolaj.project.backendapp.model.Trainer;
-import mikolaj.project.backendapp.repo.MemberRepo;
 import mikolajm.project.sportclubui.ClubApplication;
 import mikolajm.project.sportclubui.CurrentSessionUser;
 import mikolajm.project.sportclubui.Utils;
@@ -40,7 +39,6 @@ public class TrainerAccountController {
     @FXML private Button creditCardBtn;
 
     private final CurrentSessionUser currentSessionUser;
-    private final MemberRepo memberRepo;
     private Trainer trainer;
     private Image accountImage;
     Utils utils = new Utils();
@@ -48,9 +46,8 @@ public class TrainerAccountController {
     private ConfigurableApplicationContext context;
 
     @Autowired
-    public TrainerAccountController(CurrentSessionUser currentSessionUser, MemberRepo memberRepo) {
+    public TrainerAccountController(CurrentSessionUser currentSessionUser) {
         this.currentSessionUser = currentSessionUser;
-        this.memberRepo = memberRepo;
     }
 
     public void initialize(){
@@ -84,7 +81,7 @@ public class TrainerAccountController {
         viewTeamsBtn.setOnAction( e->{
             try{
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/teamsView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/user/teamsView.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 TeamsViewController teamsViewController = loader.getController();
@@ -102,7 +99,7 @@ public class TrainerAccountController {
         creditCardBtn.setOnAction(e ->{
             try{
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/creditCardView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/user/creditCardView.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 CreditCardController creditCardController = loader.getController();

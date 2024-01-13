@@ -45,7 +45,7 @@ public class ShowTeamMembersController {
         membersNum.setText("Members: " + memberList.size());
         for(Member member: memberList){
             try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/MemberRow.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/trainer/MemberRow.fxml"));
                 Parent root = loader.load();
                 MemberRowController memberRowController = loader.getController();
                 memberRowController.setMember(member);

@@ -13,12 +13,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import lombok.Getter;
-import lombok.Setter;
 import mikolaj.project.backendapp.model.Activity;
 import mikolajm.project.sportclubui.ClubApplication;
-import mikolajm.project.sportclubui.CurrentSessionUser;
 import mikolajm.project.sportclubui.LoginManager;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -38,7 +35,6 @@ public class ActivityNode extends AnchorPane {
 
 
     public ActivityNode() {
-        // Add action handler for mouse clicked
         this.setOnMouseClicked(e -> {
             System.out.println("This pane's date is: " + date);
             if(activity!=null) System.out.println("This pane's calendar entity name:  " + activity.getName());
@@ -100,7 +96,7 @@ public class ActivityNode extends AnchorPane {
         getActivityBtn.setOnAction( e-> {
             try {
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/ActivitySignUp.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/user/ActivitySignUp.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 ActivitySignupController activitySignUpController = loader.getController();

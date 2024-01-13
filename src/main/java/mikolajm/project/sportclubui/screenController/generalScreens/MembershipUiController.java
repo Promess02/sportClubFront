@@ -10,7 +10,6 @@ import mikolaj.project.backendapp.model.MembershipType;
 import mikolaj.project.backendapp.repo.MembershipTypeRepo;
 import mikolajm.project.sportclubui.ClubApplication;
 import mikolajm.project.sportclubui.LoginManager;
-import mikolajm.project.sportclubui.screenController.generalScreens.MembershipTypeController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
@@ -40,18 +39,15 @@ public class MembershipUiController implements Initializable {
 
         for (MembershipType membershipType : membershipTypeList) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/membershipType.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/user/membershipType.fxml"));
                 ConfigurableApplicationContext context = ClubApplication.getApplicationContext();
                 loader.setControllerFactory(context::getBean);
 
-                // Load the root node from the FXML file
                 Parent root = loader.load();
 
-                // Get the MembershipTypeController from the loader
                 MembershipTypeController typeController = loader.getController();
                 typeController.setMembershipType(membershipType); // You can initialize if needed
 
-                // Add the AnchorPane to the HBox
                 membershipHBox.getChildren().add(typeController.getAnchorPane());
 
             } catch (IOException ex) {

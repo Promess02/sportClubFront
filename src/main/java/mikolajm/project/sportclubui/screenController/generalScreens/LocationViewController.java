@@ -89,7 +89,7 @@ public class LocationViewController {
                 return;
             }else locationDb.setName(nameTF.getText());
 
-            if(maxCapacityTF.getText()==null || utils.isInteger(maxCapacityTF.getText())){
+            if(maxCapacityTF.getText()==null || !utils.isInteger(maxCapacityTF.getText())){
                 handleError("give valid max capacity");
                 return;
             }else locationDb.setMaxCapacity(Integer.parseInt(maxCapacityTF.getText()));
@@ -98,7 +98,7 @@ public class LocationViewController {
                 handleError("give valid week day open time");
                 return;
             }else{
-                LocalTime time = utils.formatStringToTime(weekDayOpenTF.getText());;
+                LocalTime time = utils.formatStringToTime(weekDayOpenTF.getText());
                 locationDb.setWeekDayOpenTime(time);
             }
 
@@ -106,7 +106,7 @@ public class LocationViewController {
                 handleError("give valid week day close time");
                 return;
             }else{
-                LocalTime time = utils.formatStringToTime(weekDayCloseTF.getText());;
+                LocalTime time = utils.formatStringToTime(weekDayCloseTF.getText());
                 locationDb.setWeekDayCloseTime(time);
             }
 
@@ -114,7 +114,7 @@ public class LocationViewController {
                 handleError("give valid week end open time");
                 return;
             }else{
-                LocalTime time = utils.formatStringToTime(weekEndOpenTF.getText());;
+                LocalTime time = utils.formatStringToTime(weekEndOpenTF.getText());
                 locationDb.setWeekendOpenTime(time);
             }
 
@@ -122,7 +122,7 @@ public class LocationViewController {
                 handleError("give valid week end close time");
                 return;
             }else{
-                LocalTime time = utils.formatStringToTime(weekEndCloseTF.getText());;
+                LocalTime time = utils.formatStringToTime(weekEndCloseTF.getText());
                 locationDb.setWeekendCloseTime(time);
             }
             Address address = new Address();

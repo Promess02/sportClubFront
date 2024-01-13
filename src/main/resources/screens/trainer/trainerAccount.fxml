@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane prefHeight="750.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mikolajm.project.sportclubui.screenController.trainerScreens.TrainerAccountController">
+    <children>
+        <VBox alignment="TOP_CENTER" prefHeight="750.0" prefWidth="450.0" spacing="8.0">
+            <children>
+                <ImageView fx:id="userImage" fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
+                    <VBox.margin>
+                        <Insets top="40.0" />
+                    </VBox.margin></ImageView>
+                <Button fx:id="addImageBtn" mnemonicParsing="false" prefHeight="36.0" prefWidth="144.0" text="Add profile image">
+                    <VBox.margin>
+                        <Insets top="5.0" />
+                    </VBox.margin></Button>
+                <HBox alignment="CENTER" prefHeight="44.0" prefWidth="450.0">
+                    <children>
+                        <Label text="Name: " />
+                        <Label fx:id="userName" text="insert_user_name" />
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="44.0" prefWidth="450.0">
+                    <children>
+                        <Label text="Surname: " />
+                        <Label fx:id="surname" text="insert_surname" />
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="44.0" prefWidth="450.0">
+                    <children>
+                        <Label text="Email: " />
+                        <Label fx:id="email" text="insert_email" />
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="44.0" prefWidth="450.0">
+                    <children>
+                        <Label text="phone number: " />
+                        <Label fx:id="phoneNumber" text="insert_phone_number" />
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="44.0" prefWidth="450.0">
+                    <children>
+                        <Label text="grade:" />
+                        <Label fx:id="gradeField" text="trainer_grade" />
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="44.0" prefWidth="450.0">
+                    <children>
+                        <Label text="credit card added: " />
+                        <CheckBox fx:id="creditCardCb" mnemonicParsing="false" />
+                    </children>
+                </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="477.0" prefHeight="44.0" prefWidth="450.0">
+               <children>
+                  <Label text="specialization: " />
+                  <Label fx:id="specializationField" text="insert_specialization" />
+               </children>
+            </HBox>
+                <Button fx:id="viewTeamsBtn" mnemonicParsing="false" text="view teams">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets top="5.0" />
+                    </VBox.margin>
+                </Button>
+            <Button fx:id="creditCardBtn" layoutX="161.0" layoutY="560.0" mnemonicParsing="false" text="add credit card">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            </children></VBox>
+    </children>
+
+</AnchorPane>

@@ -16,7 +16,6 @@ import mikolaj.project.backendapp.model.User;
 import mikolajm.project.sportclubui.ClubApplication;
 import mikolajm.project.sportclubui.CurrentSessionUser;
 import mikolajm.project.sportclubui.Utils;
-import mikolajm.project.sportclubui.screenController.generalScreens.MembershipUiController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
@@ -38,7 +37,7 @@ public class AccountViewController {
     @FXML private Label team;
     @FXML private CheckBox creditCardCb;
 
-    private CurrentSessionUser currentSessionUser;
+    private final CurrentSessionUser currentSessionUser;
     private ConfigurableApplicationContext context;
     private Image accountImage;
     private File selectedFile;
@@ -110,7 +109,7 @@ public class AccountViewController {
         creditCardBtn.setOnAction(e ->{
             try{
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/creditCardView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/user/creditCardView.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 CreditCardController creditCardController = loader.getController();
@@ -135,10 +134,9 @@ public class AccountViewController {
                     return;
                 }
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/membership.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/user/membership.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
-                MembershipUiController membershipUiController = loader.getController();
                 Scene scene = new Scene(root);
                 Stage primaryStage = new Stage();
                 primaryStage.setScene(scene);

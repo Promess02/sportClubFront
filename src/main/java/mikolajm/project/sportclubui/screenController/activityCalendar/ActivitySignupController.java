@@ -110,7 +110,7 @@ public class ActivitySignupController {
         locationBtn.setOnAction( e-> {
             try{
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/locationView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/userAndTrainer/locationView.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
@@ -131,7 +131,7 @@ public class ActivitySignupController {
         trainerBtn.setOnAction( e->{
             try{
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/trainerProfile.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/user/trainerProfile.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
@@ -151,7 +151,7 @@ public class ActivitySignupController {
         teamBtn.setOnAction( e->{
             try{
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/TeamView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/user/TeamView.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 Scene scene = new Scene(root);

@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import mikolaj.project.backendapp.model.NewsPost;
 import mikolajm.project.sportclubui.LoginManager;
-import mikolajm.project.sportclubui.screenController.generalScreens.NewsPostController;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import java.io.IOException;
@@ -52,16 +51,11 @@ public class NewsPostViewController {
         button.setOnAction(e ->
         {
             try {
-               // context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/NewsPostView.fxml"));
-                //loader.setControllerFactory(context::getBean);
-                // Load the root node from the FXML file
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/userAndTrainer/NewsPostView.fxml"));
                 Parent root = loader.load();
-                // Create a new Scene with the root node
                 NewsPostController activitySignUpController = loader.getController();
                 activitySignUpController.setNewsPost(newsPost);
                 Scene scene = new Scene(root);
-                // Set the Scene to the primaryStage or a new Stage
                 Stage primaryStage = new Stage(); // You might use your existing primaryStage here
                 primaryStage.setScene(scene);
                 primaryStage.show();

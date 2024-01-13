@@ -16,12 +16,10 @@ import mikolaj.project.backendapp.model.Activity;
 import mikolaj.project.backendapp.model.Location;
 import mikolaj.project.backendapp.model.Team;
 import mikolaj.project.backendapp.model.Trainer;
-import mikolaj.project.backendapp.repo.ActivityRepo;
 import mikolaj.project.backendapp.repo.LocationRepo;
 import mikolaj.project.backendapp.repo.TeamRepo;
 import mikolaj.project.backendapp.repo.TrainerRepo;
 import mikolaj.project.backendapp.service.ActivityService;
-import mikolaj.project.backendapp.service.TrainerService;
 import mikolajm.project.sportclubui.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -40,7 +38,6 @@ public class AddActivityViewController {
     @FXML private ImageView imageView;
     @FXML private Button addImageBtn;
     @FXML private HBox trainerHBox;
-    @FXML private HBox weeksHBox;
     @FXML private HBox minutesHBox;
     @FXML private HBox membersHBox;
     @FXML private TextField activityName;
@@ -49,7 +46,6 @@ public class AddActivityViewController {
     @FXML private ChoiceBox<Team> TeamCb;
     @FXML private ChoiceBox<Trainer> TrainerCb;
     @FXML private DatePicker datePicker;
-//    private Slider weeksSlider;
     private Slider minutesSlider;
     private Slider membersSlider;
     @FXML private TextField timeField;
@@ -58,20 +54,16 @@ public class AddActivityViewController {
 
     private final LocationRepo locationRepo;
     private final TeamRepo teamRepo;
-    private final TrainerService trainerService;
     private final TrainerRepo trainerRepo;
-    private final ActivityRepo activityRepo;
     private final ActivityService activityService;
     private File selectedFile;
     private Trainer trainer;
     Utils utils = new Utils();
     @Autowired
     public AddActivityViewController(LocationRepo locationRepo, TrainerRepo trainerRepo, TeamRepo teamRepo,
-                                     ActivityRepo activityRepo, ActivityService activityService, TrainerService trainerService) {
+                                      ActivityService activityService) {
         this.locationRepo = locationRepo;
-        this.activityRepo = activityRepo;
         this.teamRepo = teamRepo;
-        this.trainerService = trainerService;
         this.trainerRepo = trainerRepo;
         this.activityService = activityService;
     }

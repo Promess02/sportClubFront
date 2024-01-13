@@ -22,7 +22,7 @@ import mikolaj.project.backendapp.service.NewsPostService;
 import mikolajm.project.sportclubui.ClubApplication;
 import mikolajm.project.sportclubui.CurrentSessionUser;
 import mikolajm.project.sportclubui.LoginManager;
-import mikolajm.project.sportclubui.screenController.*;
+import mikolajm.project.sportclubui.screenController.UtilityScreens.ErrorMessageController;
 import mikolajm.project.sportclubui.screenController.activityCalendar.ActivityCalendarController;
 import mikolajm.project.sportclubui.screenController.activityCalendar.CalendarView;
 import mikolajm.project.sportclubui.screenController.calendar.CalendarViewController;
@@ -104,7 +104,7 @@ public class MainScreenController {
             Stage primaryStage = (Stage) locationsBtn.getScene().getWindow();
             primaryStage.close();
             try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/EnterScreen.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/loginRegister/EnterScreen.fxml"));
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
@@ -122,7 +122,7 @@ public class MainScreenController {
             {
                 try {
                     context = ClubApplication.getApplicationContext();
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/accountView.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/user/accountView.fxml"));
                     loader.setControllerFactory(context::getBean);
                     // Load the root node from the FXML file
                     Parent root = loader.load();
@@ -144,7 +144,7 @@ public class MainScreenController {
         locationsBtn.setOnAction( e-> {
             try {
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/locationsView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/user/locationsView.fxml"));
                 loader.setControllerFactory(context::getBean);
                 // Load the root node from the FXML file
                 Parent root = loader.load();
@@ -180,7 +180,7 @@ public class MainScreenController {
         trainersBtn.setOnAction( e ->{
             try {
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/trainerView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/user/trainerView.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 TrainersViewController trainersViewController = loader.getController();
@@ -200,7 +200,7 @@ public class MainScreenController {
         {
             try {
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/teamsView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/user/teamsView.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 TeamsViewController teamsViewController = loader.getController();
@@ -219,12 +219,10 @@ public class MainScreenController {
         membershipTypeBtn.setOnAction( e ->{
             try{
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/membership.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/user/membership.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
-                MembershipUiController membershipUiController = loader.getController();
                 Scene scene = new Scene(root);
-                // Set the Scene to the primaryStage or a new Stage
                 Stage primaryStage = new Stage(); // You might use your existing primaryStage here
                 primaryStage.setScene(scene);
                 primaryStage.show();
@@ -241,7 +239,7 @@ public class MainScreenController {
                            showErrorMessage("unable to show calendar without an active membership");
                            return;
                         }
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/activityCalendar.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/userAndTrainer/activityCalendar.fxml"));
                         Parent root = loader.load();
                         // Get the controller and add the calendar view to it
                         ActivityCalendarController controller = loader.getController();
@@ -270,7 +268,7 @@ public class MainScreenController {
                             showErrorMessage("unable to show calendar without an active membership");
                             return;
                         }
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/fullCalendar.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/userAndTrainer/fullCalendar.fxml"));
                         Parent root = loader.load();
                         // Get the controller and add the calendar view to it
                         CalendarViewController controller = loader.getController();
@@ -291,7 +289,7 @@ public class MainScreenController {
         for (NewsPost newsPost : list) {
             try {
                // context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/NewsPost.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/userAndTrainer/NewsPost.fxml"));
                 //loader.setControllerFactory(context::getBean);
                 // Load the root node from the FXML file
                 Parent root = loader.load();
@@ -309,7 +307,7 @@ public class MainScreenController {
         for (Activity activity : list) {
             try {
                 //context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/ActivityView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/user/ActivityView.fxml"));
                 //loader.setControllerFactory(context::getBean);
                 // Load the root node from the FXML file
                 Parent root = loader.load();
@@ -324,7 +322,7 @@ public class MainScreenController {
     }
     private void showErrorMessage(String error){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/errorMsg.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/popups/errorMsg.fxml"));
             Parent root = loader.load();
             ErrorMessageController errorMessageController = loader.getController();
             errorMessageController.setError(error);

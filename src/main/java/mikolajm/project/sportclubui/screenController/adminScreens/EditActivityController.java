@@ -14,7 +14,6 @@ import mikolaj.project.backendapp.model.Activity;
 import mikolaj.project.backendapp.repo.ActivityRepo;
 import mikolajm.project.sportclubui.ClubApplication;
 import mikolajm.project.sportclubui.Utils;
-import mikolajm.project.sportclubui.screenController.UpdateActivityController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;

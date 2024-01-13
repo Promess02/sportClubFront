@@ -25,10 +25,7 @@ public class FullCalendarView {
     private Map<LocalDate, Calendar> mapOfCalendar;
     private GridPane calendar;
 
-    /**
-     * Create a calendar view
-     * @param yearMonth year month to create the calendar of
-     */
+
     public FullCalendarView(YearMonth yearMonth, List<Calendar> calendarList) {
         currentYearMonth = yearMonth;
         mapOfCalendar = calendarList.stream()
@@ -111,9 +108,6 @@ public class FullCalendarView {
         calendarTitle.setText(yearMonth.getMonth().toString() + " " + String.valueOf(yearMonth.getYear()));
     }
 
-    /**
-     * Move the month back by one. Repopulate the calendar with the correct dates.
-     */
     private void previousMonth() {
         currentYearMonth = currentYearMonth.minusMonths(1);
         refreshView();
@@ -121,9 +115,6 @@ public class FullCalendarView {
 
     }
 
-    /**
-     * Move the month forward by one. Repopulate the calendar with the correct dates.
-     */
     private void nextMonth() {
         currentYearMonth = currentYearMonth.plusMonths(1);
         refreshView();

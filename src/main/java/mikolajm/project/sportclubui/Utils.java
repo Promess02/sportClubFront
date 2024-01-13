@@ -4,7 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import mikolajm.project.sportclubui.screenController.ErrorMessageController;
+import mikolajm.project.sportclubui.screenController.UtilityScreens.ErrorMessageController;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -21,7 +21,7 @@ public class Utils {
 
     public void showErrorMessage(String error){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/errorMsg.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/popups/errorMsg.fxml"));
             Parent root = loader.load();
             ErrorMessageController errorMessageController = loader.getController();
             errorMessageController.setError(error);

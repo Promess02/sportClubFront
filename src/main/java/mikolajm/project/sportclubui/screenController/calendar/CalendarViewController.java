@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class CalendarViewController {
 
-    // Get the pane to put the calendar on
     @FXML Pane calendarPane;
 
 }

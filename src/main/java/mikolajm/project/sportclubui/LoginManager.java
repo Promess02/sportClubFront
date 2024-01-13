@@ -3,7 +3,7 @@ package mikolajm.project.sportclubui;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import lombok.Getter;
-import mikolajm.project.sportclubui.screenController.MainViewController;
+import mikolajm.project.sportclubui.screenController.UtilityScreens.MainViewController;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import java.io.IOException;
@@ -17,8 +17,8 @@ import java.util.logging.Logger;
 
 public class LoginManager {
     @Getter
-    private Scene scene;
-    private ConfigurableApplicationContext context;
+    private final Scene scene;
+    private final ConfigurableApplicationContext context;
 
     public LoginManager(Scene scene, ConfigurableApplicationContext applicationContext) {
         this.context = applicationContext;
@@ -43,7 +43,7 @@ public class LoginManager {
 
     public void showLoginScreen() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/loginRegister/login.fxml"));
             loader.setControllerFactory(context::getBean);
             scene.setRoot(loader.load());
         } catch (IOException ex) {
@@ -54,7 +54,7 @@ public class LoginManager {
     private void showMainView(String sessionID) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/screens/mainview.fxml")
+                    getClass().getResource("/screens/popups/mainview.fxml")
             );
             scene.setRoot(loader.load());
             MainViewController controller =

@@ -9,8 +9,6 @@ import javafx.scene.layout.AnchorPane;
 import lombok.Getter;
 import mikolaj.project.backendapp.model.Member;
 
-import java.util.List;
-
 public class DeleteMemberRowController extends AnchorPane{
     @FXML private Label nameField;
     @FXML private Label surnameField;

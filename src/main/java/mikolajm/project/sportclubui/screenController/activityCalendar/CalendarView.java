@@ -8,7 +8,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import lombok.Getter;
-import lombok.Setter;
 import mikolaj.project.backendapp.model.Activity;
 import mikolajm.project.sportclubui.CurrentSessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,13 +28,7 @@ public class CalendarView {
     private Text calendarTitle;
     private YearMonth currentYearMonth;
     private Map<LocalDate, Activity> mapOfCalendar;
-    private Map<LocalDate, Activity> mapOfAlreadySigned;
     private GridPane calendar;
-    private Text[] dayNames;
-    private GridPane dayLabels;
-    private HBox titleBar;
-    private Button nextMonth;
-    private Button previousMonth;
     private List<Activity> alreadySignedList;
 
     private final CurrentSessionUser currentSessionUser;
@@ -59,10 +52,10 @@ public class CalendarView {
         calendar = new GridPane();
         calendar.setPrefSize(800, 600);
         calendar.setGridLinesVisible(true);
-        dayNames = new Text[]{ new Text("Sunday"), new Text("Monday"), new Text("Tuesday"),
+        Text[] dayNames = new Text[]{new Text("Sunday"), new Text("Monday"), new Text("Tuesday"),
                 new Text("Wednesday"), new Text("Thursday"), new Text("Friday"),
-                new Text("Saturday") };
-        dayLabels = new GridPane();
+                new Text("Saturday")};
+        GridPane dayLabels = new GridPane();
         dayLabels.setPrefWidth(600);
         int col = 0;
         for (Text txt : dayNames) {
@@ -73,17 +66,15 @@ public class CalendarView {
             dayLabels.add(ap, col++, 0);
         }
         calendarTitle = new Text("Activities Calendar");
-        previousMonth = new Button("<<");
+        Button previousMonth = new Button("<<");
         previousMonth.setOnAction(e -> previousMonth());
-        nextMonth = new Button(">>");
+        Button nextMonth = new Button(">>");
         nextMonth.setOnAction(e -> nextMonth());
         Button refreshBtn = new Button("Refresh");
         refreshBtn.setAlignment(Pos.CENTER);
         refreshBtn.setPadding(new Insets(0,0,0,15));
-        refreshBtn.setOnAction( e -> {
-            refreshView();
-        });
-        titleBar = new HBox(previousMonth, calendarTitle, nextMonth, refreshBtn);
+        refreshBtn.setOnAction( e -> refreshView());
+        HBox titleBar = new HBox(previousMonth, calendarTitle, nextMonth, refreshBtn);
         titleBar.setAlignment(Pos.CENTER);
 
         view = new VBox(titleBar, dayLabels, calendar);
@@ -118,7 +109,7 @@ public class CalendarView {
         }
         // Populate the calendar with day numbers
         for (ActivityNode ap : allCalendarDays) {
-            if (ap.getChildren().size() != 0) {
+            if (!ap.getChildren().isEmpty()) {
                 ap.getChildren().remove(0);
             }
             Text txt = new Text(String.valueOf(calendarDate.getDayOfMonth()));
@@ -139,7 +130,7 @@ public class CalendarView {
             calendarDate = calendarDate.plusDays(1);
         }
         // Change the title of the calendar
-        calendarTitle.setText(yearMonth.getMonth().toString() + " " + String.valueOf(yearMonth.getYear()));
+        calendarTitle.setText(yearMonth.getMonth().toString() + " " + yearMonth.getYear());
     }
 
     /**
@@ -158,9 +149,5 @@ public class CalendarView {
         currentYearMonth = currentYearMonth.plusMonths(1);
         refreshView();
         populateCalendar(currentYearMonth);
-    }
-
-    public void setAllCalendarDays(ArrayList<ActivityNode> allCalendarDays) {
-        this.allCalendarDays = allCalendarDays;
     }
 }

@@ -14,8 +14,6 @@ import lombok.Getter;
 import mikolaj.project.backendapp.model.NewsPost;
 import mikolajm.project.sportclubui.ClubApplication;
 import mikolajm.project.sportclubui.screenController.activityCalendar.ActivitySignupController;
-import mikolajm.project.sportclubui.screenController.generalScreens.LocationViewController;
-import mikolajm.project.sportclubui.screenController.generalScreens.MembershipTypeController;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import java.io.IOException;
@@ -64,7 +62,7 @@ public class NewsPostController {
         activityBtn.setOnAction( e->{
             try{
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/ActivitySignUp.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/user/ActivitySignUp.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 ActivitySignupController activitySignupController = loader.getController();
@@ -85,7 +83,7 @@ public class NewsPostController {
         locationBtn.setOnAction( e -> {
             try{
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/locationView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/userAndTrainer/locationView.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 LocationViewController controller = loader.getController();
@@ -104,7 +102,7 @@ public class NewsPostController {
         membershipBtn.setOnAction( e->{
             try{
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/membershipType.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/user/membershipType.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 MembershipTypeController membershipTypeController = loader.getController();

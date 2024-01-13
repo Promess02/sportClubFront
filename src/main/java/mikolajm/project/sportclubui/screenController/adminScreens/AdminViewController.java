@@ -54,7 +54,6 @@ public class AdminViewController {
                 context = ClubApplication.getApplicationContext();
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
-                //AddNewsPostController controller = loader.getController();
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
                 stage.setScene(scene);
@@ -150,7 +149,6 @@ public class AdminViewController {
                 context = ClubApplication.getApplicationContext();
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
-                //AddNewsPostController controller = loader.getController();
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
                 stage.setScene(scene);
@@ -218,7 +216,6 @@ public class AdminViewController {
                 context = ClubApplication.getApplicationContext();
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
-                //AddNewsPostController controller = loader.getController();
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
                 stage.setScene(scene);
@@ -236,7 +233,6 @@ public class AdminViewController {
                 context = ClubApplication.getApplicationContext();
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
-                //AddNewsPostController controller = loader.getController();
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
                 stage.setScene(scene);
@@ -254,7 +250,6 @@ public class AdminViewController {
                 context = ClubApplication.getApplicationContext();
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
-                //AddNewsPostController controller = loader.getController();
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
                 stage.setScene(scene);
@@ -272,7 +267,6 @@ public class AdminViewController {
                 context = ClubApplication.getApplicationContext();
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
-                //AddNewsPostController controller = loader.getController();
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
                 stage.setScene(scene);

@@ -7,13 +7,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import lombok.Getter;
 import mikolajm.project.sportclubui.ClubApplication;
 import mikolajm.project.sportclubui.LoginManager;
-import mikolajm.project.sportclubui.screenController.RegisterViewController;
+import mikolajm.project.sportclubui.screenController.UtilityScreens.RegisterViewController;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -54,10 +53,9 @@ public class EnterScreenController {
         registerUserBtn.setOnAction(e ->{
             try{
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/registerView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/loginRegister/registerView.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
-                RegisterViewController registerViewController = loader.getController();
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
                 stage.setScene(scene);

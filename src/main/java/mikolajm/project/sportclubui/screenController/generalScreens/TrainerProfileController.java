@@ -16,14 +16,11 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import mikolaj.project.backendapp.enums.StarRating;
 import mikolaj.project.backendapp.model.Trainer;
-import mikolaj.project.backendapp.repo.MemberRepo;
 import mikolaj.project.backendapp.service.TrainerService;
 import mikolajm.project.sportclubui.ClubApplication;
 import mikolajm.project.sportclubui.CurrentSessionUser;
 import mikolajm.project.sportclubui.Utils;
-import mikolajm.project.sportclubui.screenController.ErrorMessageController;
-import mikolajm.project.sportclubui.screenController.generalScreens.MailWindow;
-import mikolajm.project.sportclubui.screenController.generalScreens.TeamsViewController;
+import mikolajm.project.sportclubui.screenController.UtilityScreens.ErrorMessageController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
@@ -45,16 +42,13 @@ public class TrainerProfileController {
     @FXML private ChoiceBox<StarRating> starRatingChoiceBox;
     @FXML private Button saveGradeBtn;
     private Trainer trainer;
-    private final MemberRepo memberRepo;
     private final TrainerService trainerService;
     private final CurrentSessionUser currentSessionUser;
     private ConfigurableApplicationContext context;
     @Autowired
     public TrainerProfileController(TrainerService trainerService,
-                                    MemberRepo memberRepo,
                                     CurrentSessionUser currentSessionUser) {
         this.trainerService = trainerService;
-        this.memberRepo = memberRepo;
         this.currentSessionUser = currentSessionUser;
     }
 
@@ -89,7 +83,7 @@ public class TrainerProfileController {
         viewTeamsBtn.setOnAction( e->{
             try{
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/teamsView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/user/teamsView.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 TeamsViewController teamsViewController = loader.getController();
@@ -108,7 +102,7 @@ public class TrainerProfileController {
         sendEmailBtn.setOnAction( e-> {
             try{
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/mailWindow.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/userAndTrainer/mailWindow.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 MailWindow mailWindow = loader.getController();
@@ -138,7 +132,7 @@ public class TrainerProfileController {
             }
             trainerService.gradeTrainer(trainer,grade,currentSessionUser.getMember());
             try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/errorMsg.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/popups/errorMsg.fxml"));
                 Parent root = loader.load();
                 ErrorMessageController errorMessageController = loader.getController();
                 errorMessageController.setError("trainer grade saved");

@@ -62,7 +62,7 @@ public class TeamView {
         viewTrainersBtn.setOnAction( e->{
             try {
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/trainerView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/user/trainerView.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 TrainersViewController trainersViewController = loader.getController();

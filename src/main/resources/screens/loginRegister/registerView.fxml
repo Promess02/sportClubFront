@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mikolajm.project.sportclubui.screenController.UtilityScreens.RegisterViewController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="600.0" spacing="10.0">
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+         <children>
+            <Label prefHeight="64.0" prefWidth="186.0" text="Register User" textAlignment="CENTER">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="40.0" prefWidth="570.0" spacing="15.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="178.0" text="Name: ">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="userName" prefHeight="40.0" prefWidth="342.0" promptText="name" />
+               </children>
+            </HBox>
+             <HBox prefHeight="40.0" prefWidth="570.0" spacing="15.0">
+                 <children>
+                     <Label alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="178.0" text="Surname:">
+                         <font>
+                             <Font size="23.0" />
+                         </font>
+                     </Label>
+                     <TextField fx:id="userSurname" prefHeight="40.0" prefWidth="342.0" promptText="surname" />
+                 </children>
+             </HBox>
+             <HBox prefHeight="40.0" prefWidth="570.0" spacing="15.0">
+                 <children>
+                     <Label alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="178.0" text="email:">
+                         <font>
+                             <Font size="23.0" />
+                         </font>
+                     </Label>
+                     <TextField fx:id="email" prefHeight="40.0" prefWidth="342.0" promptText="email" />
+                 </children>
+             </HBox>
+             <HBox prefHeight="40.0" prefWidth="570.0" spacing="15.0">
+                 <children>
+                     <Label alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="178.0" text="Phone Number:">
+                         <font>
+                             <Font size="23.0" />
+                         </font>
+                     </Label>
+                     <TextField fx:id="userPhoneNumber" prefHeight="40.0" prefWidth="342.0" promptText="phone number" />
+                 </children>
+             </HBox>
+             <HBox prefHeight="40.0" prefWidth="570.0" spacing="15.0">
+                 <children>
+                     <Label alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="178.0" text="Password:">
+                         <font>
+                             <Font size="23.0" />
+                         </font>
+                     </Label>
+                     <PasswordField fx:id="passwordField" prefHeight="40.0" prefWidth="342.0" promptText="8-32 characters" />
+                 </children>
+             </HBox>
+             <HBox prefHeight="40.0" prefWidth="570.0" spacing="15.0">
+                 <children>
+                     <Label alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="178.0" text="Repeat Password:">
+                         <font>
+                             <Font size="21.0" />
+                         </font>
+                     </Label>
+                     <PasswordField fx:id="confPasswordField" prefHeight="40.0" prefWidth="342.0" promptText="repeat to make sure you typed it well the first time" />
+                 </children>
+             </HBox>
+            <Button fx:id="confirmBtn" mnemonicParsing="false" prefHeight="68.0" prefWidth="211.0" text="Confirm">
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

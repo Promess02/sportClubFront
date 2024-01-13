@@ -18,12 +18,12 @@ import mikolajm.project.sportclubui.ClubApplication;
 import mikolajm.project.sportclubui.CurrentSessionUser;
 import mikolajm.project.sportclubui.LoginManager;
 import mikolajm.project.sportclubui.Utils;
-import mikolajm.project.sportclubui.screenController.generalScreens.NewsPostViewController;
-import mikolajm.project.sportclubui.screenController.generalScreens.SocialsNodeController;
 import mikolajm.project.sportclubui.screenController.adminScreens.AddActivityViewController;
 import mikolajm.project.sportclubui.screenController.adminScreens.AddMemberTeamController;
 import mikolajm.project.sportclubui.screenController.calendar.CalendarViewController;
 import mikolajm.project.sportclubui.screenController.calendar.FullCalendarView;
+import mikolajm.project.sportclubui.screenController.generalScreens.NewsPostViewController;
+import mikolajm.project.sportclubui.screenController.generalScreens.SocialsNodeController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
@@ -85,10 +85,9 @@ public class TrainerMainScreenController {
                     return;
                 }
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/addPersonalTraining.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/trainer/addPersonalTraining.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
-                AddPersonalTrainingController controller = loader.getController();
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
                 stage.setScene(scene);
@@ -104,7 +103,7 @@ public class TrainerMainScreenController {
             Stage primaryStage = (Stage) calendarBtn.getScene().getWindow();
             primaryStage.close();
             try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/EnterScreen.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/loginRegister/EnterScreen.fxml"));
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
@@ -125,7 +124,7 @@ public class TrainerMainScreenController {
                     return;
                 }
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/AddMemberToTeam.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/trainer/AddMemberToTeam.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 AddMemberTeamController controller = loader.getController();
@@ -148,7 +147,7 @@ public class TrainerMainScreenController {
                     return;
                 }
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/showTeamMembers.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/trainer/showTeamMembers.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 ShowTeamMembersController controller = loader.getController();
@@ -171,7 +170,7 @@ public class TrainerMainScreenController {
                     return;
                 }
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/deleteMembersTeam.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/trainer/deleteMembersTeam.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 DeleteMembersTeamController controller = loader.getController();
@@ -193,7 +192,7 @@ public class TrainerMainScreenController {
                     handleError("somehow you don't have trainer privileges");
                     return;
                 }
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/fullCalendar.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/userAndTrainer/fullCalendar.fxml"));
                 Parent root = loader.load();
                 CalendarViewController controller = loader.getController();
                 Scene scene = new Scene(root);
@@ -229,7 +228,7 @@ public class TrainerMainScreenController {
         accountBtn.setOnAction( e ->{
             try {
                 context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/trainerAccount.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/trainer/trainerAccount.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
@@ -264,12 +263,8 @@ public class TrainerMainScreenController {
 
         for (NewsPost newsPost : newsPostList) {
             try {
-                // context = ClubApplication.getApplicationContext();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/NewsPost.fxml"));
-                //loader.setControllerFactory(context::getBean);
-                // Load the root node from the FXML file
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/userAndTrainer/NewsPost.fxml"));
                 Parent root = loader.load();
-                // Get the MembershipTypeController from the loader
                 NewsPostViewController newsPostViewController = loader.getController();
                 newsPostViewController.setNewsPost(newsPost);
                 newsRow.getChildren().add(newsPostViewController.getMainView());
