@@ -11,7 +11,7 @@ import mikolaj.project.backendapp.model.Trainer;
 import mikolaj.project.backendapp.repo.TeamRepo;
 import mikolaj.project.backendapp.repo.TrainerRepo;
 import mikolaj.project.backendapp.service.TrainerService;
-import mikolajm.project.sportclubui.Utils;
+import mikolajm.project.sportclubui.Util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

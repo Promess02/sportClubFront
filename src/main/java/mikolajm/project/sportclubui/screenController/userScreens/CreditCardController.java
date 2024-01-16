@@ -7,8 +7,8 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import mikolaj.project.backendapp.model.CreditCard;
 import mikolaj.project.backendapp.service.CreditCardService;
-import mikolajm.project.sportclubui.CurrentSessionUser;
-import mikolajm.project.sportclubui.Utils;
+import mikolajm.project.sportclubui.Util.CurrentSessionUser;
+import mikolajm.project.sportclubui.Util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

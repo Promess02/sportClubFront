@@ -7,7 +7,7 @@ import lombok.Getter;
 import mikolaj.project.backendapp.model.Trainer;
 import mikolaj.project.backendapp.repo.TrainerRepo;
 import mikolajm.project.sportclubui.ClubApplication;
-import mikolajm.project.sportclubui.LoginManager;
+import mikolajm.project.sportclubui.Util.LoginManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;

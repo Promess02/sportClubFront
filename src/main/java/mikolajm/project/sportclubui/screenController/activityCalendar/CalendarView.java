@@ -9,7 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import lombok.Getter;
 import mikolaj.project.backendapp.model.Activity;
-import mikolajm.project.sportclubui.CurrentSessionUser;
+import mikolajm.project.sportclubui.Util.CurrentSessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -13,7 +13,7 @@ import mikolaj.project.backendapp.model.User;
 import mikolaj.project.backendapp.repo.TeamRepo;
 import mikolaj.project.backendapp.repo.TrainerRepo;
 import mikolaj.project.backendapp.repo.UserRepo;
-import mikolajm.project.sportclubui.Utils;
+import mikolajm.project.sportclubui.Util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -87,14 +87,11 @@ public class AddTrainerViewController {
             trainer.setGrade(0d);
             trainer.setNumOfGrades(0);
             trainer.setSumOfGrades(0);
-
             trainerRepo.save(trainer);
-
             Stage stage = (Stage) hireBtn.getScene().getWindow();
             stage.close();
         });
     }
-
     private void handleError(String error){
         Utils utils = new Utils();
         utils.showErrorMessage(error);

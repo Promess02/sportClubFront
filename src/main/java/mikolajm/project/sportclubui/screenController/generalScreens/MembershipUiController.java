@@ -9,7 +9,7 @@ import javafx.scene.layout.HBox;
 import mikolaj.project.backendapp.model.MembershipType;
 import mikolaj.project.backendapp.repo.MembershipTypeRepo;
 import mikolajm.project.sportclubui.ClubApplication;
-import mikolajm.project.sportclubui.LoginManager;
+import mikolajm.project.sportclubui.Util.LoginManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;

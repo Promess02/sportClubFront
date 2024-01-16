@@ -260,6 +260,8 @@ public class AdminViewController {
         });
     }
 
+
+
     private void initAddActivityBtn(){
         addActivityBtn.setOnAction( e-> {
             try{

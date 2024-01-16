@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import mikolaj.project.backendapp.model.Activity;
 import mikolajm.project.sportclubui.ClubApplication;
-import mikolajm.project.sportclubui.LoginManager;
+import mikolajm.project.sportclubui.Util.LoginManager;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 

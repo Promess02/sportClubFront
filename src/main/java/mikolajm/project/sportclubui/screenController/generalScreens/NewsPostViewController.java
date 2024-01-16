@@ -12,7 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lombok.Getter;
 import mikolaj.project.backendapp.model.NewsPost;
-import mikolajm.project.sportclubui.LoginManager;
+import mikolajm.project.sportclubui.Util.LoginManager;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import java.io.IOException;

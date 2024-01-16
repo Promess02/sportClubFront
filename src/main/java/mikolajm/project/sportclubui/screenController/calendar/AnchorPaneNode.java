@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import mikolaj.project.backendapp.model.Calendar;
 import mikolajm.project.sportclubui.ClubApplication;
-import mikolajm.project.sportclubui.CurrentSessionUser;
+import mikolajm.project.sportclubui.Util.CurrentSessionUser;
 import mikolajm.project.sportclubui.screenController.activityCalendar.ActivitySignupController;
 import mikolajm.project.sportclubui.screenController.trainerScreens.AddPersonalTrainingController;
 import org.springframework.context.ConfigurableApplicationContext;

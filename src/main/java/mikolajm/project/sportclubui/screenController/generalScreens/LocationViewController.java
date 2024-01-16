@@ -10,7 +10,7 @@ import mikolaj.project.backendapp.model.Address;
 import mikolaj.project.backendapp.model.Location;
 import mikolaj.project.backendapp.repo.AddressRepo;
 import mikolaj.project.backendapp.repo.LocationRepo;
-import mikolajm.project.sportclubui.Utils;
+import mikolajm.project.sportclubui.Util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

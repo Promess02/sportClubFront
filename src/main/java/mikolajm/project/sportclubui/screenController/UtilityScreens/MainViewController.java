@@ -3,7 +3,7 @@ package mikolajm.project.sportclubui.screenController.UtilityScreens;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import mikolajm.project.sportclubui.LoginManager;
+import mikolajm.project.sportclubui.Util.LoginManager;
 
 /**
  * Controls the main application screen

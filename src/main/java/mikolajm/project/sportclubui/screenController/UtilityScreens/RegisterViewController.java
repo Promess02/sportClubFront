@@ -12,8 +12,8 @@ import mikolaj.project.backendapp.DTO.ServiceResponse;
 import mikolaj.project.backendapp.model.User;
 import mikolaj.project.backendapp.service.Impl.ServiceMessages;
 import mikolaj.project.backendapp.service.RegistrationService;
-import mikolajm.project.sportclubui.LoginManager;
-import mikolajm.project.sportclubui.Utils;
+import mikolajm.project.sportclubui.Util.LoginManager;
+import mikolajm.project.sportclubui.Util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -10,8 +10,8 @@ import mikolaj.project.backendapp.model.Member;
 import mikolaj.project.backendapp.model.Trainer;
 import mikolaj.project.backendapp.repo.CalendarRepo;
 import mikolaj.project.backendapp.repo.MemberRepo;
-import mikolajm.project.sportclubui.CurrentSessionUser;
-import mikolajm.project.sportclubui.Utils;
+import mikolajm.project.sportclubui.Util.CurrentSessionUser;
+import mikolajm.project.sportclubui.Util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package mikolajm.project.sportclubui;
+package mikolajm.project.sportclubui.Util;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

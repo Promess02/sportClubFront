@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import mikolaj.project.backendapp.model.Team;
 import mikolaj.project.backendapp.repo.TeamRepo;
 import mikolajm.project.sportclubui.ClubApplication;
-import mikolajm.project.sportclubui.Utils;
+import mikolajm.project.sportclubui.Util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;

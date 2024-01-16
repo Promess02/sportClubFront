@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import mikolaj.project.backendapp.model.MembershipType;
 import mikolaj.project.backendapp.repo.MembershipTypeRepo;
-import mikolajm.project.sportclubui.Utils;
+import mikolajm.project.sportclubui.Util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

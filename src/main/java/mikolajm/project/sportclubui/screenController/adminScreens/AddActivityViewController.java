@@ -20,7 +20,7 @@ import mikolaj.project.backendapp.repo.LocationRepo;
 import mikolaj.project.backendapp.repo.TeamRepo;
 import mikolaj.project.backendapp.repo.TrainerRepo;
 import mikolaj.project.backendapp.service.ActivityService;
-import mikolajm.project.sportclubui.Utils;
+import mikolajm.project.sportclubui.Util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

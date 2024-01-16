@@ -18,7 +18,7 @@ import mikolaj.project.backendapp.repo.ActivityRepo;
 import mikolaj.project.backendapp.repo.LocationRepo;
 import mikolaj.project.backendapp.repo.MembershipTypeRepo;
 import mikolaj.project.backendapp.service.NewsPostService;
-import mikolajm.project.sportclubui.Utils;
+import mikolajm.project.sportclubui.Util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

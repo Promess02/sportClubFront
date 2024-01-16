@@ -1,4 +1,4 @@
-package mikolajm.project.sportclubui;
+package mikolajm.project.sportclubui.Util;
 
 import lombok.Getter;
 import mikolaj.project.backendapp.enums.MembershipStatus;
@@ -141,5 +141,4 @@ public class CurrentSessionUser {
             loadCalendarList();
         else calendarList = new ArrayList<>();
     }
-
 }
