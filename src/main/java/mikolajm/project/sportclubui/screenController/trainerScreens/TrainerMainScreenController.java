@@ -257,7 +257,7 @@ public class TrainerMainScreenController {
             }
         });
     }
-    private void initRows(){
+    public void initRows(){
         List<NewsPost> newsPostList = newsPostRepo.findAll();
         List<SocialMedia> socialMediaList = socialMediaRepo.findAll();
 

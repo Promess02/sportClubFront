@@ -20,6 +20,7 @@ import mikolaj.project.backendapp.repo.LocationRepo;
 import mikolaj.project.backendapp.repo.TeamRepo;
 import mikolaj.project.backendapp.repo.TrainerRepo;
 import mikolaj.project.backendapp.service.ActivityService;
+import mikolajm.project.sportclubui.Util.CurrentSessionUser;
 import mikolajm.project.sportclubui.Util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -57,11 +58,13 @@ public class AddActivityViewController {
     private final TrainerRepo trainerRepo;
     private final ActivityService activityService;
     private File selectedFile;
+    private CurrentSessionUser currentSessionUser;
     private Trainer trainer;
     Utils utils = new Utils();
     @Autowired
-    public AddActivityViewController(LocationRepo locationRepo, TrainerRepo trainerRepo, TeamRepo teamRepo,
+    public AddActivityViewController(CurrentSessionUser currentSessionUser, LocationRepo locationRepo, TrainerRepo trainerRepo, TeamRepo teamRepo,
                                       ActivityService activityService) {
+        this.currentSessionUser = currentSessionUser;
         this.locationRepo = locationRepo;
         this.teamRepo = teamRepo;
         this.trainerRepo = trainerRepo;
@@ -187,6 +190,7 @@ public class AddActivityViewController {
                 LocalDate date = activity.getDate();
                 activity.setDate(date.plusWeeks(1));
             }
+            currentSessionUser.loadCalendarList();
             Stage stage = (Stage) createBtn.getScene().getWindow();
             stage.close();
         });

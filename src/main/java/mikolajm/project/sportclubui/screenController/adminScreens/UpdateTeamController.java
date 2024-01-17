@@ -49,7 +49,7 @@ public class UpdateTeamController {
         maxNumber.setText(team.getMaxMembers().toString());
         Image image;
         if(team.getLogoIconUrl()!=null){
-            image = new Image(team.getLogoIconUrl(), false);
+            image = new Image(team.getLogoIconUrl());
             teamImage.setImage(image);
         }else image = new Image("/Jiu-JitsuBadgers.png");
         SportCb.setValue(team.getSport());
@@ -99,7 +99,7 @@ public class UpdateTeamController {
                 return;
             }else team.setSport(SportCb.getValue());
 
-            if(teamImage.getImage()!=null){
+            if(teamImage.getImage()!=null && selectedFile!=null){
                 String fileName = selectedFile.getName();
                 int dotIndex = fileName.lastIndexOf('.');
                 String imageExtension = (dotIndex > 0) ? fileName.substring(dotIndex) : "";

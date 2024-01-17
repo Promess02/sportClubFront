@@ -79,10 +79,8 @@ public class LocationViewController {
     public void initOkBtn(){
         okBtn.setOnAction( e->{
             if(location!=null){
-                locationRepo.save(location);
-                return;
+                okBtn.setText("Save");
             }
-            okBtn.setText("Save");
             Location locationDb = new Location();
             if(nameTF.getText()==null){
                 handleError("give valid name");
@@ -147,10 +145,15 @@ public class LocationViewController {
             }else address.setPostCode(postCodeTf.getText());
 
             locationDb.setAddress(address);
-            location = locationDb;
-            addressRepo.save(address);
-            locationDb.setCurrentCapacity(0);
-            locationRepo.save(locationDb);
+            if(location!=null && location.getName().equals(locationDb.getName())){
+                location = locationDb;
+                addressRepo.save(address);
+                locationRepo.save(location);
+            }else{
+                addressRepo.save(address);
+                locationDb.setCurrentCapacity(0);
+                locationRepo.save(locationDb);
+            }
 
             Stage stage = (Stage) okBtn.getScene().getWindow();
             stage.close();

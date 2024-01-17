@@ -18,8 +18,11 @@ import mikolaj.project.backendapp.repo.ActivityRepo;
 import mikolaj.project.backendapp.repo.LocationRepo;
 import mikolaj.project.backendapp.repo.MembershipTypeRepo;
 import mikolaj.project.backendapp.service.NewsPostService;
+import mikolajm.project.sportclubui.ClubApplication;
 import mikolajm.project.sportclubui.Util.Utils;
+import mikolajm.project.sportclubui.screenController.trainerScreens.TrainerMainScreenController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -119,6 +122,9 @@ public class AddNewsPostController {
                 newsPostForm.setImageUrl(dbUrl);
             } else newsPostForm.setImageUrl("/images/clubLogo.jpg");
             newsPostService.addNewsPost(newsPostForm);
+            ConfigurableApplicationContext context = ClubApplication.getApplicationContext();
+            TrainerMainScreenController controller = context.getBean(TrainerMainScreenController.class);
+            controller.initRows();
             Stage stage = (Stage) submitBtn.getScene().getWindow();
             stage.close();
         });
