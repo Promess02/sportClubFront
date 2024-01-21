@@ -125,6 +125,10 @@ public class AccountViewController {
         });
     }
 
+    public void setMembershipName(String membershipName){
+        this.membershipName.setText(membershipName);
+    }
+
     private void initMembershipBtn(){
         membershipStatusBtn.setOnAction( e-> {
             try{

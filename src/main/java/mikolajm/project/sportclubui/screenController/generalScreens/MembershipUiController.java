@@ -8,7 +8,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import mikolaj.project.backendapp.model.MembershipType;
 import mikolaj.project.backendapp.repo.MembershipTypeRepo;
+import mikolaj.project.backendapp.service.MembershipService;
 import mikolajm.project.sportclubui.ClubApplication;
+import mikolajm.project.sportclubui.Util.CurrentSessionUser;
 import mikolajm.project.sportclubui.Util.LoginManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -40,14 +42,9 @@ public class MembershipUiController implements Initializable {
         for (MembershipType membershipType : membershipTypeList) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/user/membershipType.fxml"));
-                ConfigurableApplicationContext context = ClubApplication.getApplicationContext();
-                loader.setControllerFactory(context::getBean);
-
                 Parent root = loader.load();
-
                 MembershipTypeController typeController = loader.getController();
                 typeController.setMembershipType(membershipType); // You can initialize if needed
-
                 membershipHBox.getChildren().add(typeController.getAnchorPane());
 
             } catch (IOException ex) {

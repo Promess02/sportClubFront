@@ -122,12 +122,10 @@ public class CurrentSessionUser {
             creditCard = userRepo.findById(user.getId()).get().getCreditCard();
     }
 
-    public void loadMembership(){
+    public void loadMembership(Membership membership){
         Optional<Member> memberOptional = memberRepo.findMemberByUser(user);
         memberOptional.ifPresent(value -> member = value);
-        Optional<Membership> membershipOptional = membershipService.getMembershipForUser(user.getEmail()).getData();
-        membershipOptional.ifPresent(value -> {
-            membership = value;
+        if(membership!=null){
             if(membership.getEndDate().isBefore(LocalDate.now())){
                 Utils utils = new Utils();
                 utils.showErrorMessage("your membership has expired");
@@ -136,9 +134,11 @@ public class CurrentSessionUser {
                 membershipStatus = false;
             }
             else membershipStatus = true;
-        });
-        if(memberOptional.isPresent())
-            loadCalendarList();
-        else calendarList = new ArrayList<>();
+            if(memberOptional.isPresent()) {
+                loadCalendarList();
+            }
+            else calendarList = new ArrayList<>();
+        }
     }
+
 }

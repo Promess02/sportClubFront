@@ -11,18 +11,21 @@ import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
+import mikolaj.project.backendapp.model.Membership;
 import mikolaj.project.backendapp.model.MembershipType;
 import mikolaj.project.backendapp.service.MembershipService;
+import mikolajm.project.sportclubui.ClubApplication;
 import mikolajm.project.sportclubui.Util.CurrentSessionUser;
 import mikolajm.project.sportclubui.screenController.UtilityScreens.WarningViewController;
+import mikolajm.project.sportclubui.screenController.userScreens.AccountViewController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
 @Getter
 @Setter
-@Component
 public class MembershipTypeController {
     private MembershipType membershipType;
     @FXML private Button getBtn;
@@ -31,13 +34,18 @@ public class MembershipTypeController {
     @FXML private Label membershipName;
     @FXML private AnchorPane AnchorPane;
 
-    private final CurrentSessionUser currentSessionUser;
-    private final MembershipService membershipService;
+    private CurrentSessionUser currentSessionUser;
+    private MembershipService membershipService;
+    private AccountViewController accountViewController;
 
-    @Autowired
-    public MembershipTypeController(CurrentSessionUser currentSessionUser, MembershipService membershipService) {
-        this.currentSessionUser = currentSessionUser;
-        this.membershipService = membershipService;
+    public MembershipTypeController() {
+    }
+
+    public void initialize(){
+        ConfigurableApplicationContext context = ClubApplication.getApplicationContext();
+        accountViewController = context.getBean(AccountViewController.class);
+        currentSessionUser = context.getBean(CurrentSessionUser.class);
+        membershipService = context.getBean(MembershipService.class);
     }
 
     public void setMembershipType(MembershipType membershipType){
@@ -72,14 +80,17 @@ public class MembershipTypeController {
                     throw new RuntimeException("failed loading warning view");
                 }
             }
-            saveMembership();
+            else saveMembership();
         });
     }
 
+
     private void saveMembership(){
-        membershipService.buyMembership(currentSessionUser.getUser().getEmail(),
-                membershipType.getDescription(), null);
-        currentSessionUser.loadMembership();
+        Membership membership = membershipService.buyMembership(currentSessionUser.getUser().getEmail(),
+                membershipType.getDescription(), null).getData().orElseGet(null);
+        if(membership==null) return;
+        currentSessionUser.loadMembership(membership);
+        accountViewController.setMembershipName(membershipName.getText());
         Stage stage = (Stage) getBtn.getScene().getWindow();
         stage.close();
     }
