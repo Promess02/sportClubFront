@@ -14,6 +14,7 @@ import mikolaj.project.backendapp.DTO.NewsPostForm;
 import mikolaj.project.backendapp.model.Activity;
 import mikolaj.project.backendapp.model.Location;
 import mikolaj.project.backendapp.model.MembershipType;
+import mikolaj.project.backendapp.model.NewsPost;
 import mikolaj.project.backendapp.repo.ActivityRepo;
 import mikolaj.project.backendapp.repo.LocationRepo;
 import mikolaj.project.backendapp.repo.MembershipTypeRepo;
@@ -124,7 +125,8 @@ public class AddNewsPostController {
             newsPostService.addNewsPost(newsPostForm);
             ConfigurableApplicationContext context = ClubApplication.getApplicationContext();
             TrainerMainScreenController controller = context.getBean(TrainerMainScreenController.class);
-            controller.initRows();
+            controller.addNewsPost(new NewsPost(tileField.getText(), contentArea.getText(),null,
+                    locationCheckBox.getValue(), membershipCheckBox.getValue(), activityCheckBox.getValue()));
             Stage stage = (Stage) submitBtn.getScene().getWindow();
             stage.close();
         });

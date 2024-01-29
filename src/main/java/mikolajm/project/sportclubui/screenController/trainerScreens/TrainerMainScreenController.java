@@ -116,6 +116,18 @@ public class TrainerMainScreenController {
         });
     }
 
+    public void addNewsPost(NewsPost newsPost){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/userAndTrainer/NewsPost.fxml"));
+            Parent root = loader.load();
+            NewsPostViewController newsPostViewController = loader.getController();
+            newsPostViewController.setNewsPost(newsPost);
+            newsRow.getChildren().add(newsPostViewController.getMainView());
+        } catch (IOException ex) {
+            Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     private void initAddMemberBtn(){
         addMemberBtn.setOnAction( e-> {
             try {
